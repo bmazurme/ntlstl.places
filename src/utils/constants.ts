@@ -1,4 +1,4 @@
-const port = 3005;
+// const port = 3005;
 const admin = 'str-22@yandex.ru';
 
 export const Urls = {
@@ -14,5 +14,5 @@ export const Urls = {
 export const Regexp = {
   EMAIL: '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.{0}][a-z]{2,3}$',
 };
-export const BASE_API_URL = `http://localhost:${port}/api/`;
+export const BASE_API_URL = 'https://places.ntlstl.dev/api/';
 export const ADMIN = admin;
