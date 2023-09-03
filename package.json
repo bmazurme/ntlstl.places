@@ -116,7 +116,7 @@
     "winston": "3.8.2"
   },
   "engines": {
-    "node": "16.20.0"
+    "node": "18.17.1"
   },
   "jest": {
     "verbose": true

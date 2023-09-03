@@ -7,7 +7,7 @@ import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { config as dotEnvConfig } from 'dotenv';
+import 'dotenv/config';
 import cors from 'cors';
 
 import index from './routes';
@@ -20,8 +20,6 @@ import corsOptions from './utils/cors-options';
 import { NotFoundError } from './errors';
 
 import limiter from './utils/limiter';
-
-dotEnvConfig();
 
 const port = process.env.PORT ?? 3000;
 const pth = process.env.PTH ?? 'mongodb://127.0.0.1:27017/places';
