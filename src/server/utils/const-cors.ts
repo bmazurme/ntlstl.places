@@ -8,6 +8,7 @@ const WHITE_LIST = [
   'https://localhost:3001',
   'https://localhost:3002',
   'https://localhost:3005',
+  'https://places.ntlstl.dev',
 ];
 
 const METHODS = [
