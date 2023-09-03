@@ -23,8 +23,8 @@ import limiter from './utils/limiter';
 
 dotEnvConfig();
 
-const pth = process.env.PTH ?? 'mongodb://127.0.0.1:27017/mesto';
-
+const port = process.env.PORT ?? 3000;
+const pth = process.env.PTH ?? 'mongodb://127.0.0.1:27017/places';
 const helmetConfig = {
   useDefaults: true,
   directives: {
@@ -35,8 +35,6 @@ const helmetConfig = {
     imgSrc: ['*'],
   },
 };
-
-const port = process.env.PORT ?? 3000;
 
 const app = express();
 
