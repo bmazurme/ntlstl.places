@@ -77,13 +77,15 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${REGISTRY_ID}/mesto:latest
+$ docker push cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker pull cr.yandex/${REGISTRY_ID}/mesto:latest
+$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run cr.yandex/${REGISTRY_ID}/mesto:latest
+$ docker run cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/mesto:latest
+$ docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/places:latest
+
+$ docker rmi id -f
 
 # [https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin](https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin)
 $ docker exec -it container_ID_or_name /bin/bash
