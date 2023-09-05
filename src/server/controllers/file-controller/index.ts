@@ -1,19 +1,14 @@
 /* eslint-disable consistent-return */
-import {
-  NextFunction,
-  // Request,
-  Response,
-} from 'express';
+import { NextFunction, Request, Response } from 'express';
 import path from 'path';
 
 import { BadRequestError, NotFoundError } from '../../errors';
 
 import Card from '../../models/card-model';
 
-const getFile = async (req: unknown, res: Response, next: NextFunction) => {
+const getFile = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // @ts-ignore
-    const card = await Card.findOne({ originalname: req.params.filename });
+    const card = await Card.findOne({ link: req.params.filename });
 
     if (!card) {
       return next(new NotFoundError('File not found'));
