@@ -10,15 +10,14 @@ import { cardSelector, setCard, cardsSelector } from '../../store';
 import style from './cards.module.css';
 
 export default function Cards() {
-  const cards = useAppSelector(cardsSelector);
   const dispatch = useAppDispatch();
+  const cards = useAppSelector(cardsSelector);
   const selectedCard = useAppSelector(cardSelector);
 
   return (
     <section className={style.cards}>
       {cards.map((card: Card) => (<Card key={card._id} card={card} />))}
-      {selectedCard
-        && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
+      {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
     </section>
   );
 }
