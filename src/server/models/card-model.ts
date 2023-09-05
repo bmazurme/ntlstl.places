@@ -2,7 +2,7 @@
 import {
   Schema, Document, model, Model, Types,
 } from 'mongoose';
-import isUrl from 'validator/lib/isURL';
+// import isUrl from 'validator/lib/isURL';
 
 export interface ICard extends Document {
   name: string;
@@ -10,6 +10,14 @@ export interface ICard extends Document {
   userId: Types.ObjectId;
   likes: Types.ObjectId[];
   createdAt: Date;
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
 }
 
 export interface CardModel extends Model<ICard> {
@@ -26,10 +34,10 @@ const CardSchema = new Schema({
   link: {
     type: String,
     required: true,
-    validate: {
-      validator: (link: string) => isUrl(link),
-      message: 'некорректные данные',
-    },
+    // validate: {
+    //   validator: (link: string) => isUrl(link),
+    //   message: 'некорректные данные',
+    // },
   },
   userId: {
     type: Types.ObjectId,
@@ -43,6 +51,38 @@ const CardSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  fieldname: {
+    type: String,
+    required: true,
+  },
+  originalname: {
+    type: String,
+    required: true,
+  },
+  encoding: {
+    type: String,
+    required: true,
+  },
+  mimetype: {
+    type: String,
+    required: true,
+  },
+  destination: {
+    type: String,
+    required: true,
+  },
+  filename: {
+    type: String,
+    required: true,
+  },
+  path: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: Number,
+    required: true,
   },
 });
 
