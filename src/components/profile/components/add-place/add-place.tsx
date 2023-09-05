@@ -3,12 +3,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { Button, InputField } from '../../../form-components';
+import UploadButton from '../../../upload-button';
 
 import style from './add-place.module.css';
 
 type FormPayload = {
   name: string;
-  link: string;
+  file: any;
 };
 
 const inputs = [
@@ -22,16 +23,6 @@ const inputs = [
     required: true,
     autoComplete: 'current-name',
   },
-  {
-    name: 'link',
-    label: 'Url картинки',
-    pattern: {
-      value: /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\\/]))?/,
-      message: 'Url is invalid',
-    },
-    required: true,
-    autoComplete: 'current-link',
-  },
 ];
 
 export default function AddPlace({ isLoading, onAddPlace }
@@ -39,12 +30,13 @@ export default function AddPlace({ isLoading, onAddPlace }
   const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Loading...' : 'Save';
   const { control, handleSubmit } = useForm<FormPayload>({
-    defaultValues: { name: '', link: '' },
+    defaultValues: { name: '', file: '' },
   });
 
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
-      await onAddPlace(data);
+      data.file.append('name', data.name);
+      await onAddPlace(data.file);
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
@@ -72,6 +64,11 @@ export default function AddPlace({ isLoading, onAddPlace }
           )}
         />
       ))}
+      <Controller
+        control={control}
+        name="file"
+        render={({ field }) => (<UploadButton onChange={field.onChange} />)}
+      />
       <Button className={style.submit} variant="filled">
         {buttonText}
       </Button>
