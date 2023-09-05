@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
-// import { UploadedFile } from 'express-fileupload';
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 
 import { BadRequestError, NotFoundError, ForbiddenError } from '../../errors';
@@ -12,16 +12,19 @@ import { IUser } from '../../models/user-model';
 const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
     const { name } = (req as Request).body;
-
     const tempPath = req.files[0].path;
-    const targetPath = path.join('uploads', req.files[0].originalname);
-    // if (path.extname(req.files[0].originalname).toLowerCase()) {
-    fs.rename(tempPath, targetPath, (err) => { console.log('err'); });
+    const uniqName = `${uuidv4()}_${req.files[0].originalname}`.toLowerCase();
+    const targetPath = path.join('uploads', uniqName);
+    fs.rename(tempPath, targetPath, (err) => {
+      if (err) {
+        console.log('err');
+      }
+    });
 
     const card = await Card.create({
       ...req.files[0],
       name,
-      link: req.files[0].originalname,
+      link: uniqName,
       userId: (req as & { user: IUser}).user._id,
     });
 
@@ -47,6 +50,12 @@ const deleteCard = async (req: unknown, res: Response, next: NextFunction) => {
       next(new ForbiddenError('access denied'));
     }
 
+    const targetPath = path.join(__dirname, '..', 'uploads', card.link);
+    fs.unlink(targetPath, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
     await Card.deleteOne({ _id: (req as Request).params.id });
 
     return res.status(200).send({ message: 'карточка удалена' });
