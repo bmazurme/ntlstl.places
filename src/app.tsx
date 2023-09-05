@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import SignInPage from './pages/signin-page';
 import OauthPage from './pages/oauth-page';
 import MainPage from './pages/main-page';
+import KitPage from './pages/kit/kit-page';
 import NotFoundPage from './pages/404';
 
 import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
@@ -23,6 +24,7 @@ export default function App() {
           <Route path={Urls.BASE} element={(<MainPage />)} />
           <Route path={Urls.SIGNIN} element={(<SignInPage />)} />
           <Route path={Urls.OAUTH.INDEX} element={(<OauthPage />)} />
+          <Route path={Urls.KIT.INDEX} element={(<KitPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
       </ErrorBoundaryWrapper>
