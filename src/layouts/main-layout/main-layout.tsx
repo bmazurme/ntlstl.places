@@ -1,5 +1,4 @@
 import React from 'react';
-import { useErrorHandler } from 'react-error-boundary';
 
 import Profile from '../../components/profile';
 import Cards from '../../components/cards';
@@ -10,12 +9,7 @@ import { useGetCardsQuery } from '../../store';
 
 export default function MainLayout() {
   const user = useUser();
-  const handleError = useErrorHandler();
-  const { isError: cardsError, isLoading: isLoadingCards } = useGetCardsQuery();
-
-  if (cardsError) {
-    handleError(cardsError);
-  }
+  const { isLoading: isLoadingCards } = useGetCardsQuery();
 
   return (
     <>
