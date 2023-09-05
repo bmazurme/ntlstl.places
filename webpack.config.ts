@@ -76,7 +76,7 @@ const client = merge<Configuration>(common, {
 const server = merge<Configuration>(common, {
   name: 'server',
   target: 'node',
-  entry: ['./src/server/server.ts'],
+  entry: ['./src/server/index.ts'],
   mode: process.env.NODE_ENV as Environment ?? 'development',
   externals: [
     nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] }),
