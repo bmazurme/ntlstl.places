@@ -56,7 +56,7 @@ export default function EditProfile({ info, isLoading, onUpdateUser }
 
   return (
     <form className="form form_type_edit" onSubmit={onSubmit}>
-      <h2 className={style.title}>Редактировать профиль</h2>
+      <h2 className={style.title}>Update profile</h2>
       {inputs.map((input) => (
         <Controller
           key={input.name}
