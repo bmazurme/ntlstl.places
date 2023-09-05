@@ -10,7 +10,7 @@ export default function Slide() {
 
   return (
     <div className={style.slide}>
-      <img src={card?.link ?? ''} alt={card?.name ?? ''} className={style.image} />
+      <img src={`/api/files/${card?.link}` ?? ''} alt={card?.name ?? ''} className={style.image} />
       <p className={style.name}>{card?.name ?? ''}</p>
     </div>
   );
