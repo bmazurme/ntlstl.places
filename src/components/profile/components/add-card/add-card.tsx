@@ -5,7 +5,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import { Button, InputField } from '../../../form-components';
 import UploadButton from '../../../upload-button';
 
-import style from './add-place.module.css';
+import style from './add-card.module.css';
 
 type FormPayload = {
   name: string;
@@ -15,7 +15,7 @@ type FormPayload = {
 const inputs = [
   {
     name: 'name',
-    label: 'Название',
+    label: 'Name',
     pattern: {
       value: /^[a-zA-Z0-9_-]{3,15}$/,
       message: 'Name is invalid',
@@ -25,7 +25,7 @@ const inputs = [
   },
 ];
 
-export default function AddPlace({ isLoading, onAddPlace }
+export default function AddCard({ isLoading, onAddPlace }
 : { isLoading: boolean; onAddPlace: (data: FormPayload) => void; }) {
   const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Loading...' : 'Save';
