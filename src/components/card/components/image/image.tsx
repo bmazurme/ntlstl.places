@@ -12,7 +12,7 @@ export default function Image({ card }: { card: Card; }) {
     <img
       className={style.image}
       alt={card.name}
-      src={card.link}
+      src={`/api/files/${card.link}`}
       onClick={() => dispatch(setCard(card))}
       aria-hidden="true"
       loading="lazy"
