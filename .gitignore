@@ -12,6 +12,7 @@
 /build
 /dist
 /data
+/uploads
 
 # misc
 .DS_Store
