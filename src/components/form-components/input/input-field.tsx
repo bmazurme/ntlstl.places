@@ -11,13 +11,14 @@ type OwnProps = {
   label?: string;
   black?: boolean;
   errorText?: string;
+  readonly?: boolean;
 };
 
 export type InputProps = OwnProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'pattern'>;
 
 const InputField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
-    errorText = '', type, onChange, label, id, value, placeholder, className, black,
+    errorText = '', type, onChange, label, id, value, placeholder, className, black, readonly,
   } = props;
   return (
     <div className={style['text-field']}>
@@ -39,6 +40,7 @@ const InputField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         value={value}
         placeholder={placeholder}
         className={classNames(style.input, className)}
+        readOnly={readonly}
       />
       {errorText
         && <span className={classNames(style.error, style.help, `${label}-input-error`)}>
