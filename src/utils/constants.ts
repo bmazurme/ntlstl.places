@@ -9,6 +9,9 @@ export const Urls = {
     INDEX: 'oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
+  KIT: {
+    INDEX: '/kit',
+  },
   404: '*',
 };
 export const Regexp = {
