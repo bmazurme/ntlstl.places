@@ -1,4 +1,4 @@
-# Project: ntlstl.mesto
+# Project: ntlstl.places
 ### Tech Stack
 ![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)
