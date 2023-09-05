@@ -15,7 +15,6 @@ const upload = multer({ dest: 'uploads/' });
 const router = Router();
 
 router.post(UrlsApi.CARDS.INDEX, upload.array('files'), createCard);
-
 router.delete(UrlsApi.CARDS.ID, validateObjectId, deleteCard);
 router.put(UrlsApi.CARDS.LIKES, validateObjectId, likeCard);
 router.delete(UrlsApi.CARDS.LIKES, validateObjectId, dislikeCard);
