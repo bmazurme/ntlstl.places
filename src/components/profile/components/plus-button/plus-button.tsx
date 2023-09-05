@@ -3,7 +3,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
 import Modal from '../../../modal';
-import AddPlace from '../add-place';
+import AddCard from '../add-card';
 import { useAddCardMutation } from '../../../../store';
 
 import style from './plus-button.module.css';
@@ -41,7 +41,7 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
         && (
           <Modal
             onClose={handleCloseAllPopups}
-            children={<AddPlace isLoading={isLoadingCard} onAddPlace={handleAddPlaceSubmit} />}
+            children={<AddCard isLoading={isLoadingCard} onAddPlace={handleAddPlaceSubmit} />}
           />
         )}
     </>
