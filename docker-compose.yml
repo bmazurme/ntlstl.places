@@ -9,7 +9,7 @@ services:
     networks:
       - awesome
     volumes:
-      - ./data:/data/db
+      - dbdata6:/data/db
 
   my-app:
     depends_on:
@@ -32,6 +32,8 @@ services:
       - DEV_JWT_SECRET=$DEV_JWT_SECRET
       - HOST=$HOST
     restart: always
+    volumes:
+      - .:/uploads
     networks:
       - awesome
 
@@ -39,5 +41,5 @@ networks:
   awesome:
     driver: bridge
 
-volumes: 
-  mongo-data:
+volumes:
+  dbdata6:
