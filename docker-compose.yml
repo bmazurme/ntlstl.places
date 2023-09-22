@@ -9,7 +9,7 @@ services:
     networks:
       - awesome
     volumes:
-      - dbdata6:/data/db
+      - ./dbdata6:/data/db
 
   my-app:
     depends_on:
@@ -33,7 +33,7 @@ services:
       - HOST=$HOST
     restart: always
     volumes:
-      - .:/uploads
+      - ./uploads:/uploads
     networks:
       - awesome
 
@@ -41,5 +41,5 @@ networks:
   awesome:
     driver: bridge
 
-volumes:
-  dbdata6:
+# volumes:
+#   dbdata6:
