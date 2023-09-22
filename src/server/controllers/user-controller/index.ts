@@ -3,21 +3,20 @@ import { NextFunction, Request, Response } from 'express';
 
 import { NotFoundError, BadRequestError } from '../../errors/index';
 
-import Users from '../../models/user-model';
+import User from '../../models/user-model';
 
 const updateAvatar = async (req: unknown, res: Response, next: NextFunction) => {
   try {
     const { avatar } = (req as Request).body;
-    const options = { new: true };
-    const user = await Users.findByIdAndUpdate(
-      (req as & { user: User}).user._id,
-      { avatar },
-      options,
+    const user = await User.findOne(
+      { where: { id: (req as & { user: User }).user.id } },
     );
 
     if (!user) {
       next(new NotFoundError('пользователь не найден'));
     }
+
+    await user?.update({ avatar });
 
     return res.status(200).send(user);
   } catch (err: unknown) {
@@ -32,16 +31,15 @@ const updateAvatar = async (req: unknown, res: Response, next: NextFunction) => 
 const updateUser = async (req: unknown, res: Response, next: NextFunction) => {
   try {
     const { name, about } = (req as Request).body;
-    const options = { new: true };
-    const user = await Users.findByIdAndUpdate(
-      (req as & { user: User}).user._id,
-      { name, about },
-      options,
+    const user = await User.findOne(
+      { where: { id: (req as & { user: User }).user.id } },
     );
 
     if (!user) {
       next(new NotFoundError('пользователь не найден'));
     }
+
+    await user?.update({ name, about });
 
     return res.status(200).send(user);
   } catch (err: unknown) {

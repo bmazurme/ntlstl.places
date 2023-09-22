@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
-import Users from '../../models/user-model';
+import User from '../../models/user-model';
 
 const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -31,13 +31,19 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
     };
     const response = await fetch('https://login.yandex.ru/info', requestOptions);
 
+    console.log('>>>', response);
+
     if (response.ok) {
       const { default_email } = await response.json();
-      let user = await Users.findOne({ defaultEmail: default_email });
+      console.log('default_email', default_email);
+
+      let user = await User.findOne({
+        where: { email: default_email },
+      });
 
       if (!user) {
-        user = await Users.create({
-          defaultEmail: default_email,
+        user = await User.create({
+          email: default_email,
           name: 'User',
           about: 'guest',
           avatar: 'https://www.ejin.ru/wp-content/uploads/2019/05/zakat-zimoj-na-gore.jpg',
@@ -45,7 +51,7 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
       }
 
       const tokenNew = jwt.sign(
-        { default_email, _id: user._id },
+        { default_email, id: user.id },
         DEV_JWT_SECRET,
         { expiresIn: '7d' },
       );

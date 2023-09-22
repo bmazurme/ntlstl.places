@@ -1,19 +1,40 @@
 version: "3"
 
 services:
-  mongodb:
-    image: mongo:6.0.1
-    restart: always
+  postgres:
+    image: postgres:13.2-alpine
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-newPassword}
+      POSTGRES_DB: ${POSTGRES_DB:-my-db-name}
     networks:
       - awesome
+
+  pgadmin:
+    image: dpage/pgadmin4:4.18
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_LISTEN_PORT: "80"
+    ports:
+      - "8080:80"
     volumes:
-      - ./dbdata6:/data/db
+      - ./pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - awesome
 
   my-app:
     depends_on:
-      - mongodb
+      - postgres
     image: cr.yandex/${REGISTRY_ID}/places:latest
     platform: linux/amd64
     build:
@@ -21,11 +42,17 @@ services:
     ports:
       - "${PORT:-3000}:3000"
     environment:
-      - DB_HOST=$DB_HOST
-      - DB_NAME=$DB_NAME
-      - DB_PORT=$DB_PORT
+      - DATABASE_URL=$DATABASE_URL
+      - POSTGRES_HOST=$POSTGRES_HOST
+      - POSTGRES_PORT=$POSTGRES_PORT
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+      # - DB_HOST=$DB_HOST
+      # - DB_NAME=$DB_NAME
+      # - DB_PORT=$DB_PORT
       - NODE_ENV=$NODE_ENV
-      - PTH=$PTH
+      # - PTH=$PTH
       - PORT=3000
       - CLIENT_ID=$CLIENT_ID
       - CLIENT_SECRET=$CLIENT_SECRET
@@ -42,4 +69,5 @@ networks:
     driver: bridge
 
 # volumes:
-#   dbdata6:
+#   pgadmin-data:
+

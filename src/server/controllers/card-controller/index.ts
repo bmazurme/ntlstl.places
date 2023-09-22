@@ -7,7 +7,7 @@ import fs from 'fs';
 import { BadRequestError, NotFoundError, ForbiddenError } from '../../errors';
 
 import Card from '../../models/card-model';
-import { IUser } from '../../models/user-model';
+import Like from '../../models/like-model';
 
 const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
@@ -25,7 +25,7 @@ const createCard = async (req: any, res: Response, next: NextFunction) => {
       ...req.files[0],
       name,
       link: uniqName,
-      userId: (req as & { user: IUser}).user._id,
+      user_id: (req as & { user: User}).user.id,
     });
 
     return res.send(card);
@@ -38,25 +38,27 @@ const createCard = async (req: any, res: Response, next: NextFunction) => {
   }
 };
 
-const deleteCard = async (req: unknown, res: Response, next: NextFunction) => {
+const deleteCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findById((req as Request).params.id);
+    const card = await Card.findOne({ where: { id: req.params.id } });
 
     if (!card) {
       return new NotFoundError('карточка не найдена');
     }
 
-    if (!card.userId.equals((req as Request & { user: IUser}).user._id)) {
+    if (card.user_id !== Number((req as Request & { user: User }).user.id)) {
       next(new ForbiddenError('access denied'));
     }
 
     const targetPath = path.join(__dirname, '..', 'uploads', card.link);
+
     fs.unlink(targetPath, (err) => {
       if (err) {
         next(err);
       }
     });
-    await Card.deleteOne({ _id: (req as Request).params.id });
+
+    await Card.destroy({ where: { id: (req as Request).params.id } });
 
     return res.status(200).send({ message: 'карточка удалена' });
   } catch (err) {
@@ -66,7 +68,7 @@ const deleteCard = async (req: unknown, res: Response, next: NextFunction) => {
 
 const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = (await Card.find({})).reverse();
+    const cards = (await Card.findAll()).reverse();
 
     return res.status(200).send(cards);
   } catch (err) {
@@ -74,19 +76,16 @@ const getCards = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const likeCard = async (req: unknown, res: Response, next: NextFunction) => {
+const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findByIdAndUpdate(
-      (req as Request).params.id,
-      { $addToSet: { likes: (req as Request & { user: IUser }).user._id } },
-      { new: true },
+    const like = await Like.create(
+      {
+        card_id: Number(req.params.id),
+        user_id: Number((req as Request & { user: User }).user.id),
+      },
     );
 
-    if (!card) {
-      next(new NotFoundError('карточка не найдена'));
-    }
-
-    return res.status(200).send(card);
+    return res.status(201).send(like);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       next(new BadRequestError('переданы некорректные данные в метод'));
@@ -96,19 +95,36 @@ const likeCard = async (req: unknown, res: Response, next: NextFunction) => {
   }
 };
 
-const dislikeCard = async (req: unknown, res: Response, next: NextFunction) => {
+const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findByIdAndUpdate(
-      (req as Request).params.id,
-      { $pull: { likes: (req as Request & { user: User }).user._id } },
-      { new: true },
-    );
+    const like = await Like.destroy({
+      where: {
+        card_id: Number(req.params.id),
+        user_id: Number((req as Request & { user: User }).user.id),
+      },
+    });
 
-    if (!card) {
+    if (!like) {
       next(new NotFoundError('карточка не найдена'));
     }
 
-    return res.status(200).send(card);
+    return res.sendStatus(200);
+  } catch (error: unknown) {
+    if ((error as Error).name === 'CastError') {
+      next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    next(error);
+  }
+};
+
+const getLikes = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const likes = await Like.findAll(
+      { where: { card_id: req.params.id } },
+    );
+
+    return res.status(201).send(likes);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       next(new BadRequestError('переданы некорректные данные в метод'));
@@ -124,4 +140,5 @@ export {
   getCards,
   likeCard,
   dislikeCard,
+  getLikes,
 };

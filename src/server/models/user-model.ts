@@ -1,54 +1,44 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import {
-  Schema, Document, model, Model,
-} from 'mongoose';
+  Model,
+  Table,
+  Column,
+  AutoIncrement,
+  PrimaryKey,
+  DataType,
+} from 'sequelize-typescript';
 
-import validator from 'validator';
-import isUrl from 'validator/lib/isURL';
+import { Optional } from 'sequelize';
 
-export interface IUser extends Document {
-  defaultEmail: string;
+interface UserAttributes {
+  id: number;
+  avatar: string;
   name: string;
   about: string;
-  avatar: string;
+  email: string;
 }
 
-export interface UserModel extends Model<IUser> {
-  findUserByCredentials: (defaultEmail: string) => Promise<IUser | undefined>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+
+@Table({
+  timestamps: true,
+  tableName: 'users',
+  modelName: 'User',
+})
+export default class User extends Model<UserAttributes, UserCreationAttributes> {
+  @AutoIncrement
+  @PrimaryKey
+  @Column(DataType.INTEGER)
+    id!: number;
+
+  @Column(DataType.STRING)
+    avatar!: string;
+
+  @Column(DataType.STRING)
+    name!: string;
+
+  @Column(DataType.STRING)
+    about!: string;
+
+  @Column(DataType.STRING)
+    email!: string;
 }
-
-const UserSchema = new Schema({
-  defaultEmail: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: {
-      validator(defaultEmail: string) {
-        return validator.isEmail(defaultEmail);
-      },
-      defaultEmail: 'Введён некорректный email',
-    },
-  },
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30,
-  },
-  about: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30,
-  },
-  avatar: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (link: string) => isUrl(link),
-      message: 'некорректные данные',
-    },
-  },
-});
-
-export default model<IUser, UserModel>('User', UserSchema);

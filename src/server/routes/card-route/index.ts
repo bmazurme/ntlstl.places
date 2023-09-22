@@ -6,17 +6,17 @@ import {
   deleteCard,
   likeCard,
   dislikeCard,
+  getLikes,
 } from '../../controllers/card-controller';
-import { validateObjectId } from '../../utils/validator';
-// validateCardData,
 import { UrlsApi } from '../../utils/routers';
 
 const upload = multer({ dest: 'uploads/' });
 const router = Router();
 
 router.post(UrlsApi.CARDS.INDEX, upload.array('files'), createCard);
-router.delete(UrlsApi.CARDS.ID, validateObjectId, deleteCard);
-router.put(UrlsApi.CARDS.LIKES, validateObjectId, likeCard);
-router.delete(UrlsApi.CARDS.LIKES, validateObjectId, dislikeCard);
+router.delete(UrlsApi.CARDS.ID, deleteCard);
+router.get(UrlsApi.CARDS.LIKES_ID, getLikes);
+router.put(UrlsApi.CARDS.LIKES, likeCard);
+router.delete(UrlsApi.CARDS.LIKES, dislikeCard);
 
 export default router;

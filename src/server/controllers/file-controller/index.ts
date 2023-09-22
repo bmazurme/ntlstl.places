@@ -8,7 +8,7 @@ import Card from '../../models/card-model';
 
 const getFile = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findOne({ link: req.params.filename });
+    const card = await Card.findOne({ where: { link: req.params.filename } });
 
     if (!card) {
       return next(new NotFoundError('File not found'));

@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { useChangeLikeMutation } from '../../../../store';
+import { useChangeLikeMutation, useGetLikesQuery } from '../../../../store';
 
 import style from './like-button.module.css';
 
@@ -11,16 +11,23 @@ interface ILikeProps {
   card: Card;
 }
 
+type TypeLike = {
+  id: string;
+  user_id: string;
+  card_id: string;
+};
+
 export default function LikeButton({ user, card }: ILikeProps) {
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
-  const isLiked = card.likes.some((like: string) => like === user?._id);
+  const { data: likes = [] } = useGetLikesQuery({ cardId: card.id });
+  const isLiked = likes.some((like: any) => like.user_id === user?.id);
 
   const onCardLike = async (c: Card) => {
     try {
       await changeLike({
-        cardId: c._id,
-        value: c.likes.some((u) => u === user?._id),
+        cardId: c.id,
+        value: likes.some((u: TypeLike) => u.user_id === user?.id),
       });
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
@@ -41,7 +48,7 @@ export default function LikeButton({ user, card }: ILikeProps) {
         name="button-like"
         disabled={!user}
       />
-      <p className={style.counter}>{card.likes.length}</p>
+      <p className={style.counter}>{likes.length}</p>
     </div>
   );
 }

@@ -1,20 +1,20 @@
 import { celebrate, Joi } from 'celebrate';
-import { isValidObjectId } from 'mongoose';
-import BadRequestError from '../errors/bad-request-error';
+// import { isValidObjectId } from 'mongoose';
+// import BadRequestError from '../errors/bad-request-error';
 
-const StringRequired = Joi.string().required();
+// const StringRequired = Joi.string().required();
 const reg = /^((http|https):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
 
-const validateObjectId = celebrate({
-  params: Joi.object().keys({
-    id: StringRequired.custom((value) => {
-      if (!isValidObjectId(value)) {
-        throw new BadRequestError('переданы некорректные данные');
-      }
-      return value;
-    }),
-  }),
-});
+// const validateObjectId = celebrate({
+//   params: Joi.object().keys({
+//     id: StringRequired.custom((value) => {
+//       if (!isValidObjectId(value)) {
+//         throw new BadRequestError('переданы некорректные данные');
+//       }
+//       return value;
+//     }),
+//   }),
+// });
 
 const validateCardData = celebrate({
   body: Joi.object().keys({
@@ -54,7 +54,7 @@ const validateUserData = celebrate({
 });
 
 export {
-  validateObjectId,
+  // validateObjectId,
   validateCardData,
   validateLoginData,
   validateRegistrData,

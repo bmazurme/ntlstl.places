@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose, { ConnectOptions } from 'mongoose';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
 
@@ -21,8 +20,9 @@ import { NotFoundError } from './errors';
 
 import limiter from './utils/limiter';
 
+import dbConnect from './connect';
+
 const port = process.env.PORT ?? 3000;
-const pth = process.env.PTH ?? 'mongodb://127.0.0.1:27017/places';
 const helmetConfig = {
   useDefaults: true,
   directives: {
@@ -35,11 +35,6 @@ const helmetConfig = {
 };
 
 const app = express();
-
-mongoose.connect(pth, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as ConnectOptions);
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -68,7 +63,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/', index);
-
 app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
 
@@ -83,6 +77,13 @@ app.use('*', () => {
 app.use(errorLogger);
 app.use(errorHandlerMiddleware);
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+const listen = () => {
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+};
+
+(async () => {
+  await dbConnect();
+  listen();
+})();

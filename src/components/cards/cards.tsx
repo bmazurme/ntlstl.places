@@ -16,7 +16,7 @@ export default function Cards() {
 
   return (
     <section className={style.cards}>
-      {cards.map((card: Card) => (<Card key={card._id} card={card} />))}
+      {cards.map((card: Card) => (<Card key={card.id} card={card} />))}
       {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
     </section>
   );

@@ -30,7 +30,7 @@ const cardsApiEndpoints = cardsApi
       }),
       deleteCard: builder.mutation({
         query: (data) => ({
-          url: `/cards/${data?._id}`,
+          url: `/cards/${data?.id}`,
           method: 'DELETE',
         }),
         invalidatesTags: ['Cards'],
@@ -42,6 +42,13 @@ const cardsApiEndpoints = cardsApi
         }),
         invalidatesTags: ['Cards'],
       }),
+      getLikes: builder.query({
+        query: ({ cardId }) => ({
+          url: `/cards/likes/${cardId}`,
+          method: 'GET',
+        }),
+        providesTags: ['Cards'],
+      }),
     }),
   });
 
@@ -51,5 +58,6 @@ export const {
   useDeleteCardMutation,
   useChangeLikeMutation,
   useAddCardMutation,
+  useGetLikesQuery,
 } = cardsApiEndpoints;
 export { cardsApiEndpoints };

@@ -20,8 +20,8 @@ export default function Navbar({ isOpen, handlerClick }
   const user = useUser();
 
   useEffect(() => {
-    if (user?.defaultEmail) {
-      setEmail(user.defaultEmail);
+    if (user?.email) {
+      setEmail(user.email);
     }
   }, []);
 
@@ -34,8 +34,8 @@ export default function Navbar({ isOpen, handlerClick }
       <ThemeButton />
       <ul onClick={handlerClick} className={classNames(style.navbar, { [style.opened]: isOpen })} aria-hidden="true">
         {!user && <NavItem to={Urls.SIGNIN} value="Sign in" active="active" />}
-        {user?.defaultEmail && <NavItem to="/" value={email} active="active" />}
-        {user?.defaultEmail && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
+        {user?.email && <NavItem to="/" value={email} active="active" />}
+        {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
       </ul>
       <Button isOpen={isOpen} handlerClick={handlerClick} />
     </>

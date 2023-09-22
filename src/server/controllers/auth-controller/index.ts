@@ -16,18 +16,18 @@ const logout = (req: Request, res: Response, next: NextFunction) => {
 const getUserMe = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // @ts-ignore
-    const user = await Users.findOne({ defaultEmail: req.user.default_email });
+    const user = await Users.findOne({ where: { email: req.user.default_email }});
 
     if (!user) {
       return next(new NotFoundError('User not found'));
     }
 
     return res.send({
-      defaultEmail: user.defaultEmail,
+      email: user.email,
       name: user.name,
       about: user.about,
       avatar: user.avatar,
-      _id: user._id,
+      id: user.id,
     });
   } catch (err) {
     next(err);
