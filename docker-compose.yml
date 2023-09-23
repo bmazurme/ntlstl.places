@@ -41,6 +41,8 @@ services:
       context: .
     ports:
       - "${PORT:-3000}:3000"
+    volumes:
+      - ./uploads:/usr/src/app/uploads
     environment:
       - DATABASE_URL=$DATABASE_URL
       - POSTGRES_HOST=$POSTGRES_HOST
@@ -55,8 +57,6 @@ services:
       - DEV_JWT_SECRET=$DEV_JWT_SECRET
       - HOST=$HOST
     restart: always
-    volumes:
-      - ./uploads:/uploads
     networks:
       - awesome
 
