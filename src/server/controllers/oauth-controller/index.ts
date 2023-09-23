@@ -31,8 +31,6 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
     };
     const response = await fetch('https://login.yandex.ru/info', requestOptions);
 
-    console.log('>>>', response);
-
     if (response.ok) {
       const { default_email } = await response.json();
       console.log('default_email', default_email);
