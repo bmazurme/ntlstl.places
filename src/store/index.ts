@@ -13,6 +13,7 @@ import {
 import userReducer from './slices/user-slice';
 import cardReducer from './slices/card-slice';
 import cardsReducer from './slices/cards-slice';
+import currentReducer from './slices/current-slice';
 import { isServer } from '../utils';
 
 export * from './api/auth-api/endpoints';
@@ -39,6 +40,7 @@ export const store = configureStore({
     user: userReducer,
     card: cardReducer,
     cards: cardsReducer,
+    current: currentReducer,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [cardsApi.reducerPath]: cardsApi.reducer,
