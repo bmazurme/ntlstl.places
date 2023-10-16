@@ -15,7 +15,7 @@ import { SHIFT } from '../../utils/constants';
 
 import style from './cards.module.css';
 
-function MoreButton({ handler, disabled }: { handler: () => void; disabled: boolean }) {
+function More({ handler, disabled }: { handler: () => void; disabled: boolean }) {
   return (
     <button
       aria-label="Add"
@@ -45,7 +45,7 @@ export default function Cards() {
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
-        && (<MoreButton handler={onMore} disabled={current.length >= cards.length} />)}
+        && (<More handler={onMore} disabled={current.length >= cards.length} />)}
     </div>
   );
 }
