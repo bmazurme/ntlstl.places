@@ -1,5 +1,4 @@
 import { celebrate, Joi } from 'celebrate';
-// import { isValidObjectId } from 'mongoose';
 // import BadRequestError from '../errors/bad-request-error';
 
 // const StringRequired = Joi.string().required();
