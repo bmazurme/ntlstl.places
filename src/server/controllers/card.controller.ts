@@ -47,7 +47,7 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
     }
 
     if (card.user_id !== Number((req as Request & { user: User }).user.id)) {
-      next(new ForbiddenError('access denied'));
+      return next(new ForbiddenError('access denied'));
     }
 
     const targetPath = path.join(__dirname, '..', 'uploads', card.link);
@@ -87,8 +87,8 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
 
     return res.status(201).send(like);
   } catch (error: unknown) {
-    if ((error as Error).name === 'CastError') {
-      next(new BadRequestError('переданы некорректные данные в метод'));
+    if ((error as Error).name === 'SequelizeForeignKeyConstraintError') {
+      return next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
     next(error);
@@ -105,13 +105,13 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
     });
 
     if (!like) {
-      next(new NotFoundError('карточка не найдена'));
+      return next(new NotFoundError('карточка не найдена'));
     }
 
     return res.sendStatus(200);
   } catch (error) {
     if ((error as Error).name === 'CastError') {
-      next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
     next(error);

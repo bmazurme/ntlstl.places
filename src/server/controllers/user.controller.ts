@@ -13,7 +13,7 @@ export const updateAvatar = async (req: unknown, res: Response, next: NextFuncti
     );
 
     if (!user) {
-      next(new NotFoundError('пользователь не найден'));
+      return next(new NotFoundError('пользователь не найден'));
     }
 
     await user?.update({ avatar });
@@ -36,7 +36,7 @@ export const updateUser = async (req: unknown, res: Response, next: NextFunction
     );
 
     if (!user) {
-      next(new NotFoundError('пользователь не найден'));
+      return next(new NotFoundError('пользователь не найден'));
     }
 
     await user?.update({ name, about });
@@ -44,7 +44,7 @@ export const updateUser = async (req: unknown, res: Response, next: NextFunction
     return res.status(200).send(user);
   } catch (err: unknown) {
     if ((err as Error).name === 'CastError') {
-      next(new BadRequestError());
+      return next(new BadRequestError());
     }
 
     next(err);

@@ -62,7 +62,6 @@ app.get('*', (_req, res) => {
 app.use('*', () => {
   throw new NotFoundError('HTTP 404 Not Found');
 });
-
 app.use(errorLogger);
 app.use(errorHandlerMiddleware);
 

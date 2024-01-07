@@ -14,7 +14,7 @@ const getLikes = async (req: Request, res: Response, next: NextFunction) => {
     return res.status(201).send(likes);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
     next(error);
