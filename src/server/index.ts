@@ -1,13 +1,12 @@
 import express from 'express';
+import 'dotenv/config';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
 
 import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-import 'dotenv/config';
 import cors from 'cors';
-
 import index from './routes';
 
 import { requestLogger, errorLogger, errorHandlerMiddleware } from './middlewares';
