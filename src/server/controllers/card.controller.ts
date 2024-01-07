@@ -4,12 +4,12 @@ import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 
-import { BadRequestError, NotFoundError, ForbiddenError } from '../../errors';
+import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 
-import Card from '../../models/card-model';
-import Like from '../../models/like-model';
+import Card from '../models/card.model';
+import Like from '../models/like.model';
 
-const createCard = async (req: any, res: Response, next: NextFunction) => {
+export const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
     const { name } = (req as Request).body;
     const tempPath = req.files[0].path;
@@ -38,7 +38,7 @@ const createCard = async (req: any, res: Response, next: NextFunction) => {
   }
 };
 
-const deleteCard = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const card = await Card.findOne({ where: { id: req.params.id } });
 
@@ -66,7 +66,7 @@ const deleteCard = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getCards = async (req: Request, res: Response, next: NextFunction) => {
+export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const cards = (await Card.findAll()).reverse();
 
@@ -76,7 +76,7 @@ const getCards = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const likeCard = async (req: Request, res: Response, next: NextFunction) => {
+export const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const like = await Like.create(
       {
@@ -95,7 +95,7 @@ const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
+export const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const like = await Like.destroy({
       where: {
@@ -109,19 +109,11 @@ const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     return res.sendStatus(200);
-  } catch (error: unknown) {
+  } catch (error) {
     if ((error as Error).name === 'CastError') {
       next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
     next(error);
   }
-};
-
-export {
-  createCard,
-  deleteCard,
-  getCards,
-  likeCard,
-  dislikeCard,
 };

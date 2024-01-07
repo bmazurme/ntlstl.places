@@ -10,8 +10,8 @@ import {
 } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 
-import User from './user-model';
-import Card from './card-model';
+import User from './user.model';
+import Card from './card.model';
 
 interface LikeAttributes {
   id: number;

@@ -1,9 +1,9 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
 
-import { BadRequestError } from '../../errors';
+import { BadRequestError } from '../errors';
 
-import Like from '../../models/like-model';
+import Like from '../models/like.model';
 
 const getLikes = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -4,15 +4,12 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
-import User from '../../models/user-model';
+import User from '../models/user.model';
 
 const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.body;
-
-    const CLIENT_ID = process.env.CLIENT_ID || '';
-    const CLIENT_SECRET = process.env.CLIENT_SECRET || '';
-    const DEV_JWT_SECRET = process.env.DEV_JWT_SECRET || 'DEV_JWT_SECRET';
+    const { CLIENT_ID = '', CLIENT_SECRET = '', DEV_JWT_SECRET = 'DEV_JWT_SECRET' } = process.env;
 
     const formdata = new FormData();
     formdata.append('code', code);
@@ -33,7 +30,6 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
 
     if (response.ok) {
       const { default_email } = await response.json();
-      console.log('default_email', default_email);
 
       let user = await User.findOne({
         where: { email: default_email },

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { getUserMe } from '../../controllers/auth-controller';
-import { updateAvatar, updateUser } from '../../controllers/user-controller';
+import { getUserMe } from '../controllers/auth.controller';
+import { updateAvatar, updateUser } from '../controllers/user.controller';
 
-import { UrlsApi } from '../../utils/routers';
+import { UrlsApi } from '../utils/routers';
 
 const router = Router();
 

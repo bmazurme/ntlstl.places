@@ -5,14 +5,12 @@ import connectLivereload from 'connect-livereload';
 import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
 import 'dotenv/config';
 import cors from 'cors';
 
 import index from './routes';
 
-import { requestLogger, errorLogger } from './middlewares/logger-middleware';
-import errorHandlerMiddleware from './middlewares/error-handler-middleware';
+import { requestLogger, errorLogger, errorHandlerMiddleware } from './middlewares';
 
 import corsOptions from './utils/cors-options';
 import { helmetConfig } from './utils/helmet-config';
@@ -29,8 +27,7 @@ const app = express();
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(requestLogger);
 
@@ -39,9 +36,7 @@ app.use(limiter);
 if (process.env.NODE_ENV === 'production') {
   app.use(helmet.hidePoweredBy());
   app.use(helmet.contentSecurityPolicy(helmetConfig));
-}
-
-if (process.env.NODE_ENV === 'development') {
+} else if (process.env.NODE_ENV === 'development') {
   const liveReloadServer = livereload.createServer();
 
   liveReloadServer.server.once('connection', () => {
@@ -56,9 +51,12 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/', index);
 app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
-
+// fix to public
 app.get('*', (_req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, 'index.html'));
+  res
+    .status(200)
+    .cookie('mode', process.env.NODE_ENV === 'production' ? '' : 'dev')
+    .sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 app.use('*', () => {

@@ -1,15 +1,16 @@
 import { config as dotEnvConfig } from 'dotenv';
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-import User from './models/user-model';
-import Card from './models/card-model';
-import Like from './models/like-model';
+import User from './models/user.model';
+import Card from './models/card.model';
+import Like from './models/like.model';
 
 dotEnvConfig();
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.POSTGRES_HOST ?? 'postgres',
-  // host: 'localhost',
+  host: process.env.NODE_ENV === 'production'
+    ? process.env.POSTGRES_HOST ?? 'postgres'
+    : 'localhost',
   port: +(process.env.POSTGRES_PORT ?? 5432),
   username: process.env.POSTGRES_USER ?? 'postgres',
   password: process.env.POSTGRES_PASSWORD ?? 'newPassword',

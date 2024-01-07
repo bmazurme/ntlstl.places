@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
 
-import { NotFoundError, BadRequestError } from '../../errors/index';
+import { NotFoundError, BadRequestError } from '../errors/index';
 
-import User from '../../models/user-model';
+import User from '../models/user.model';
 
-const updateAvatar = async (req: unknown, res: Response, next: NextFunction) => {
+export const updateAvatar = async (req: unknown, res: Response, next: NextFunction) => {
   try {
     const { avatar } = (req as Request).body;
     const user = await User.findOne(
@@ -28,7 +28,7 @@ const updateAvatar = async (req: unknown, res: Response, next: NextFunction) => 
   }
 };
 
-const updateUser = async (req: unknown, res: Response, next: NextFunction) => {
+export const updateUser = async (req: unknown, res: Response, next: NextFunction) => {
   try {
     const { name, about } = (req as Request).body;
     const user = await User.findOne(
@@ -50,5 +50,3 @@ const updateUser = async (req: unknown, res: Response, next: NextFunction) => {
     next(err);
   }
 };
-
-export { updateAvatar, updateUser };

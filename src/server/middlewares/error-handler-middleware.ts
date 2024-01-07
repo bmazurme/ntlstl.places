@@ -11,4 +11,4 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, next) => {
   next();
 };
 
-export default errorHandlerMiddleware;
+export { errorHandlerMiddleware };

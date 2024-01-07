@@ -2,11 +2,11 @@
 import { NextFunction, Request, Response } from 'express';
 import path from 'path';
 
-import { BadRequestError, NotFoundError } from '../../errors';
+import { BadRequestError, NotFoundError } from '../errors';
 
-import Card from '../../models/card-model';
+import Card from '../models/card.model';
 
-const getFile = async (req: Request, res: Response, next: NextFunction) => {
+export const getFile = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const card = await Card.findOne({ where: { link: req.params.filename } });
 
@@ -23,5 +23,3 @@ const getFile = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
-export { getFile };

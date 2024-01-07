@@ -12,8 +12,8 @@ import {
 
 import { Optional } from 'sequelize';
 
-import User from './user-model';
-import Like from './like-model';
+import User from './user.model';
+import Like from './like.model';
 
 interface CardAttributes {
   id: number;

@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
 
-import { NotFoundError } from '../../errors/index';
+import { NotFoundError } from '../errors/index';
 
-import Users from '../../models/user-model';
+import Users from '../models/user.model';
 
-const logout = (req: Request, res: Response, next: NextFunction) => {
+export const logout = (req: Request, res: Response, next: NextFunction) => {
   try {
     return res.clearCookie('token', { path: '/' }).send({ message: 'logout' });
   } catch (err) {
@@ -13,7 +13,7 @@ const logout = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getUserMe = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserMe = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // @ts-ignore
     const user = await Users.findOne({ where: { email: req.user.default_email } });
@@ -33,5 +33,3 @@ const getUserMe = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
-
-export { logout, getUserMe };
