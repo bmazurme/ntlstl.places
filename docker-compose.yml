@@ -56,6 +56,10 @@ services:
       - CLIENT_SECRET=$CLIENT_SECRET
       - DEV_JWT_SECRET=$DEV_JWT_SECRET
       - HOST=$HOST
+      - TELEGRAM_TOKEN=$TELEGRAM_TOKEN
+      - TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
+      - TELEGRAM_LEVEL=$TELEGRAM_LEVEL
+
     restart: always
     networks:
       - awesome
