@@ -99,7 +99,7 @@ $ docker pull cr.yandex/${REGISTRY_ID}/places:latest
 
 $ docker run cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
 
 $ docker rmi id -f
 
