@@ -1,12 +1,12 @@
-// const port = 3005;
 const admin = 'str-22@yandex.ru';
+export const SHIFT = 30;
 
 export const Urls = {
   BASE: '/',
   SIGNIN: '/signin',
   SIGNUP: '/signup',
   OAUTH: {
-    INDEX: 'oauth',
+    INDEX: '/oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
   KIT: {

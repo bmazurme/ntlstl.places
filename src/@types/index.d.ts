@@ -8,24 +8,24 @@ type Action<T> = {
 type Reducer<T> = (state: T, action: Action<T>) => T;
 
 type User = {
-  _id: string;
+  id: string;
   name: string;
   about: string;
   avatar: string;
-  defaultEmail: string;
+  email: string;
   password: string;
 };
 
 type Like = {
-  _id: string,
+  id: string,
   user: User | null,
 }
 
  type Card = {
-  _id: string,
+  id: string,
   name: string,
   link: string,
   likes: string[],
-  userId: string | null,
+  user_id: string | null,
   createdAt: Date
 }

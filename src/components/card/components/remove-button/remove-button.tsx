@@ -18,7 +18,7 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
   const errorHandler = useErrorHandler();
   const [deleteCard, { isLoading: isLoadingCard }] = useDeleteCardMutation();
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
-  const isOwn = card?.userId === user?._id;
+  const isOwn = card?.user_id === user?.id;
   const handleCloseAllPopups = () => setConfirmPopup(false);
   const handleCardDelete = async () => {
     try {

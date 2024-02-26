@@ -14,6 +14,8 @@
 /data
 /dbdata6
 /uploads
+/pgadmin-data
+/postgresdata
 nginx
 
 # misc
@@ -28,5 +30,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-error.log
-request.log
+.log
+*.log
+# error.log
+# request.log
+

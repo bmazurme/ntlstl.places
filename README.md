@@ -66,6 +66,22 @@ Implemented features:
 - [X] Add, delete card, like and dislike
 - [ ] Tests, jest, cypress
 
+### Postgres
+
+```bash
+$ brew update
+
+$ brew doctor
+
+$ brew install postgresql@14
+
+$ brew services start postgresql@14
+
+$ brew services list
+
+$ brew services stop postgresql@14
+```
+
 ### Docker
 
 ```bash
@@ -83,7 +99,7 @@ $ docker pull cr.yandex/${REGISTRY_ID}/places:latest
 
 $ docker run cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
 
 $ docker rmi id -f
 

@@ -30,3 +30,5 @@ error.log*
 
 ./data
 ./dbdata6
+./data-db
+./postgresdata

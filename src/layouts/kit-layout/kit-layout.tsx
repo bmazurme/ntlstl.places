@@ -10,14 +10,12 @@ export default function NotFoundLayout() {
   return (
     <div className={style.container}>
       <UploadButton onChange={(formData: FormData) => console.log(formData)} />
-
       <div className={style.counter}>
         <div className={style.icon}>
           <EyeIcon className="h-3 w-3" />
         </div>
         <span className={style.value}>0</span>
       </div>
-
     </div>
   );
 }

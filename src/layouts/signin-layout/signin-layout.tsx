@@ -6,7 +6,20 @@ import yaOauth from '../../images/ya-oauth.svg';
 
 import style from './signin-layout.module.css';
 
-const link = 'https://oauth.yandex.ru/authorize?response_type=code&client_id=131fd54e2cb047f78ae10e63a1caf0e2';
+// const link = 'https://oauth.yandex.ru/authorize?response_type=code&client_id=c709762dfe3e447999beb343da0bee9f';
+function getCookie(name: string) {
+  const matches = document.cookie.match(new RegExp(
+    // eslint-disable-next-line no-useless-escape
+    `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`,
+  ));
+
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// console.log(getCookie('mode'), getCookie('mode') === 'dev');
+const link = getCookie('mode') === 'dev'
+  ? 'https://oauth.yandex.ru/authorize?response_type=code&client_id=c709762dfe3e447999beb343da0bee9f'
+  : 'https://oauth.yandex.ru/authorize?response_type=code&client_id=131fd54e2cb047f78ae10e63a1caf0e2';
 
 export default function SigninLayout() {
   const navigate = useNavigate();

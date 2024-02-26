@@ -20,7 +20,7 @@ export default function Profile() {
         <p className={style.profession}>{user?.about}</p>
         <ProfileButton info={user} popup={popup} setPopup={setPopup} />
       </div>
-      {user?.defaultEmail === ADMIN && <PlusButton popup={popup} setPopup={setPopup} />}
+      {user?.email === ADMIN && <PlusButton popup={popup} setPopup={setPopup} />}
     </section>
   );
 }

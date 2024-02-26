@@ -20,6 +20,7 @@ const inputs = [
       value: /^[a-zA-Z0-9_-]{3,15}$/,
       message: 'Name is invalid',
     },
+    // disabled: false,
     required: true,
     autoComplete: 'current-name',
   },
@@ -36,7 +37,9 @@ export default function AddCard({ isLoading, onAddPlace }
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
       data.file.append('name', data.name);
+      // disabled and reset
       await onAddPlace(data.file);
+      // reset({ name: '', file: '' });
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
@@ -44,7 +47,7 @@ export default function AddCard({ isLoading, onAddPlace }
 
   return (
     <form className="form form_type_edit" onSubmit={onSubmit}>
-      <h2 className={style.title}>Новое место</h2>
+      <h2 className={style.title}>New place</h2>
       {inputs.map((input) => (
         <Controller
           key={input.name}

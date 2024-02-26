@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { getCards } from '../../controllers/card-controller';
-import { UrlsApi } from '../../utils/routers';
+import { getCards } from '../controllers/card.controller';
+import { UrlsApi } from '../utils/routers';
 
 const router = Router();
 
