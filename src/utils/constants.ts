@@ -6,7 +6,7 @@ export const Urls = {
   SIGNIN: '/signin',
   SIGNUP: '/signup',
   OAUTH: {
-    INDEX: 'oauth',
+    INDEX: '/oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
   KIT: {

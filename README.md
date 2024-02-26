@@ -66,6 +66,22 @@ Implemented features:
 - [X] Add, delete card, like and dislike
 - [ ] Tests, jest, cypress
 
+### Postgres
+
+```bash
+$ brew update
+
+$ brew doctor
+
+$ brew install postgresql@14
+
+$ brew services start postgresql@14
+
+$ brew services list
+
+$ brew services stop postgresql@14
+```
+
 ### Docker
 
 ```bash

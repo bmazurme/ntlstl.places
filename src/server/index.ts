@@ -51,6 +51,7 @@ app.use('/api/', index);
 app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
 // fix to public
+// console.log('--', process.env);
 app.get('*', (_req, res) => {
   res
     .status(200)
