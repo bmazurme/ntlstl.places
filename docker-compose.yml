@@ -40,7 +40,7 @@ services:
     build:
       context: .
     ports:
-      - "${PORT:-3000}:3000"
+      - "${PORT:-3005}:3005"
     volumes:
       - ./uploads:/usr/src/app/uploads
     environment:
@@ -51,7 +51,7 @@ services:
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - POSTGRES_DB=$POSTGRES_DB
       - NODE_ENV=$NODE_ENV
-      - PORT=3000
+      - PORT=3005
       - CLIENT_ID=$CLIENT_ID
       - CLIENT_SECRET=$CLIENT_SECRET
       - DEV_JWT_SECRET=$DEV_JWT_SECRET
