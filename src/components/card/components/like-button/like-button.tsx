@@ -21,7 +21,7 @@ export default function LikeButton({ user, card }: ILikeProps) {
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
   const { data: likes = [] } = useGetLikesQuery({ cardId: card.id });
-  const isLiked = likes.some((like: any) => like.user_id === user?.id);
+  const isLiked = likes.some((like: Card) => like.user_id === user?.id);
 
   const onCardLike = async (c: Card) => {
     try {

@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true, 
+    "experimentalDecorators": true,
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": false,

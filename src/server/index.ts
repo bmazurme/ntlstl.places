@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
+import compression from 'compression';
 
 import path from 'path';
 import helmet from 'helmet';
@@ -24,6 +25,7 @@ const port = process.env.PORT ?? 3005;
 
 const app = express();
 
+app.use(compression({ brotli: { enabled: true, zlib: { } } }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
