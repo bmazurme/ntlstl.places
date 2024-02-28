@@ -22,7 +22,8 @@
 * Photo posting service.
 
 ## Demo
-...
+
+![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
 
 ### Installation
 ```bash
