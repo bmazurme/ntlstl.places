@@ -9,7 +9,17 @@ import User from '../models/user.model';
 const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.body;
-    const { CLIENT_ID = '', CLIENT_SECRET = '', DEV_JWT_SECRET = 'DEV_JWT_SECRET' } = process.env;
+    let {
+      CLIENT_ID = '',
+      CLIENT_SECRET = '',
+      // eslint-disable-next-line prefer-const
+      DEV_JWT_SECRET = 'DEV_JWT_SECRET',
+    } = process.env;
+
+    if (process.env.NODE_ENV !== 'production') {
+      CLIENT_ID = process.env.CLIENT_ID_DEV!;
+      CLIENT_SECRET = process.env.CLIENT_SECRET_DEV!;
+    }
 
     const formdata = new FormData();
     formdata.append('code', code);
@@ -20,6 +30,7 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
     const rlst = await fetch('https://oauth.yandex.ru/token', options);
 
     const rs = await rlst.json();
+
     const { access_token: token } = rs;
     const requestOptions: RequestInit = {
       method: 'POST',
