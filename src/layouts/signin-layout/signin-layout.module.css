@@ -1,7 +1,11 @@
-.layout {
+.common {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.layout {
+  composes: common;
   flex-direction: column;
   box-sizing: border-box;
 }
@@ -17,9 +21,7 @@
 }
 
 .form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  composes: common;
   min-height: 400px;
   max-width: 300px;
   width: 100%;
