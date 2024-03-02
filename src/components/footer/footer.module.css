@@ -9,12 +9,14 @@
 }
 
 .link {
-  color: #545454;
+  /* color: #545454; */
+  color: var(--menu-color);
   text-decoration: none;
 }
 
 .link:visited {
-  color: #545454;
+  /* color: #545454; */
+  color: var(--menu-color-active);
 }
 
 .copyright {
