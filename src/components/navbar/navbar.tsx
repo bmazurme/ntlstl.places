@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
@@ -32,7 +34,11 @@ export default function Navbar({ isOpen, handlerClick }
   return (
     <>
       <ThemeButton />
-      <ul onClick={handlerClick} className={classNames(style.navbar, { [style.opened]: isOpen })} aria-hidden="true">
+      <ul
+        onClick={handlerClick}
+        className={classNames(style.navbar, { [style.opened]: isOpen })}
+        // aria-hidden="true"
+      >
         {!user && <NavItem to={Urls.SIGNIN} value="Sign in" active="active" />}
         {user?.email && <NavItem to="/" value={email} active="active" />}
         {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
