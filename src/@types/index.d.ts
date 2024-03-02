@@ -1,4 +1,6 @@
 declare module '*.css';
+declare module 'image-to-webp';
+declare module 'sharp-multer';
 
 type Action<T> = {
   type: string;
@@ -21,7 +23,7 @@ type Like = {
   user: User | null,
 }
 
- type Card = {
+type Card = {
   id: string,
   name: string,
   link: string,
