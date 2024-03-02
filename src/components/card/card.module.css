@@ -16,6 +16,7 @@
   display: flex;
   box-sizing: border-box;
   padding: 20px;
+  padding-left: 10px;
   height: 78px;
   margin: 0;
   flex-direction: row;
@@ -27,7 +28,7 @@
 
 .name {
   margin: 2px 0;
-  padding: 0;
+  /* padding: 0; */
   max-width: 200px;
   width: 100%;
   text-overflow: ellipsis;
@@ -36,4 +37,16 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 24px;
+
+  border: 0;
+  border-radius: 4px;
+  background-color: var(--card-background-color);
+  padding: 5px 10px;
+  box-sizing: border-box;
+  /* color: var(--color); */
+}
+
+.name:hover {
+  background-color: #e1e1e1;
+   /* var(--title-color-hover); */
 }
