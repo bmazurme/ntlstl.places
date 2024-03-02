@@ -51,7 +51,7 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
           email: default_email,
           name: 'User',
           about: 'guest',
-          avatar: 'https://www.ejin.ru/wp-content/uploads/2019/05/zakat-zimoj-na-gore.jpg',
+          avatar: 'user_0.webp',
         });
       }
 

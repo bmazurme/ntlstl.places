@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
+import { imageToWebp } from 'image-to-webp'; // npm i webp-converter
 
 import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 
@@ -13,11 +14,20 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
   try {
     const { name } = (req as Request).body;
     const tempPath = req.files[0].path;
-    const uniqName = `${uuidv4()}_${req.files[0].originalname}`.toLowerCase();
+    const fileName = req.files[0].originalname;
+    const uniqName = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
     const targetPath = path.join('uploads', uniqName);
-    fs.rename(tempPath, targetPath, (err) => {
+    const webpImage = await imageToWebp(tempPath, 80);
+
+    fs.rename(webpImage, targetPath, (err) => {
       if (err) {
-        console.log('err');
+        next(err);
+      }
+    });
+
+    fs.unlink(tempPath, (err) => {
+      if (err) {
+        next(err);
       }
     });
 
@@ -66,6 +76,27 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
   }
 };
 
+export const updateCard = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const card = await Card.findOne({ where: { id: req.params.id } });
+    const { name } = (req as Request).body;
+
+    if (!card) {
+      return new NotFoundError('card was not found');
+    }
+
+    if (card.user_id !== Number((req as Request & { user: User }).user.id)) {
+      return next(new ForbiddenError('access denied'));
+    }
+
+    await card.update({ name });
+
+    return res.status(200).send(card);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const cards = (await Card.findAll()).reverse();
@@ -105,7 +136,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
     });
 
     if (!like) {
-      return next(new NotFoundError('карточка не найдена'));
+      return next(new NotFoundError('card was not found'));
     }
 
     return res.sendStatus(200);
