@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:21-alpine AS base
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash
 WORKDIR /usr/src/app
 RUN npm config set cache /usr/src/app/.npm-cache --global
@@ -15,7 +15,7 @@ RUN npm install
 FROM base AS prod-deps
 COPY --from=dev-deps /usr/src/app/.npm-cache/ /usr/src/app/.npm-cache/
 COPY package*.json ./
-# RUN npm set-script prepare '' &&  npm install --production --prefer-offline
+RUN npm set-script prepare '' &&  npm install --production --prefer-offline
 RUN npm install --production --prefer-offline
 RUN rm -rf /usr/src/app/.npm-caches
 
