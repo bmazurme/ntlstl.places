@@ -8,6 +8,8 @@ html {
   --color-in: #fff;
   --menu-color: #a9a9a9;
   --menu-color-active: #000;
+  --transition-default: .3s ease;
+  --transition-scroll: smooth;
 }
 
 html[ms-theme="dark"] {
@@ -20,6 +22,8 @@ html[ms-theme="dark"] {
   --color-in: #000;
   --menu-color: #a9a9a9;
   --menu-color-active: #fff;
+  --transition-default: .3s ease;
+  --transition-scroll: smooth;
 }
 
 .root {
@@ -30,4 +34,6 @@ html[ms-theme="dark"] {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
+  transition: background-color var(--transition-default);
+  overflow-y: scroll
 }
