@@ -37,9 +37,7 @@ export default function AddCard({ isLoading, onAddPlace }
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
       data.file.append('name', data.name);
-      // disabled and reset
       await onAddPlace(data.file);
-      // reset({ name: '', file: '' });
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
