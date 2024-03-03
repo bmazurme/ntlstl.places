@@ -1,5 +1,4 @@
 import path from 'path';
-import type { Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import nodeExternals from 'webpack-node-externals';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -8,6 +7,8 @@ import ESLintPlugin from 'eslint-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import NodemonPlugin from 'nodemon-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+
+import type { Configuration } from 'webpack';
 
 type Environment = 'development' | 'production' | 'none' | undefined;
 
