@@ -102,6 +102,7 @@ const server = merge<Configuration>(common, {
   mode: process.env.NODE_ENV as Environment ?? 'development',
   externals: [
     nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] }),
+    'sharp',
   ],
   plugins: [
     new NodemonPlugin({
