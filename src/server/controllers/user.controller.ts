@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { imageToWebp } from 'image-to-webp';
+import sharp from 'sharp';
 
 import { NotFoundError, BadRequestError } from '../errors/index';
 
@@ -34,13 +34,14 @@ export const updateAvatar = async (req: any, res: Response, next: NextFunction) 
     const tempPath = req.files[0].path;
     const uniqName = `user_${user.id}_${uuidv4()}.webp`.toLowerCase();
     const targetPath = path.join('uploads', 'avatars', uniqName);
-    const webpImage = await imageToWebp(tempPath, 80);
 
-    fs.rename(webpImage, targetPath, (err) => {
-      if (err) {
-        next(err);
-      }
-    });
+    await sharp(tempPath)
+      .resize({
+        width: 240,
+        height: 240,
+      })
+      .toFormat('webp')
+      .toFile(targetPath);
 
     fs.unlink(tempPath, (err) => {
       if (err) {

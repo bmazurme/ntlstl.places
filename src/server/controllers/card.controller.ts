@@ -1,9 +1,11 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
-import { imageToWebp } from 'image-to-webp'; // npm i webp-converter
+import { v4 as uuidv4 } from 'uuid';
+import sharp from 'sharp';
+
+// import { imageToWebp } from 'image-to-webp'; // npm i webp-converter
 
 import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 
@@ -17,9 +19,12 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
     const fileName = req.files[0].originalname;
     const uniqName = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
     const targetPath = path.join('uploads', uniqName);
-    const webpImage = await imageToWebp(tempPath, 80);
 
-    fs.rename(webpImage, targetPath, (err) => {
+    await sharp(tempPath)
+      .toFormat('webp')
+      .toFile(targetPath);
+
+    fs.unlink(tempPath, (err) => {
       if (err) {
         next(err);
       }
@@ -35,7 +40,7 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
       ...req.files[0],
       name,
       link: uniqName,
-      user_id: (req as & { user: User}).user.id,
+      user_id: (req as & { user: User }).user.id,
     });
 
     return res.send(card);
