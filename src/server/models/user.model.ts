@@ -6,7 +6,6 @@ import {
   PrimaryKey,
   DataType,
 } from 'sequelize-typescript';
-
 import { Optional } from 'sequelize';
 
 interface UserAttributes {
@@ -28,17 +27,17 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-    id!: number;
+  declare id: number;
 
   @Column(DataType.STRING)
-    avatar!: string;
+  declare avatar: string;
 
   @Column(DataType.STRING)
-    name!: string;
+  declare name: string;
 
   @Column(DataType.STRING)
-    about!: string;
+  declare about: string;
 
   @Column(DataType.STRING)
-    email!: string;
+  declare email: string;
 }

@@ -7,9 +7,9 @@ import {
   AllowNull,
   DataType,
   HasMany,
-  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
-
+import { NonAttribute } from '@sequelize/core';
 import { Optional } from 'sequelize';
 
 import User from './user.model';
@@ -33,19 +33,21 @@ export default class Card extends Model<CardAttributes, CardCreationAttributes> 
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-    id!: number;
+  declare id: number;
 
   @Column(DataType.STRING)
-    name!: string;
+  declare name: string;
 
   @Column(DataType.STRING)
-    link!: string;
+  declare link: string;
 
-  @ForeignKey(() => User)
+  @BelongsTo(() => User, 'user_id')
+  declare user?: NonAttribute<User>;
+
   @AllowNull(false)
   @Column(DataType.INTEGER)
-    user_id!: number;
+  declare user_id: number;
 
   @HasMany(() => Like)
-    likes!: Like[];
+  declare likes: Like[];
 }
