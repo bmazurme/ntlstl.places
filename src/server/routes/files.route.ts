@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import { getFile, getAvatarFile, getCoverFile } from '../controllers/file.controller';
-
 import { UrlsApi } from '../utils/routers';
 
 const router = Router();

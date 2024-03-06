@@ -10,7 +10,6 @@ import {
 } from '../controllers/card.controller';
 import { UrlsApi } from '../utils/routers';
 
-// const upload = multer({ dest: 'uploads/' });
 const upload = multer({ dest: 'uploads/' });
 const router = Router();
 

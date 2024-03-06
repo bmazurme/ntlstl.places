@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import { logout } from '../controllers/auth.controller';
-
 import { UrlsApi } from '../utils/routers';
 
 const router = Router();

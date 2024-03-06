@@ -3,7 +3,6 @@ import multer from 'multer';
 
 import { getUserMe } from '../controllers/auth.controller';
 import { updateAvatar, updateUser, getUsers } from '../controllers/user.controller';
-
 import { UrlsApi } from '../utils/routers';
 
 const router = Router();
