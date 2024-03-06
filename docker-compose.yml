@@ -36,7 +36,7 @@ services:
     depends_on:
       - postgres
     image: cr.yandex/${REGISTRY_ID}/places:latest
-    # platform: linux/amd64
+    platform: linux/amd64
     build:
       context: .
       target: runner
