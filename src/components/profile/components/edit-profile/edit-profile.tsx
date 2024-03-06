@@ -16,7 +16,7 @@ const inputs = [
     name: 'name',
     label: 'Name',
     pattern: {
-      value: /^[a-zA-Z0-9_-]{3,15}$/,
+      value: /^[\s+$.a-zA-Z0-9_-]{3,25}$/,
       message: 'Name is invalid',
     },
     required: true,
@@ -26,7 +26,7 @@ const inputs = [
     name: 'about',
     label: 'About',
     pattern: {
-      value: /^[a-zA-Z0-9_-]{3,15}$/,
+      value: /^[\s+$.a-zA-Z0-9_-]{3,25}$/,
       message: 'About is invalid',
     },
     required: true,
@@ -48,7 +48,7 @@ export default function EditProfile({ info, isLoading, onUpdateUser }
 
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
-      await onUpdateUser(data);
+      onUpdateUser(data);
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
