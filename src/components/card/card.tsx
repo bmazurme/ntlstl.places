@@ -37,19 +37,22 @@ export default function Card({ card }: { card: Card; }) {
       {user && <RemoveButton card={card} user={user} />}
       <Image card={card} />
       <form className={style.group}>
-        {user?.id === card.user_id
-          ? (
-            <input
-              className={style.name}
-              type="text"
-              name="name"
-              readOnly={user?.id !== card.user_id}
-              value={values.name}
-              onChange={handleChange}
-              onBlur={onSubmit}
-            />
-          )
-          : <h2 className={style.name}>{card.name}</h2>}
+        <div className={style.box}>
+          {user?.id === card.user_id
+            ? (
+              <input
+                className={style.input}
+                type="text"
+                name="name"
+                readOnly={user?.id !== card.user_id}
+                value={values.name}
+                onChange={handleChange}
+                onBlur={onSubmit}
+              />
+            )
+            : <h2 className={style.name}>{card.name}</h2>}
+          <div className={style.user}>{card.user.name}</div>
+        </div>
         <LikeButton card={card} user={user} />
       </form>
     </div>
