@@ -51,24 +51,6 @@ $ npm run eslint
 $ npm start
 ```
 
-Implemented features:
-- [X] Popup, modal
-- [X] Display the number of likes of the card
-- [X] Form validation, react-hook-form
-- [X] Redux, RTK Query
-- [X] React error boundaries
-- [X] TypeScript, Webpack
-- [X] Express static
-- [X] Docker
-- [X] Service worker
-- [X] CI/CD GitHub Actions
-- [X] Dark&light theme
-- [X] API, express
-- [X] User registration, authorization OAUTH
-- [X] Add, edit user information
-- [X] Add, delete card, like and dislike
-- [ ] Tests, jest, cypress
-
 ### Postgres
 
 ```bash
