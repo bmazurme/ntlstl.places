@@ -27,7 +27,7 @@ COPY . .
 RUN npm run build
 RUN find . -name node_modules | xargs rm -rf
 
-FROM --platform=linux/amd64 base AS runner
+FROM base AS runner
 COPY --from=prod-deps /usr/src/app/ .
 COPY --from=builder /usr/src/app/ .
 CMD ["node", "dist/server"]
