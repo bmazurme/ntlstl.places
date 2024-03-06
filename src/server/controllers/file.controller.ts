@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
+import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
-import fs from 'fs';
 
 import { BadRequestError, NotFoundError } from '../errors';
 
@@ -23,7 +23,6 @@ export const getFile = async (req: Request, res: Response, next: NextFunction) =
       .on('info', (info) => console.log('=>', info));
 
     readableStream.pipe(transform).pipe(res);
-    // res.sendFile(path.join(__dirname, '..', 'uploads', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));

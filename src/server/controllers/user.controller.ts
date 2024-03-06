@@ -2,8 +2,8 @@
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
 import sharp from 'sharp';
+import { v4 as uuidv4 } from 'uuid';
 
 import { NotFoundError, BadRequestError } from '../errors/index';
 

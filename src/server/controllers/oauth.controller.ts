@@ -6,7 +6,7 @@ import 'dotenv/config';
 
 import User from '../models/user.model';
 
-const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
+export const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.body;
     let {
@@ -30,7 +30,6 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
     const rlst = await fetch('https://oauth.yandex.ru/token', options);
 
     const rs = await rlst.json();
-
     const { access_token: token } = rs;
     const requestOptions: RequestInit = {
       method: 'POST',
@@ -73,5 +72,3 @@ const oauthYaSigninController = async (req: Request, res: Response, next: NextFu
     next(err);
   }
 };
-
-export { oauthYaSigninController };

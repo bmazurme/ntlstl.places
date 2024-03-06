@@ -1,14 +1,13 @@
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
-import path from 'path';
 import fs from 'fs';
-import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
 import sharp from 'sharp';
-
-// import { imageToWebp } from 'image-to-webp'; // npm i webp-converter
+import { v4 as uuidv4 } from 'uuid';
 
 import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 
+import User from '../models/user.model';
 import Card from '../models/card.model';
 import Like from '../models/like.model';
 
@@ -104,7 +103,21 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
 export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = (await Card.findAll()).reverse();
+    const cards = (await Card.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Like,
+          attributes: ['user_id'],
+        },
+      ],
+      order: [
+        ['createdAt', 'DESC'],
+      ],
+    }));
 
     return res.status(200).send(cards);
   } catch (err) {
