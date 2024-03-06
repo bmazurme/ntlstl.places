@@ -32,7 +32,7 @@ export default function AvatarButton({ info, popup, setPopup }: AvatarProps) {
     <>
       <div
         className={style.image}
-        style={{ backgroundImage: `url(${info?.avatar})` }}
+        style={{ backgroundImage: `url(/api/files/avatar/${info?.avatar})` }}
         onClick={handleOpenEditAvatarPopup}
         aria-hidden="true"
       />
@@ -44,7 +44,7 @@ export default function AvatarButton({ info, popup, setPopup }: AvatarProps) {
             <EditAvatar
               isLoading={isLoadingAvatar}
               info={info}
-              onUpdateUser={handleUpdateAvatarSubmit}
+              updateUserAvatar={handleUpdateAvatarSubmit}
             />
           )}
         />

@@ -4,7 +4,7 @@ export const UrlsApi = {
     OUT: '/logout',
   },
   USER: {
-    INDEX: '/user',
+    INDEX: '/users',
     ME: '/users/me',
     AVATAR: '/users/me/avatar',
   },
@@ -16,5 +16,7 @@ export const UrlsApi = {
   },
   FILES: {
     INDEX: '/files/:filename',
+    AVATAR: '/files/avatar/:filename',
+    COVERS: '/files/covers/:filename',
   },
 };

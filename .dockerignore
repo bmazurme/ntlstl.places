@@ -32,3 +32,10 @@ error.log*
 ./dbdata6
 ./data-db
 ./postgresdata
+
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore

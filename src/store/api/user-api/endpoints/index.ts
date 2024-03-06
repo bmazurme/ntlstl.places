@@ -22,12 +22,18 @@ const usersApiEndpoints = usersApi
         invalidatesTags: ['Users'],
       }),
       updateUserAvatar: builder.mutation({
-        query: (user) => ({
+        query: (formData) => ({
           url: '/users/me/avatar',
           method: 'PATCH',
-          body: user,
+          body: formData,
         }),
-        invalidatesTags: ['Users'],
+      }),
+      getUsers: builder.query<User[], void>({
+        query: () => ({
+          url: '/users',
+          method: 'GET',
+        }),
+        providesTags: ['Users'],
       }),
     }),
   });
@@ -36,5 +42,6 @@ export const {
   useGetUserMeMutation,
   useUpdateUserMutation,
   useUpdateUserAvatarMutation,
+  useGetUsersQuery,
 } = usersApiEndpoints;
 export { usersApiEndpoints };

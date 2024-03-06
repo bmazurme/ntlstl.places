@@ -3,6 +3,7 @@
 ![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)
 ![Redux](https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux)
+![Sharp](https://img.shields.io/badge/-Sharp-black?style=flat-square&logo=sharp)
 ![Express](https://img.shields.io/badge/-Express-black?style=flat-square&logo=express)
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-black?style=flat-square&logo=postgresql)
 ![Sequelize](https://img.shields.io/badge/-Sequelize-black?style=flat-square&logo=sequelize)
@@ -12,7 +13,8 @@
 ![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
 ![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
 ![Webpack](https://img.shields.io/badge/-Webpack-black?style=flat-square&logo=webpack)
-![Jest](https://img.shields.io/badge/-Jest-black?style=flat-square&logo=jest)
+![PostCSS](https://img.shields.io/badge/-PostCSS-black?style=flat-square&logo=postcss)
+![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
 * framer-motion
 * uuidv4
@@ -48,24 +50,6 @@ $ npm run eslint
 # launch
 $ npm start
 ```
-
-Implemented features:
-- [X] Popup, modal
-- [X] Display the number of likes of the card
-- [X] Form validation, react-hook-form
-- [X] Redux, RTK Query
-- [X] React error boundaries
-- [X] TypeScript, Webpack
-- [X] Express static
-- [X] Docker
-- [X] Service worker
-- [X] CI/CD GitHub Actions
-- [X] Dark&light theme
-- [X] API, express
-- [X] User registration, authorization OAUTH
-- [X] Add, edit user information
-- [X] Add, delete card, like and dislike
-- [ ] Tests, jest, cypress
 
 ### Postgres
 

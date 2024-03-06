@@ -12,10 +12,12 @@ export default function Image({ card }: { card: Card; }) {
     <img
       className={style.image}
       alt={card.name}
-      src={`/api/files/${card.link}`}
+      src={`/api/files/covers/${card.link}`}
       onClick={() => dispatch(setCard(card))}
       aria-hidden="true"
-      loading="lazy"
+      // loading="lazy"
+      height="282px"
+      width="282px"
     />
   );
 }

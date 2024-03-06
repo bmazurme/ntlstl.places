@@ -9,6 +9,12 @@ export const Urls = {
     INDEX: '/oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
+  ADMIN: {
+    INDEX: '/admin',
+  },
+  USERS: {
+    INDEX: '/users',
+  },
   KIT: {
     INDEX: '/kit',
   },

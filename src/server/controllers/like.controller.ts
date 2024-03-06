@@ -5,7 +5,7 @@ import { BadRequestError } from '../errors';
 
 import Like from '../models/like.model';
 
-const getLikes = async (req: Request, res: Response, next: NextFunction) => {
+export const getLikes = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const likes = await Like.findAll(
       { where: { card_id: req.params.id } },
@@ -20,5 +20,3 @@ const getLikes = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
-export { getLikes };

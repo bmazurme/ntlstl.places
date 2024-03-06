@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
@@ -41,7 +42,7 @@ export default function Cards() {
   return (
     <div className={style.container}>
       <section className={style.cards}>
-        {current.map((card: Card) => (<Card key={card.id} card={card} />))}
+        {current.map((card) => (<Card key={card.id} card={card} />))}
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT

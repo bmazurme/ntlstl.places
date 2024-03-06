@@ -10,6 +10,7 @@ export default function Button({ isOpen, handlerClick }
     <button
       type="button"
       onClick={handlerClick}
+      aria-label="Switch menu"
       className={classNames(style.btn, { [style.opened]: isOpen })}
     />
   );

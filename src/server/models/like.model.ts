@@ -30,15 +30,15 @@ export default class Like extends Model<LikeAttributes, LikeCreationAttributes> 
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
-    id!: number;
+  declare id: number;
 
   @ForeignKey(() => Card)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-    card_id!: number;
+  declare card_id: number;
 
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-    user_id!: number;
+  declare user_id: number;
 }

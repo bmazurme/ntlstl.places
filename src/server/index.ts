@@ -12,12 +12,11 @@ import index from './routes';
 
 import { requestLogger, errorLogger, errorHandlerMiddleware } from './middlewares';
 
-import corsOptions from './utils/cors-options';
+import { limiter } from './utils/limiter';
+import { corsOptions } from './utils/cors-options';
 import { helmetConfig } from './utils/helmet-config';
 
 import { NotFoundError } from './errors';
-
-import limiter from './utils/limiter';
 
 import dbConnect from './connect';
 
@@ -53,7 +52,6 @@ app.use('/api/', index);
 app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
 // fix to public
-// console.log('--', process.env);
 app.get('*', (_req, res) => {
   res
     .status(200)

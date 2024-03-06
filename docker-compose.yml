@@ -39,6 +39,8 @@ services:
     platform: linux/amd64
     build:
       context: .
+      target: runner
+      dockerfile: ./Dockerfile
     ports:
       - "${PORT:-3005}:3005"
     volumes:

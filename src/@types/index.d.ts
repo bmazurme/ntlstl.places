@@ -1,4 +1,6 @@
 declare module '*.css';
+declare module 'image-to-webp';
+declare module 'sharp-multer';
 
 type Action<T> = {
   type: string;
@@ -8,7 +10,7 @@ type Action<T> = {
 type Reducer<T> = (state: T, action: Action<T>) => T;
 
 type User = {
-  id: string;
+  id: number;
   name: string;
   about: string;
   avatar: string;
@@ -17,15 +19,17 @@ type User = {
 };
 
 type Like = {
-  id: string,
-  user: User | null,
-}
+  id: number;
+  user: User | null;
+};
 
- type Card = {
-  id: string,
-  name: string,
-  link: string,
-  likes: string[],
-  user_id: string | null,
-  createdAt: Date
-}
+type Card = {
+  id: string;
+  name: string;
+  link: string;
+  // likes: string[];
+  user_id: number | null;
+  createdAt: Date;
+  user: { name: string; };
+  likes: { user_id: number; }[];
+};

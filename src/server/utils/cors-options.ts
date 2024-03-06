@@ -11,7 +11,7 @@ const checkWhiteList: any = (origin: string, callback: any) => {
   }
 };
 
-const corsOptions: cors.CorsOptions = {
+export const corsOptions: cors.CorsOptions = {
   credentials: true,
   origin: checkWhiteList,
   methods: METHODS,
@@ -19,5 +19,3 @@ const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 204,
   allowedHeaders: ALLOWED_HEADERS,
 };
-
-export default corsOptions;

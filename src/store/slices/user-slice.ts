@@ -9,13 +9,13 @@ export type InfoState = {
   data: User | null,
 };
 
-export const initialStateUsers: InfoState = {
+export const initialStateUser: InfoState = {
   data: null,
 };
 
 const slice = createSlice({
   name: 'user',
-  initialState: initialStateUsers,
+  initialState: initialStateUser,
   reducers: {},
   extraReducers: (builder) => {
     builder

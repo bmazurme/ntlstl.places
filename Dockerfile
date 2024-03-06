@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:21-alpine3.18 AS base
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash
 WORKDIR /usr/src/app
 RUN npm config set cache /usr/src/app/.npm-cache --global
@@ -11,6 +11,8 @@ FROM base AS dev-deps
 ENV NODE_ENV development
 COPY package*.json ./
 RUN npm install
+RUN npm install --include=optional sharp
+RUN npm install --os=linux --libc=musl --cpu=x64 sharp
 
 FROM base AS prod-deps
 COPY --from=dev-deps /usr/src/app/.npm-cache/ /usr/src/app/.npm-cache/

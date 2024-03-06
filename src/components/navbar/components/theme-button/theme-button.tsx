@@ -14,7 +14,12 @@ export default function ThemeButton() {
   };
 
   return (
-    <button className={style.icon} type="button" onClick={onToggle}>
+    <button
+      className={style.icon}
+      type="button"
+      onClick={onToggle}
+      aria-label="Switch theme"
+    >
       {isDark === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
     </button>
   );

@@ -35,6 +35,14 @@ const cardsApiEndpoints = cardsApi
         }),
         invalidatesTags: ['Cards'],
       }),
+      updateCard: builder.mutation({
+        query: (data) => ({
+          url: `/cards/${data?.id}`,
+          method: 'PATCH',
+          body: data,
+        }),
+        invalidatesTags: ['Cards'],
+      }),
       changeLike: builder.mutation({
         query: ({ cardId, value }) => ({
           url: `/cards/${cardId}/likes`,
@@ -59,5 +67,6 @@ export const {
   useChangeLikeMutation,
   useAddCardMutation,
   useGetLikesQuery,
+  useUpdateCardMutation,
 } = cardsApiEndpoints;
 export { cardsApiEndpoints };
