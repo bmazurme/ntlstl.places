@@ -5,7 +5,7 @@
 
 .like {
   composes: common;
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -13,10 +13,8 @@
 .button {
   composes: common;
   align-self: flex-end;
-  width: 22px;
-  height: 19px;
-  background-image: url("../../../../images/stroke.svg");
-  background-size: cover;
+  width: 24px;
+  height: 24px;
   background-color: var(--card-background-color);
   border: 0;
 }
@@ -24,10 +22,6 @@
 .button:hover {
   opacity: 0.5;
   cursor: pointer;
-}
-
-.checked {
-  background-image: url("../../../../images/stroke-checked.svg");
 }
 
 .disabled {
