@@ -37,10 +37,9 @@ export default function Navbar({ isOpen, handlerClick }
       <ul
         onClick={handlerClick}
         className={classNames(style.navbar, { [style.opened]: isOpen })}
-        // aria-hidden="true"
       >
         {!user && <NavItem to={Urls.SIGNIN} value="Sign in" active="active" />}
-        {user?.email && <NavItem to="/" value={email} active="active" />}
+        {user?.email && <NavItem to={`/users/${user.id}`} value={email} active="active" />}
         {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
       </ul>
       <Button isOpen={isOpen} handlerClick={handlerClick} />

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext } from 'react';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 import ThemeContext from '../../../../context/theme-context';
 
@@ -20,7 +20,7 @@ export default function ThemeButton() {
       onClick={onToggle}
       aria-label="Switch theme"
     >
-      {isDark === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
+      {isDark === 'light' ? <FaMoon /> : <FaSun />}
     </button>
   );
 }

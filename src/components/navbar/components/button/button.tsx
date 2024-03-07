@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import classNames from 'classnames';
+import { MdClose, MdMenu } from 'react-icons/md';
 
 import style from './button.module.css';
 
@@ -12,6 +13,8 @@ export default function Button({ isOpen, handlerClick }
       onClick={handlerClick}
       aria-label="Switch menu"
       className={classNames(style.btn, { [style.opened]: isOpen })}
-    />
+    >
+      {isOpen ? <MdClose size={30} /> : <MdMenu size={30} />}
+    </button>
   );
 }
