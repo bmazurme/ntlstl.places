@@ -8,7 +8,7 @@ html {
   --color-in: #fff;
   --menu-color: #a9a9a9;
   --menu-color-active: #000;
-  --transition-default: .3s ease;
+  --transition-default: 0.3s ease;
   --transition-scroll: smooth;
 }
 
@@ -22,7 +22,7 @@ html[ms-theme="dark"] {
   --color-in: #000;
   --menu-color: #a9a9a9;
   --menu-color-active: #fff;
-  --transition-default: .3s ease;
+  --transition-default: 0.3s ease;
   --transition-scroll: smooth;
 }
 
@@ -35,5 +35,5 @@ html[ms-theme="dark"] {
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
   transition: background-color var(--transition-default);
-  overflow-y: scroll
+  overflow-y: scroll;
 }
