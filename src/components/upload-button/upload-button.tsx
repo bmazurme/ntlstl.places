@@ -5,7 +5,7 @@ import React, {
   type ChangeEvent,
 } from 'react';
 import classNames from 'classnames';
-import { DocumentArrowUpIcon } from '@heroicons/react/24/outline';
+import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import style from './upload-button.module.css';
 
@@ -45,7 +45,7 @@ export default function UploadButton({ onChange }: TypeFileChangerProps) {
           id="file"
           className={classNames(style.input)}
         />
-        <DocumentArrowUpIcon className="h-3 w-3" />
+        <FaCloudUploadAlt />
       </label>
       <span className={classNames(style.link)}>{name}</span>
     </div>
