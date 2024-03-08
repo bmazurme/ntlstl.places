@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { FaAngleDown } from 'react-icons/fa6';
 import classNames from 'classnames';
 
 import Card from '../card';
@@ -25,7 +25,7 @@ function More({ handler, disabled }: { handler: () => void; disabled: boolean })
       type="button"
       onClick={handler}
     >
-      <ChevronDownIcon className="h-6 w-6" />
+      <FaAngleDown size={36} />
     </button>
   );
 }
@@ -42,7 +42,7 @@ export default function Cards() {
   return (
     <div className={style.container}>
       <section className={style.cards}>
-        {current.map((card) => (<Card key={card.id} card={card} />))}
+        {current.map((card, i) => (<Card key={card.id} card={card} index={i} />))}
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
