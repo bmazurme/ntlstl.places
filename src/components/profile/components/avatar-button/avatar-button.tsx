@@ -11,9 +11,12 @@ type AvatarProps = {
   popup: { profile: boolean; avatar: boolean; place: boolean; };
   setPopup: (p: { profile: boolean; avatar: boolean; place: boolean; }) => void;
   info: User | null;
+  currentUser: User | null;
 };
 
-export default function AvatarButton({ info, popup, setPopup }: AvatarProps) {
+export default function AvatarButton({
+  info, popup, setPopup, currentUser,
+}: AvatarProps) {
   const errorHandler = useErrorHandler();
   const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation();
   const handleOpenEditAvatarPopup = () => setPopup({ ...popup, avatar: true });
@@ -30,12 +33,22 @@ export default function AvatarButton({ info, popup, setPopup }: AvatarProps) {
 
   return (
     <>
-      <div
-        className={style.image}
-        style={{ backgroundImage: `url(/api/files/avatar/${info?.avatar})` }}
-        onClick={handleOpenEditAvatarPopup}
-        aria-hidden="true"
-      />
+      {currentUser?.id === info?.id
+        ? (
+          <div
+            className={style.image_button}
+            style={{ backgroundImage: `url(/api/files/avatar/${currentUser?.avatar})` }}
+            onClick={handleOpenEditAvatarPopup}
+            aria-hidden="true"
+          />
+        ) : (
+          <div
+            className={style.image}
+            style={{ backgroundImage: `url(/api/files/avatar/${currentUser?.avatar})` }}
+            aria-hidden="true"
+          />
+        )}
+
       {popup.avatar
         && (
         <Modal

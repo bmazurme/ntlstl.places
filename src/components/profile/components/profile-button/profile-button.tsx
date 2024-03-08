@@ -1,6 +1,6 @@
 import React from 'react';
 import { useErrorHandler } from 'react-error-boundary';
-import { PencilIcon } from '@heroicons/react/24/outline';
+import { FaPencilAlt } from 'react-icons/fa';
 
 import Modal from '../../../modal';
 import EditProfile from '../edit-profile';
@@ -36,7 +36,7 @@ export default function ProfileButton({ info, popup, setPopup }: ProfileProps) {
         className={style.edit}
         onClick={handleOpenEditProfilePopup}
       >
-        <PencilIcon className="h-2 w-2" />
+        <FaPencilAlt size={14} />
       </button>
       {popup.profile
         && (
