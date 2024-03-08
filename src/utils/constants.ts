@@ -14,6 +14,7 @@ export const Urls = {
   },
   USERS: {
     INDEX: '/users',
+    CURRENT: '/users/:id',
   },
   KIT: {
     INDEX: '/kit',
