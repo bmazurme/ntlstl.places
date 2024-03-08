@@ -6,6 +6,7 @@ export const UrlsApi = {
   USER: {
     INDEX: '/users',
     ME: '/users/me',
+    ID: '/users/:id',
     AVATAR: '/users/me/avatar',
   },
   CARDS: {
@@ -13,6 +14,7 @@ export const UrlsApi = {
     ID: '/cards/:id',
     LIKES: '/cards/:id/likes',
     LIKES_ID: '/cards/likes/:id',
+    USER: '/cards/user/:id',
   },
   FILES: {
     INDEX: '/files/:filename',
