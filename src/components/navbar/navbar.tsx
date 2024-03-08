@@ -39,6 +39,7 @@ export default function Navbar({ isOpen, handlerClick }
         className={classNames(style.navbar, { [style.opened]: isOpen })}
       >
         {!user && <NavItem to={Urls.SIGNIN} value="Sign in" active="active" />}
+        {user?.email && <NavItem to="/users" value="Users" active="active" />}
         {user?.email && <NavItem to={`/users/${user.id}`} value={email} active="active" />}
         {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
       </ul>
