@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import { EyeIcon } from '@heroicons/react/24/outline';
+import { FaEye } from 'react-icons/fa';
 
 import UploadButton from '../../components/upload-button';
 
@@ -12,7 +12,7 @@ export default function NotFoundLayout() {
       <UploadButton onChange={(formData: FormData) => console.log(formData)} />
       <div className={style.counter}>
         <div className={style.icon}>
-          <EyeIcon className="h-3 w-3" />
+          <FaEye />
         </div>
         <span className={style.value}>0</span>
       </div>
