@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { NotFoundError } from '../errors/index';
 
-import Users from '../models/user.model';
+import User from '../models/user.model';
 
 export const logout = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -13,10 +13,11 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const getUserMe = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserMe = async (req: unknown, res: Response, next: NextFunction) => {
   try {
-    // @ts-ignore
-    const user = await Users.findOne({ where: { email: req.user.default_email } });
+    const user = await User.findOne({
+      where: { email: (req as Request & { user: { default_email: string; } }).user.default_email },
+    });
 
     if (!user) {
       return next(new NotFoundError('User not found'));

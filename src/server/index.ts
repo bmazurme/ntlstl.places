@@ -1,26 +1,27 @@
 import express from 'express';
+// import spdy from 'spdy';
 import 'dotenv/config';
 import livereload from 'livereload';
 import connectLivereload from 'connect-livereload';
 import compression from 'compression';
+// import fs from 'fs';
 
 import path from 'path';
+import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+
 import index from './routes';
 
 import { requestLogger, errorLogger, errorHandlerMiddleware } from './middlewares';
-
-import { limiter } from './utils/limiter';
-import { corsOptions } from './utils/cors-options';
-import { helmetConfig } from './utils/helmet-config';
-
+import { limiter, corsOptions, helmetConfig } from './utils';
 import { NotFoundError } from './errors';
 
 import dbConnect from './connect';
 
-const port = process.env.PORT ?? 3005;
+const PORT = process.env.PORT ?? 3005;
+// const CERT_DIR = `${__dirname}/cert`;
+// const useSSL = !!process.env.SSL;
 
 const app = express();
 
@@ -28,7 +29,6 @@ app.use(compression({ brotli: { enabled: true, zlib: { } } }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
-
 app.use(requestLogger);
 
 app.use(limiter);
@@ -65,11 +65,24 @@ app.use('*', () => {
 app.use(errorLogger);
 app.use(errorHandlerMiddleware);
 
+// const server = spdy.createServer(
+//   {
+//     // key: fs.readFileSync(`${CERT_DIR}/server.key`),
+//     // cert: fs.readFileSync(`${CERT_DIR}/server.cert`),
+//   },
+//   app,
+// );
 const listen = () => {
-  app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
   });
 };
+// const listen = () => {
+//   server.listen(PORT, () => {
+//     console.log(`App listening on port ${PORT}`);
+//     console.log('SSL enabled');
+//   });
+// };
 
 (async () => {
   await dbConnect();

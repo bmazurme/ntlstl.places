@@ -1,14 +1,9 @@
 import type { ErrorRequestHandler } from 'express';
 
-const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, next) => {
-  const {
-    status = err.status || 500,
-    message = err.message,
-  } = err;
+export const errorHandlerMiddleware: ErrorRequestHandler = (err, _req, res, next) => {
+  const { status = 500, message } = err;
 
   res.status(status).send({ message });
 
   next();
 };
-
-export { errorHandlerMiddleware };

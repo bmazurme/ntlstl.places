@@ -11,9 +11,27 @@ import User from '../models/user.model';
 
 export const getUsers = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const cards = (await User.findAll()).reverse();
+    const users = await User.findAll();
 
-    return res.status(200).send(cards);
+    return res.status(200).send(users);
+  } catch (err: unknown) {
+    if ((err as Error).name === 'CastError') {
+      next(new BadRequestError());
+    }
+
+    next(err);
+  }
+};
+
+export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await User.findOne({ where: { id: req.params.id } });
+
+    if (!user) {
+      return next(new NotFoundError('пользователь не найден'));
+    }
+
+    return res.status(200).send(user);
   } catch (err: unknown) {
     if ((err as Error).name === 'CastError') {
       next(new BadRequestError());

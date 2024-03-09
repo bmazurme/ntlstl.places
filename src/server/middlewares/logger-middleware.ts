@@ -12,24 +12,21 @@ const option: Options = {
 winston.add(new TelegramLogger(option));
 
 const transportRequest = new winston.transports.DailyRotateFile({
-  // указываем формат имени файла
-  filename: 'request-%DATE%.log',
-  // указываем шаблон для даты
-  datePattern: 'YYYY-MM-DD-HH',
+  filename: 'request-%DATE%.log', // указываем формат имени файла
+  datePattern: 'YYYY-MM-DD-HH', // указываем шаблон для даты
 });
+
 const transportError = new winston.transports.DailyRotateFile({
   filename: 'error-%DATE%.log',
   datePattern: 'YYYY-MM-DD-HH',
 });
 
-const requestLogger = expressWinston.logger({
+export const requestLogger = expressWinston.logger({
   transports: [transportRequest],
   format: winston.format.json(),
 });
 
-const errorLogger = expressWinston.errorLogger({
+export const errorLogger = expressWinston.errorLogger({
   transports: [transportError],
   format: winston.format.json(),
 });
-
-export { requestLogger, errorLogger };
