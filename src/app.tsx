@@ -7,6 +7,7 @@ import MainPage from './pages/main-page';
 import KitPage from './pages/kit/kit-page';
 import AdminPage from './pages/admin-page';
 import UsersPage from './pages/users-page';
+import UserPage from './pages/user-page';
 import NotFoundPage from './pages/404';
 
 import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
@@ -28,6 +29,7 @@ export default function App() {
           <Route path={Urls.OAUTH.INDEX} element={(<OauthPage />)} />
           <Route path={Urls.ADMIN.INDEX} element={(<AdminPage />)} />
           <Route path={Urls.USERS.INDEX} element={(<UsersPage />)} />
+          <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
           <Route path={Urls.KIT.INDEX} element={(<KitPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
