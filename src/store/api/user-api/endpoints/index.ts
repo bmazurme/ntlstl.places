@@ -13,6 +13,13 @@ const usersApiEndpoints = usersApi
         }),
         invalidatesTags: ['Users'],
       }),
+      getUserById: builder.query<User, string>({
+        query: (id) => ({
+          url: `/users/${id}`,
+          method: 'GET',
+        }),
+        providesTags: ['Users'],
+      }),
       updateUser: builder.mutation({
         query: (user: Record<string, string>) => ({
           url: '/users/me',
@@ -40,6 +47,7 @@ const usersApiEndpoints = usersApi
 
 export const {
   useGetUserMeMutation,
+  useGetUserByIdQuery,
   useUpdateUserMutation,
   useUpdateUserAvatarMutation,
   useGetUsersQuery,

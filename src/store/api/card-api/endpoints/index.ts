@@ -13,7 +13,14 @@ const cardsApiEndpoints = cardsApi
         }),
         providesTags: ['Cards'],
       }),
-      getCard: builder.mutation({
+      getCardsByUser: builder.mutation<Card[], string>({
+        query: (id) => ({
+          url: `/cards/user/${id}`,
+          method: 'GET',
+        }),
+        invalidatesTags: ['Cards'],
+      }),
+      getCard: builder.mutation<Card[], string>({
         query: (cardId) => ({
           url: `/cards/${cardId}`,
           method: 'PATCH',
@@ -62,6 +69,7 @@ const cardsApiEndpoints = cardsApi
 
 export const {
   useGetCardsQuery,
+  useGetCardsByUserMutation,
   useGetCardMutation,
   useDeleteCardMutation,
   useChangeLikeMutation,

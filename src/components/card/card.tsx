@@ -1,5 +1,6 @@
 import React from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { Link } from 'react-router-dom';
 
 import { useUpdateCardMutation } from '../../store';
 
@@ -12,7 +13,7 @@ import useUser from '../../hooks/use-user';
 
 import style from './card.module.css';
 
-export default function Card({ card }: { card: Card; }) {
+export default function Card({ card, index }: { card: Card; index: number; }) {
   const user = useUser();
   const errorHandler = useErrorHandler();
   const { values, handleChange, resetForm } = useFormWithValidation({ name: card.name });
@@ -35,8 +36,8 @@ export default function Card({ card }: { card: Card; }) {
   return (
     <div className={style.card}>
       {user && <RemoveButton card={card} user={user} />}
-      <Image card={card} />
-      <form className={style.group}>
+      <Image card={card} index={index} />
+      <div className={style.group}>
         <div className={style.box}>
           {user?.id === card.user_id
             ? (
@@ -51,10 +52,12 @@ export default function Card({ card }: { card: Card; }) {
               />
             )
             : <h2 className={style.name}>{card.name}</h2>}
-          <div className={style.user}>{card.user.name}</div>
+          <Link to={`/user/${card.user_id}`} className={style.user}>
+            {card.user.name}
+          </Link>
         </div>
         <LikeButton card={card} user={user} />
-      </form>
+      </div>
     </div>
   );
 }

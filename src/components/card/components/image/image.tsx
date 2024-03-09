@@ -5,7 +5,7 @@ import { setCard } from '../../../../store';
 
 import style from './image.module.css';
 
-export default function Image({ card }: { card: Card; }) {
+export default function Image({ card, index }: { card: Card; index: number; }) {
   const dispatch = useAppDispatch();
 
   return (
@@ -15,7 +15,7 @@ export default function Image({ card }: { card: Card; }) {
       src={`/api/files/covers/${card.link}`}
       onClick={() => dispatch(setCard(card))}
       aria-hidden="true"
-      // loading="lazy"
+      loading={index > 6 ? 'lazy' : 'eager'}
       height="282px"
       width="282px"
     />

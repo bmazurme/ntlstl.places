@@ -9,7 +9,6 @@
   height: 360px;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .group {
@@ -56,6 +55,12 @@
   font-size: 14px;
   line-height: 14px;
   margin-left: 10px;
+  text-decoration: none;
+  color: var(--menu-color);
+}
+
+.user:visited {
+  color: var(--menu-color);
 }
 
 .box {

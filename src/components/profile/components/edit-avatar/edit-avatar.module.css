@@ -24,6 +24,7 @@
   color: white;
   font-size: 18px;
   line-height: 22px;
+
 }
 
 .submit:hover {
@@ -37,8 +38,6 @@
     line-height: 17px;
   }
 }
-
-
 
 .common {
   display: flex;
@@ -81,7 +80,5 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-
   background-color: aliceblue;
 }
-

@@ -103,7 +103,7 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
 export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = (await Card.findAll({
+    const cards = await Card.findAll({
       include: [
         {
           model: User,
@@ -117,7 +117,34 @@ export const getCards = async (req: Request, res: Response, next: NextFunction) 
       order: [
         ['createdAt', 'DESC'],
       ],
-    }));
+    });
+
+    return res.status(200).send(cards);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getCardsByUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const cards = await Card.findAll(
+      {
+        where: { user_id: req.params.id },
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+          {
+            model: Like,
+            attributes: ['user_id'],
+          },
+        ],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      },
+    );
 
     return res.status(200).send(cards);
   } catch (err) {

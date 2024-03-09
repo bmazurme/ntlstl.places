@@ -17,7 +17,7 @@ const inputs = [
     name: 'name',
     label: 'Name',
     pattern: {
-      value: /^[a-zA-Z0-9_-]{3,15}$/,
+      value: /^[\s+$.a-zA-Z0-9_-]{3,25}$/,
       message: 'Name is invalid',
     },
     // disabled: false,
@@ -33,7 +33,6 @@ export default function AddCard({ isLoading, onAddPlace }
   const { control, handleSubmit } = useForm<FormPayload>({
     defaultValues: { name: '', file: '' },
   });
-
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
       data.file.append('name', data.name);

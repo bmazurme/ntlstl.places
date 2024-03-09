@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { FaAngleDown } from 'react-icons/fa6';
 import classNames from 'classnames';
 
@@ -9,12 +10,13 @@ import Slide from '../slide';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  cardSelector, setCard, cardsSelector, currentSelector, setCurrent,
+  cardSelector, setCard,
+  userCardsSelector, userCurrentSelector, setUserCurrent, setUserCards, useGetCardsByUserMutation,
 } from '../../store';
 
 import { SHIFT } from '../../utils/constants';
 
-import style from './cards.module.css';
+import style from './user-cards.module.css';
 
 function More({ handler, disabled }: { handler: () => void; disabled: boolean }) {
   return (
@@ -30,14 +32,21 @@ function More({ handler, disabled }: { handler: () => void; disabled: boolean })
   );
 }
 
-export default function Cards() {
+export default function UserCards() {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
-  const cards = useAppSelector(cardsSelector);
+  const cards = useAppSelector(userCardsSelector);
   const selectedCard = useAppSelector(cardSelector);
-  const current = useAppSelector(currentSelector);
+  const current = useAppSelector(userCurrentSelector);
+  const [getCards, { data = [] }] = useGetCardsByUserMutation();
   const onMore = () => {
-    dispatch(setCurrent([...current, ...cards.slice(current.length, current.length + SHIFT)]));
+    dispatch(setUserCurrent([...current, ...cards.slice(current.length, current.length + SHIFT)]));
   };
+
+  useEffect(() => {
+    getCards(id!);
+    dispatch(setUserCards(data));
+  }, [id]);
 
   return (
     <div className={style.container}>
