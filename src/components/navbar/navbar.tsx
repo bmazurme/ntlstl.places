@@ -38,10 +38,10 @@ export default function Navbar({ isOpen, handlerClick }
         onClick={handlerClick}
         className={classNames(style.navbar, { [style.opened]: isOpen })}
       >
-        {!user && <NavItem to={Urls.SIGNIN} value="Sign in" active="active" />}
-        {user?.email && <NavItem to="/users" value="Users" active="active" />}
-        {user?.email && <NavItem to={`/users/${user.id}`} value={email} active="active" />}
-        {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} active="" />}
+        {!user && <NavItem to={Urls.SIGNIN} value="Sign in" />}
+        {user?.email && <NavItem to="/users" value="Users" />}
+        {user?.email && <NavItem to={`/user/${user.id}`} value={email} />}
+        {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} />}
       </ul>
       <Button isOpen={isOpen} handlerClick={handlerClick} />
     </>
