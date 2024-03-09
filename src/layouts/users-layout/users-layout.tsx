@@ -21,7 +21,7 @@ export default function UsersLayout() {
         <ul className={style.list}>
           {users.map((u: User, i: number) => (
             <li className={style.item} key={i}>
-              <Link to={`/users/${u.id}`} className={style.link}>
+              <Link to={`/user/${u.id}`} className={style.link}>
                 <img
                   className={style.avatar}
                   alt={u.name}
