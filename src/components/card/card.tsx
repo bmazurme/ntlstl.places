@@ -52,7 +52,7 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
               />
             )
             : <h2 className={style.name}>{card.name}</h2>}
-          <Link to={`/users/${card.user_id}`} className={style.user}>
+          <Link to={`/user/${card.user_id}`} className={style.user}>
             {card.user.name}
           </Link>
         </div>
