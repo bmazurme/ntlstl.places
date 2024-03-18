@@ -34,6 +34,7 @@ const usersApiEndpoints = usersApi
           method: 'PATCH',
           body: formData,
         }),
+        invalidatesTags: ['Users'],
       }),
       getUsers: builder.query<User[], void>({
         query: () => ({

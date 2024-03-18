@@ -1,6 +1,6 @@
-import authApi from '..';
+import oauthApi from '..';
 
-const authApiEndpoints = authApi
+const authApiEndpoints = oauthApi
   .enhanceEndpoints({
     addTagTypes: ['User'],
   })
