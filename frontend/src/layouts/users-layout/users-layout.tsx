@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { useGetUsersQuery, usersSelector } from '../../store';
 
+import { BASE_API_URL } from '../../utils/constants';
+
 import style from './users-layout.module.css';
 
 export default function UsersLayout() {
@@ -25,7 +27,7 @@ export default function UsersLayout() {
                 <img
                   className={style.avatar}
                   alt={u.name}
-                  src={`/api/files/avatar/${u.avatar}`}
+                  src={`${BASE_API_URL}/files/avatar/${u.avatar}`}
                   height="50px"
                   width="50px"
                 />
