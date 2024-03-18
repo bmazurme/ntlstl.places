@@ -5,6 +5,8 @@ import Modal from '../../../modal';
 import EditAvatar from '../edit-avatar';
 import { useUpdateUserAvatarMutation } from '../../../../store';
 
+import { BASE_API_URL } from '../../../../utils/constants';
+
 import style from './avatar-button.module.css';
 
 type AvatarProps = {
@@ -37,14 +39,14 @@ export default function AvatarButton({
         ? (
           <div
             className={style.image_button}
-            style={{ backgroundImage: `url(/api/files/avatar/${currentUser?.avatar})` }}
+            style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
             onClick={handleOpenEditAvatarPopup}
             aria-hidden="true"
           />
         ) : (
           <div
             className={style.image}
-            style={{ backgroundImage: `url(/api/files/avatar/${currentUser?.avatar})` }}
+            style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
             aria-hidden="true"
           />
         )}

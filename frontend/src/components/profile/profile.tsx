@@ -7,8 +7,6 @@ import { userCardsSelector } from '../../store';
 import useUser from '../../hooks/use-user';
 import { useAppSelector } from '../../hooks';
 
-import { ADMIN } from '../../utils/constants';
-
 import style from './profile.module.css';
 
 export default function Profile({ currentUser }: { currentUser: User; }) {
@@ -30,7 +28,7 @@ export default function Profile({ currentUser }: { currentUser: User; }) {
         <p className={style.count}>{`Posts: ${cards.length}`}</p>
         {currentUser?.id === user?.id && <ProfileButton info={currentUser} popup={popup} setPopup={setPopup} />}
       </div>
-      {user?.email === ADMIN && <PlusButton popup={popup} setPopup={setPopup} />}
+      {user?.id === 1 && <PlusButton popup={popup} setPopup={setPopup} />}
     </section>
   );
 }

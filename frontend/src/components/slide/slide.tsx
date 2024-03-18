@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { cardSelector } from '../../store';
 
 import { MODAL_CONFIG } from '../../utils';
+import { BASE_API_URL } from '../../utils/constants';
 
 import style from './slide.module.css';
 
@@ -21,7 +22,7 @@ export default function Slide() {
           }}
           animate={MODAL_CONFIG.ANIMATE}
           exit={MODAL_CONFIG.EXIT}
-          src={`/api/files/${card?.link}` ?? ''}
+          src={`${BASE_API_URL}/files/${card?.link}` ?? ''}
           alt={card?.name ?? ''}
           className={style.image}
           height="100%"

@@ -9,6 +9,7 @@ import style from './add-card.module.css';
 
 type FormPayload = {
   name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   file: any;
 };
 
