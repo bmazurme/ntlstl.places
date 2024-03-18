@@ -1,4 +1,3 @@
-const admin = 'str-22@yandex.ru';
 export const SHIFT = 30;
 
 export const Urls = {
@@ -24,5 +23,5 @@ export const Urls = {
 export const Regexp = {
   EMAIL: '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.{0}][a-z]{2,3}$',
 };
-export const BASE_API_URL = '/api/';
-export const ADMIN = admin;
+// export const BASE_API_URL = '/api/';
+export const BASE_API_URL = 'http://localhost:4000';
