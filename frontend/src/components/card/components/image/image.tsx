@@ -3,6 +3,8 @@ import React from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { setCard } from '../../../../store';
 
+import { BASE_API_URL } from '../../../../utils/constants';
+
 import style from './image.module.css';
 
 export default function Image({ card, index }: { card: Card; index: number; }) {
@@ -12,7 +14,7 @@ export default function Image({ card, index }: { card: Card; index: number; }) {
     <img
       className={style.image}
       alt={card.name}
-      src={`/api/files/covers/${card.link}`}
+      src={`${BASE_API_URL}/files/covers/${card.link}`}
       onClick={() => dispatch(setCard(card))}
       aria-hidden="true"
       loading={index > 6 ? 'lazy' : 'eager'}
