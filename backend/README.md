@@ -17,6 +17,30 @@
 
 ![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
 
+### To do backend
+- [X] prod/dev configs .env
+- [X] fix package.json, scripts
+- [X] fix dockerfile
+- [X] fix docker-compose -> shared
+- [ ] fix update libs
+- [ ] fix logs (live-time, root)
+- [ ] fix winston telegram config, manual
+- [ ] fix endpoint cards
+- [ ] fix admins endpoints
+- [ ] fix avatar endpoint (sharp)
+- [ ] fix oauth (any services)
+- [ ] fix CORS, CSP configs
+- [ ] feat role
+- [ ] feat tag (location, model, controller, route)
+- [ ] feat note (model, controller, route)
+- [ ] feat comment (model, controller, slides, notes)
+- [ ] feat notification model, controller, route, websocket
+- [ ] express -> nest
+- [ ] sequelize -> type-orm
+- [ ] oauth -> passport
+- [ ] separate file-storage api
+- [ ] size images for upload
+
 ### Installation
 ```bash
 # clone the repository on your computer

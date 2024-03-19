@@ -20,6 +20,47 @@
 
 ![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
 
+### To do frontend
+- [X] prod/dev configs .env
+- [X] fix package.json, scripts
+- [X] fix dockerfile
+- [X] docker-compose -> shared
+- [X] fix update libs
+- [ ] fix style-lint config
+- [ ] fix links (color)
+- [ ] fix icon, static
+- [ ] fix footer for mobile mode
+- [ ] fix main-page (custom cards, ads-card)
+- [ ] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
+- [ ] fix upload form image for card (crop, rotate, scale) - lib AvatarEditor
+- [ ] fix atatar component (add preloader)
+- [ ] fix oauth page (wigth, color-scheme)
+- [ ] fix profile style
+- [ ] fix slide style, effect, edit mode, edit template / grid
+- [ ] fix slide-image preloader
+- [ ] fix edit-profile form
+- [ ] fix routing (to slide, to auth)
+- [ ] fix routing slide (open card page by id & open slide by click) 
+- [ ] fix mobile, tab modes
+- [ ] fix paginator, carusel
+- [ ] fix preloader, api (is-loading)
+- [ ] fix users-page - style, likes, comments
+- [ ] fix bundle
+- [ ] feat upload progress files/images widget
+- [ ] feat card page
+- [ ] feat theme-array [custom theme]
+- [ ] feat tags-page / block (lib)
+- [ ] feat pwa api
+- [ ] feat admin-page (cards, notes, comments, metrik)
+- [ ] feat role
+- [ ] feat ui-kit-page
+- [ ] feat metrik-page
+- [ ] feat page about (info)
+- [ ] feat location tag widget
+- [ ] feat share-link widget
+- [ ] feat notication page, page-list, block, widget, websocket
+- [ ] feat metrik
+
 ### Installation
 ```bash
 # clone the repository on your computer
