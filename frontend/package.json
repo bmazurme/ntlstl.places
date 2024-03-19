@@ -91,9 +91,6 @@
     "styled-components": "5.3.6",
     "uuid": "9.0.0"
   },
-  "engines": {
-    "node": "21.7.1"
-  },
   "jest": {
     "verbose": true
   },
