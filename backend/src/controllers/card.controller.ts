@@ -138,6 +138,7 @@ export const getCards = async (req: Request, res: Response, next: NextFunction) 
           attributes: ['user_id'],
         },
       ],
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [
         ['createdAt', 'DESC'],
       ],
@@ -164,6 +165,7 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
             attributes: ['user_id'],
           },
         ],
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
         order: [
           ['createdAt', 'DESC'],
         ],
