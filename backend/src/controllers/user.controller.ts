@@ -11,7 +11,9 @@ import User from '../models/user.model';
 
 export const getUsers = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
+    });
 
     return res.status(200).send(users);
   } catch (err: unknown) {
@@ -25,7 +27,10 @@ export const getUsers = async (req: any, res: Response, next: NextFunction) => {
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await User.findOne({ where: { id: req.params.id } });
+    const user = await User.findOne({
+      where: { id: req.params.id },
+      attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
+    });
 
     if (!user) {
       return next(new NotFoundError('пользователь не найден'));
@@ -43,9 +48,10 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
 
 export const updateAvatar = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const user = await User.findOne(
-      { where: { id: (req as & { user: User }).user.id } },
-    );
+    const user = await User.findOne({
+      where: { id: (req as & { user: User }).user.id },
+      attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
+    });
 
     if (!user) {
       return next(new NotFoundError('пользователь не найден'));
