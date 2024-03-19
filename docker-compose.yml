@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-newPassword}
       POSTGRES_DB: ${POSTGRES_DB:-my-db-name}
     networks:
-      - awesome
+      - internal-network
 
   backend:
     container_name: compose-back-container
@@ -24,9 +24,8 @@ services:
     image: compose-back-optimal-image
     platform: linux/amd64
     networks:
-      # - internal-network
-      # - internet
-      - awesome
+      - internal-network
+      - internet
     ports:
       - 4000:4000
     restart: unless-stopped
@@ -46,12 +45,14 @@ services:
     image: compose-front-optimal-image
     platform: linux/amd64
     networks:
-      # - internet
-      - awesome
+      - internet
     ports:
       - 8081:80
     restart: unless-stopped
 
 networks:
-  awesome:
+  internal-network:
+    driver: bridge
+    internal: true
+  internet:
     driver: bridge
