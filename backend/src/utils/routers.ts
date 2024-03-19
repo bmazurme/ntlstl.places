@@ -20,5 +20,6 @@ export const UrlsApi = {
     INDEX: '/files/:filename',
     AVATAR: '/files/avatar/:filename',
     COVERS: '/files/covers/:filename',
+    UPDATE: '/files',
   },
 };
