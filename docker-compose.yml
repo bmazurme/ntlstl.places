@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 services:
   postgres:
@@ -7,7 +7,7 @@ services:
       - "5432:5432"
     volumes:
       - ./postgresdata:/var/lib/postgresql/data
-      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+      - ./migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -16,55 +16,41 @@ services:
     networks:
       - awesome
 
-  pgadmin:
-    image: dpage/pgadmin4:4.18
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: secret
-      PGADMIN_LISTEN_PORT: "80"
-    ports:
-      - "8080:80"
-    volumes:
-      - ./pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - postgres
-    networks:
-      - awesome
-
-  my-app:
-    depends_on:
-      - postgres
-    image: cr.yandex/${REGISTRY_ID}/places:latest
-    platform: linux/amd64
+  backend:
+    container_name: compose-back-container
     build:
-      context: .
-      target: runner
-      dockerfile: ./Dockerfile
-    ports:
-      - "${PORT:-3005}:3005"
-    volumes:
-      - ./uploads:/usr/src/app/uploads
-    environment:
-      - DATABASE_URL=$DATABASE_URL
-      - POSTGRES_HOST=$POSTGRES_HOST
-      - POSTGRES_PORT=$POSTGRES_PORT
-      - POSTGRES_USER=$POSTGRES_USER
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - POSTGRES_DB=$POSTGRES_DB
-      - NODE_ENV=$NODE_ENV
-      - PORT=3005
-      - CLIENT_ID=$CLIENT_ID
-      - CLIENT_SECRET=$CLIENT_SECRET
-      - DEV_JWT_SECRET=$DEV_JWT_SECRET
-      - HOST=$HOST
-      - TELEGRAM_TOKEN=$TELEGRAM_TOKEN
-      - TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
-      - TELEGRAM_LEVEL=$TELEGRAM_LEVEL
-
-    restart: always
+      context: backend
+      dockerfile: Dockerfile
+    image: compose-back-optimal-image
+    platform: linux/amd64
     networks:
+      # - internal-network
+      # - internet
       - awesome
+    ports:
+      - 4000:4000
+    restart: unless-stopped
+    env_file:
+      - backend/.env
+    depends_on:
+      - postgres
+    volumes:
+      - ./uploads:/app/uploads
+      #- ./uploads:/usr/src/app/uploads
+
+  frontend:
+    container_name: compose-front-container
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    image: compose-front-optimal-image
+    platform: linux/amd64
+    networks:
+      # - internet
+      - awesome
+    ports:
+      - 8081:80
+    restart: unless-stopped
 
 networks:
   awesome:
