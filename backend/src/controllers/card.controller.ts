@@ -18,10 +18,22 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
     const fileName = req.files[0].originalname;
     const uniqName = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
     const targetPath = path.join('uploads', uniqName);
+    const folderCovers = path.join(__dirname, '..', '..', 'uploads', 'covers');
+    const folderSlides = path.join(__dirname, '..', '..', 'uploads', 'slides');
+    const cover = path.join(folderCovers, uniqName);
+    const slide = path.join(folderSlides, uniqName);
 
     await sharp(tempPath)
       .toFormat('webp')
       .toFile(targetPath);
+    await sharp(tempPath)
+      .toFormat('webp')
+      .resize(564, 564)
+      .toFile(cover);
+    await sharp(tempPath)
+      .toFormat('webp')
+      .resize(1000, 1000)
+      .toFile(slide);
 
     fs.unlink(tempPath, (err) => {
       if (err) {
@@ -64,9 +76,21 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
       return next(new ForbiddenError('access denied'));
     }
 
-    const targetPath = path.join(__dirname, '..', 'uploads', card.link);
+    const targetPath = path.join(__dirname, '..', '..', 'uploads', card.link);
+    const covers = path.join(__dirname, '..', '..', 'uploads', 'covers', card.link);
+    const slides = path.join(__dirname, '..', '..', 'uploads', 'slides', card.link);
 
     fs.unlink(targetPath, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
+    fs.unlink(covers, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
+    fs.unlink(slides, (err) => {
       if (err) {
         next(err);
       }

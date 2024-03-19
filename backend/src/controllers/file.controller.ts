@@ -17,12 +17,7 @@ export const getFile = async (req: Request, res: Response, next: NextFunction) =
       return next(new NotFoundError('File not found'));
     }
 
-    const readableStream = fs.createReadStream(path.join(__dirname, '..', 'uploads', card.link));
-    const transform = sharp()
-      .resize(1000, 1000)
-      .on('info', (info) => console.log('=>', info));
-
-    readableStream.pipe(transform).pipe(res);
+    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'slides', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -40,12 +35,7 @@ export const getCoverFile = async (req: Request, res: Response, next: NextFuncti
       return next(new NotFoundError('File not found'));
     }
 
-    const readableStream = fs.createReadStream(path.join(__dirname, '..', 'uploads', card.link));
-    const transform = sharp()
-      .resize(564, 564)
-      .on('info', (info) => console.log('=>', info));
-
-    readableStream.pipe(transform).pipe(res);
+    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'covers', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -63,7 +53,44 @@ export const getAvatarFile = async (req: Request, res: Response, next: NextFunct
       return next(new NotFoundError('File not found'));
     }
 
-    res.sendFile(path.join(__dirname, '..', 'uploads', 'avatars', user.avatar));
+    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'avatars', user.avatar));
+  } catch (error: unknown) {
+    if ((error as Error).name === 'CastError') {
+      return next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    next(error);
+  }
+};
+
+export const updateFiles = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const folderCovers = path.join(__dirname, '..', '..', 'uploads', 'covers');
+    const folderSlides = path.join(__dirname, '..', '..', 'uploads', 'slides');
+
+    if (!fs.existsSync(folderCovers)) {
+      fs.mkdirSync(folderCovers);
+    }
+
+    if (!fs.existsSync(folderSlides)) {
+      fs.mkdirSync(folderSlides);
+    }
+
+    const cards = await Card.findAll({});
+    cards.forEach(async (card) => {
+      const srcCover = path.join(__dirname, '..', '..', 'uploads', card.link);
+      const cover = path.join(folderCovers, card.link);
+      const slide = path.join(folderSlides, card.link);
+
+      await sharp(srcCover)
+        .resize(564, 564)
+        .toFile(cover);
+      await sharp(srcCover)
+        .resize(1000, 1000)
+        .toFile(slide);
+    });
+
+    return res.send({ message: 'ok' });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));

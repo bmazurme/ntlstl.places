@@ -9,22 +9,16 @@ import User from '../models/user.model';
 export const oauthYaSigninController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.body;
-    let {
-      CLIENT_ID = '',
-      CLIENT_SECRET = '',
-      // eslint-disable-next-line prefer-const
+    const {
+      OAUTH_YA_CLIENT_ID = '',
+      OAUTH_YA_CLIENT_SECRET = '',
       DEV_JWT_SECRET = 'DEV_JWT_SECRET',
     } = process.env;
 
-    if (process.env.NODE_ENV !== 'production') {
-      CLIENT_ID = process.env.CLIENT_ID_DEV!;
-      CLIENT_SECRET = process.env.CLIENT_SECRET_DEV!;
-    }
-
     const formdata = new FormData();
     formdata.append('code', code);
-    formdata.append('client_id', CLIENT_ID);
-    formdata.append('client_secret', CLIENT_SECRET);
+    formdata.append('client_id', OAUTH_YA_CLIENT_ID);
+    formdata.append('client_secret', OAUTH_YA_CLIENT_SECRET);
     formdata.append('grant_type', 'authorization_code');
     const options: RequestInit = { method: 'POST', body: formdata, redirect: 'follow' };
     const rlst = await fetch('https://oauth.yandex.ru/token', options);
