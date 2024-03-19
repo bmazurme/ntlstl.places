@@ -5,18 +5,18 @@ import User from './models/user.model';
 import Card from './models/card.model';
 import Like from './models/like.model';
 
-dotEnvConfig();
+dotEnvConfig({ path: `.env.${process.env.NODE_ENV}` });
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.NODE_ENV === 'production'
-    ? process.env.POSTGRES_HOST ?? 'postgres'
-    : 'localhost',
+  host: process.env.POSTGRES_HOST ?? 'localhost',
   port: +(process.env.POSTGRES_PORT ?? 5432),
   username: process.env.POSTGRES_USER ?? 'postgres',
   password: process.env.POSTGRES_PASSWORD ?? 'newPassword',
   database: process.env.POSTGRES_DB ?? 'my-db-name',
   dialect: 'postgres',
 };
+
+console.log(process.env);
 
 const sequelize = new Sequelize(sequelizeOptions);
 sequelize.addModels([User, Card, Like]);
