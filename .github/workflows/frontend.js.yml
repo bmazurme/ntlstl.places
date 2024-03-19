@@ -24,5 +24,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: ./frontend/package-lock.json
-    - run: npm ci
+    - run: npm ci --legacy-bundling
     - run: npm run test
