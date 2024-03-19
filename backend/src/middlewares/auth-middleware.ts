@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
 import { UnauthorizedError } from '../errors';
+import User from '../models/user.model';
 
 const authMiddleware = (req: any, _res: Response, next: NextFunction) => {
   const { token } = req.cookies as unknown as Record<string, string>;
