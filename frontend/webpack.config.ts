@@ -1,5 +1,4 @@
 import path from 'path';
-// import { DefinePlugin } from 'webpack';
 import { merge } from 'webpack-merge';
 import { config as dotEnvConfig } from 'dotenv';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -15,7 +14,7 @@ type Environment = 'development' | 'production' | 'none' | undefined;
 
 dotEnvConfig();
 
-const client = (env) => merge<Configuration & {devServer: any}>({
+const client = (env: { production?: boolean; }) => merge<Configuration & {devServer: any}>({
   name: 'client',
   target: 'web',
   mode: process.env.NODE_ENV as Environment ?? 'development',
@@ -29,14 +28,6 @@ const client = (env) => merge<Configuration & {devServer: any}>({
   optimization: {
     minimize: process.env.NODE_ENV === 'production',
     minimizer: [
-      // new DefinePlugin(),
-      // new Dotenv(),
-      // new DefinePlugin({
-      //   'process.env': {
-      //     REACT_APP_TEST: JSON.stringify(process.env.REACT_APP_TEST),
-      //     // SOME_VALUE: JSON.stringify(process.env.SOME_VALUE),
-      //   },
-      // }),
       new TerserPlugin({
         terserOptions: {
           format: {
@@ -71,12 +62,6 @@ const client = (env) => merge<Configuration & {devServer: any}>({
   },
   plugins: [
     new Dotenv({ path: env.production ? './.env.production' : './.env.development' }),
-    // new DefinePlugin({
-    //   'process.env': {
-    //     REACT_APP_TEST: JSON.stringify(process.env.NODE_ENV),
-    //     // SOME_VALUE: JSON.stringify(process.env.SOME_VALUE),
-    //   },
-    // }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
