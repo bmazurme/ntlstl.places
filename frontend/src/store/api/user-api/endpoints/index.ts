@@ -29,7 +29,7 @@ const usersApiEndpoints = usersApi
         invalidatesTags: ['Users'],
       }),
       updateUserAvatar: builder.mutation({
-        query: (formData) => ({
+        query: (formData: FormData) => ({
           url: '/users/me/avatar',
           method: 'PATCH',
           body: formData,
