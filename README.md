@@ -23,6 +23,8 @@
 
 [![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
 [![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
+[![Deploy backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml)
+[![Deploy frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml)
 
 ## Demo
 
