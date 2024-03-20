@@ -13,7 +13,6 @@ env:
   REACT_APP_OAUTH_YA_ENDPOINT: secrets.REACT_APP_OAUTH_YA_ENDPOINT
   IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY_FRONTEND }}:latest
 
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
