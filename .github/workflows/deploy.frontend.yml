@@ -11,7 +11,7 @@ on:
 env:
   NODE_ENV: production
   PORT: 4000
-  IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY_FRONTEND }}:latest
+  IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY_FR }}:latest
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,12 +31,12 @@ jobs:
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-          CR_REPOSITORY: ${{ secrets.CR_REPOSITORY_FRONTEND }}
+          CR_REPOSITORY: ${{ secrets.CR_REPOSITORY_FR }}
           IMAGE_TAG: ${{ github.sha }}
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
 
         run: |
           cd frontend
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY_FRONTEND:latest .
-          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY_FRONTEND:latest
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY_FR:latest .
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY_FR:latest
