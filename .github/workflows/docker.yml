@@ -37,5 +37,5 @@ jobs:
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
         run: |
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest -f backend .
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest -f backend/Dockerfile .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
