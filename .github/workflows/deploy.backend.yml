@@ -11,7 +11,7 @@ on:
 env:
   NODE_ENV: production
   PORT: 4000
-  IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY }}:latest
+  IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY }}-backend:latest
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,5 +38,5 @@ jobs:
 
         run: |
           cd backend
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest .
-          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-backend:latest .
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-backend:latest
