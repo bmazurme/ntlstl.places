@@ -18,10 +18,6 @@
 ![PM2](https://img.shields.io/badge/-PM2-black?style=flat-square&logo=pm2)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
-* framer-motion
-* uuidv4
-* classnames
-
 ### About
 * Photo posting service.
 
