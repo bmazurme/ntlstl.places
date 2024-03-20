@@ -24,7 +24,7 @@ export default function AvatarButton({
   const handleOpenEditAvatarPopup = () => setPopup({ ...popup, avatar: true });
   const handleCloseAllPopups = () => setPopup({ profile: false, avatar: false, place: false });
 
-  const handleUpdateAvatarSubmit = async (data: Record<string, string>) => {
+  const handleUpdateAvatarSubmit = async (data: FormData) => {
     try {
       await updateUserAvatar(data);
       handleCloseAllPopups();

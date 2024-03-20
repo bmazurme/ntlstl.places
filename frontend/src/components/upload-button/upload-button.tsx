@@ -1,38 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   useRef,
   useState,
   useCallback,
   type ChangeEvent,
 } from 'react';
+// import AvatarEditor from 'react-avatar-editor';
 import classNames from 'classnames';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import style from './upload-button.module.css';
 
-type TypeFileChangerProps = { onChange: (formData: FormData) => void; };
+// type TypeFileChangerProps = { onChange: (formData: FormData) => void; };
 
-export default function UploadButton({ onChange }: TypeFileChangerProps) {
+export default function UploadButton({ setEditor }
+  : { setEditor: (file: File | string | null) => void; }) {
   const elementInputFile = useRef<HTMLInputElement>(null);
   const [name, setName] = useState('');
-  const onInputChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = useCallback(async (evt: ChangeEvent<HTMLInputElement>) => {
     const { files } = evt.target;
     const validateImgFile = (file: File | undefined) => !!file?.type.match('image.*');
 
-    if (!files?.[0]) {
+    if (!files?.[0] || !validateImgFile(files[0])) {
       return;
     }
 
-    if (!validateImgFile(files[0])) {
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    const form = new FormData();
-    form.append('files', files[0]);
-
-    onChange(form);
-    setName(files[0].name);
+    const file = files[0];
+    setName(file.name);
+    setEditor(file);
   }, []);
 
   return (

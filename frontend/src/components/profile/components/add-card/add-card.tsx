@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
@@ -28,16 +28,30 @@ const inputs = [
 ];
 
 export default function AddCard({ isLoading, onAddPlace }
-: { isLoading: boolean; onAddPlace: (data: FormPayload) => void; }) {
+: { isLoading: boolean; onAddPlace: (data: FormData) => void; }) {
   const errorHandler = useErrorHandler();
+  const [editor, setEditor] = useState<File | string | null>(null);
   const buttonText = isLoading ? 'Loading...' : 'Save';
   const { control, handleSubmit } = useForm<FormPayload>({
     defaultValues: { name: '', file: '' },
   });
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
-      data.file.append('name', data.name);
-      onAddPlace(data.file);
+      // data.file.append('name', data.name);
+      // onAddPlace(data.file);
+      const form = new FormData();
+
+      if (editor) {
+        // const canvasScaled = editor2!.getImageScaledToCanvas();
+        // const dt = canvasScaled.toDataURL('image/jpeg');
+        // const res = await fetch(dt);
+        // const blob = await res.blob();
+
+        form.append('name', data.name);
+        form.append('files', editor);
+      }
+
+      onAddPlace(form);
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
@@ -65,11 +79,12 @@ export default function AddCard({ isLoading, onAddPlace }
           )}
         />
       ))}
-      <Controller
+      {/* <Controller
         control={control}
         name="file"
         render={({ field }) => (<UploadButton onChange={field.onChange} />)}
-      />
+      /> */}
+      <UploadButton setEditor={setEditor} />
       <Button className={style.submit} variant="filled">
         {buttonText}
       </Button>
