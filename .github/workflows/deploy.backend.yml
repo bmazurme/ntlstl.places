@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy
+name: Deploy backend
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -10,9 +10,8 @@ on:
 
 env:
   NODE_ENV: production
-  PORT: 3000
+  PORT: 4000
   IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY }}:latest
-
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,6 +35,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
+
         run: |
           cd backend
           docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:latest .
