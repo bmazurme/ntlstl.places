@@ -13,8 +13,11 @@
 ![Nginx](https://img.shields.io/badge/-Nginx-black?style=flat-square&logo=nginx)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
+
 ### About
 * Photo posting service.
+
+[![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
 
 ## Demo
 

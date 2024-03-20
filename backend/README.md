@@ -13,6 +13,8 @@
 ### About
 * Photo posting service.
 
+[![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
+
 ## Demo
 
 ![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")

@@ -13,7 +13,9 @@
 ![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
 ![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
 ![Webpack](https://img.shields.io/badge/-Webpack-black?style=flat-square&logo=webpack)
+![Jest](https://img.shields.io/badge/-Jest-black?style=flat-square&logo=jest)
 ![PostCSS](https://img.shields.io/badge/-PostCSS-black?style=flat-square&logo=postcss)
+![PM2](https://img.shields.io/badge/-PM2-black?style=flat-square&logo=pm2)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
 * framer-motion
@@ -22,6 +24,9 @@
 
 ### About
 * Photo posting service.
+
+[![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
+[![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
 
 ## Demo
 
