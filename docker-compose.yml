@@ -22,7 +22,7 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    image: compose-back-optimal-image
+    image: cr.yandex/${REGISTRY_ID}/places-backend:latest
     platform: linux/amd64
     networks:
       - internal-network
@@ -43,7 +43,7 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
-    image: compose-front-optimal-image
+    image: cr.yandex/${REGISTRY_ID}/places-frontend:latest
     platform: linux/amd64
     networks:
       - internet
