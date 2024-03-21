@@ -19,6 +19,7 @@ key.json
 /uploads
 /pgadmin-data
 /postgresdata
+/migrations
 
 # misc
 .DS_Store
