@@ -24,4 +24,4 @@ export const Regexp = {
   EMAIL: '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.{0}][a-z]{2,3}$',
 };
 // export const BASE_API_URL = '/api/';
-export const BASE_API_URL = 'http://api.places.ntlstl.dev/';
+export const BASE_API_URL = 'https://api.places.ntlstl.dev/';
