@@ -35,6 +35,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
+          REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }}
 
         run: |
           cd frontend
