@@ -4,7 +4,7 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
 
 // Create our baseQuery instance
 const oauthQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://api.places.ntlstl.dev/',
   prepareHeaders: (headers) => headers,
   credentials: 'include',
 });
