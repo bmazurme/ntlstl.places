@@ -30,21 +30,10 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          script:
-            echo CR_REGISTRY=${{ secrets.CR_REGISTRY }} > frontend/.env
-            echo REGISTRY_ID=${{ secrets.CR_REGISTRY }} > frontend/.env
-            echo CR_REPOSITORY=${{ secrets.CR_REPOSITORY }} > frontend/.env
-            echo IMAGE_TAG=${{ secrets.IMAGE_TAG }} > frontend/.env
-            echo NODE_ENV=${{ secrets.NODE_ENV }} > frontend/.env
-            echo PORT=${{ secrets.PORT }} > frontend/.env
-          
-            echo API_HOST=${{ secrets.API_HOST }} > frontend/.env
-            echo REACT_APP_OAUTH_YA_ENDPOINT=${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }} > frontend/.env
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-          REGISTRY_ID: ${{ secrets.CR_REGISTRY }}
           CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
           NODE_ENV: ${{ env.NODE_ENV }}

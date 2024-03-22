@@ -43,7 +43,7 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
-    image: cr.yandex/${REGISTRY_ID}/places-frontend:latest
+    image: cr.yandex/${CR_REGISTRY}/places-frontend:latest
     platform: linux/amd64
     networks:
       - internet
