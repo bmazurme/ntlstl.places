@@ -32,12 +32,6 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
-        id: deploy-coi
-        uses: yc-actions/yc-coi-deploy@v1.0.1
-        with:
-          script:
-            echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > ./frontend/.env
-            echo API_HOST=${{ secrets.API_HOST }} > ./frontend/.env
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
           CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
@@ -49,5 +43,8 @@ jobs:
 
         run: |
           cd frontend
-          docker-compose build
+          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > .env
+          echo API_HOST=${{ secrets.API_HOST }} > .env
+
+          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest .
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
