@@ -11,14 +11,15 @@ on:
 env:
   NODE_ENV: production
   PORT: 4000
-  IMAGE_NAME: cr.yandex/${{secrets.CR_REGISTRY}}/${{ secrets.CR_REPOSITORY }}-frontend:latest
+  IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY }}-frontend:latest
   API_HOST: ${{ secrets.API_HOST }}
-  YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
+  REACT_APP_OAUTH_YA_ENDPOINT: {{ secrets.YA_ENDPOINT }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # needs: set_up_env
     steps:
 
       # initialize repo
@@ -38,9 +39,9 @@ jobs:
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
           API_HOST: ${{ secrets.API_HOST }}
-          YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
-          
+          REACT_APP_OAUTH_YA_ENDPOINT: {{ secrets.YA_ENDPOINT }}
+
         run: |
           cd frontend
-          docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest .
+          docker-compose build
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
