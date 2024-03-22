@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { Button, InputField } from '../../../form-components';
+import Button from '../../../button';
+import InputField from '../../../input-field';
 import UploadButton from '../../../upload-button';
 
 import style from './add-card.module.css';
@@ -37,16 +38,9 @@ export default function AddCard({ isLoading, onAddPlace }
   });
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
-      // data.file.append('name', data.name);
-      // onAddPlace(data.file);
       const form = new FormData();
 
       if (editor) {
-        // const canvasScaled = editor2!.getImageScaledToCanvas();
-        // const dt = canvasScaled.toDataURL('image/jpeg');
-        // const res = await fetch(dt);
-        // const blob = await res.blob();
-
         form.append('name', data.name);
         form.append('files', editor);
       }
