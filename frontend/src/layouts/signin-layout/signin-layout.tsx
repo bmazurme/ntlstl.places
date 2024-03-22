@@ -20,7 +20,7 @@ export default function SigninLayout() {
     <div className={style.layout}>
       <h2 className={style.title}>Sign In</h2>
       <div className={style.form}>
-        <a href={process.env.REACT_APP_OAUTH_YA_ENDPOINT}>
+        <a href={process.env.YA_ENDPOINT}>
           <img src={yaOauth} alt="Sign in with Yandex ID" />
         </a>
       </div>
