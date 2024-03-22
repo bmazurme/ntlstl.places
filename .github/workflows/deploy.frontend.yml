@@ -32,7 +32,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
-        uses: docker/build-push-action@v3
+        # uses: docker/build-push-action@v3
         with:
           context: .
           build-args: |
