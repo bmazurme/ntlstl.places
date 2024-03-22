@@ -45,8 +45,8 @@ services:
       dockerfile: Dockerfile
     image: cr.yandex/${CR_REGISTRY}/places-frontend:latest
     platform: linux/amd64
-    env_file:
-      - frontend/.env
+    # env_file:
+    #   - frontend/.env
     networks:
       - internet
     ports:
