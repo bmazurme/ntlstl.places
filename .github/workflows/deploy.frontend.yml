@@ -51,8 +51,8 @@ jobs:
 
         run: |
           cd frontend
-          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > .env.production
           echo API_HOST=${{ secrets.API_HOST }} > .env.production
+          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > .env.production
           chmod 600 .env.production
           cd ..
 
