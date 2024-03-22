@@ -30,15 +30,15 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          context: .
-          build-args: |
-            CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-            CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
-            IMAGE_TAG: ${{ github.sha }}
-            NODE_ENV: ${{ env.NODE_ENV }}
-            PORT: ${{ env.PORT }}
-            API_HOST: ${{ secrets.API_HOST }}
-            REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
+          # context: .
+          # build-args: |
+          #   CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
+          #   CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
+          #   IMAGE_TAG: ${{ github.sha }}
+          #   NODE_ENV: ${{ env.NODE_ENV }}
+          #   PORT: ${{ env.PORT }}
+          #   API_HOST: ${{ secrets.API_HOST }}
+          #   REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
@@ -48,11 +48,11 @@ jobs:
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
           API_HOST: ${{ secrets.API_HOST }}
-          REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
+          REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }}
 
         run: |
           cd frontend
-          echo REACT_APP_OAUTH_YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > .env.production
+          echo REACT_APP_OAUTH_YA_ENDPOINT=${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }} > .env.production
           echo API_HOST=${{ secrets.API_HOST }} > .env.production
           chmod 600 .env.production
           cd ..
