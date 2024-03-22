@@ -13,7 +13,7 @@ env:
   PORT: 4000
   IMAGE_NAME: cr.yandex/${{secrets.CR_REGISTRY}}/${{ secrets.CR_REPOSITORY }}-frontend:latest
   API_HOST: ${{ secrets.API_HOST }}
-  YA_ENDPOINT: {{ secrets.YA_ENDPOINT }}
+  YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,7 +38,7 @@ jobs:
           NODE_ENV: ${{ env.NODE_ENV }}
           PORT: ${{ env.PORT }}
           API_HOST: ${{ secrets.API_HOST }}
-          YA_ENDPOINT: {{ secrets.YA_ENDPOINT }}
+          YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
           
         run: |
           cd frontend
