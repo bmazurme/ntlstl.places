@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy frontend
+name: Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -45,8 +45,23 @@ jobs:
           cd frontend
           echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} >> .env.production
           echo API_HOST=${{ secrets.API_HOST }} >> .env.production
+          cd ../backend
+          echo OAUTH_YA_CLIENT_ID=${{ secrets.OAUTH_YA_CLIENT_ID }} >> .env.production
+          echo OAUTH_YA_CLIENT_SECRET=${{ secrets.OAUTH_YA_CLIENT_SECRET }} >> .env.production
+          echo DEV_JWT_SECRET=${{ secrets.DEV_JWT_SECRET }} >> .env.production
+          echo PORT=${{ secrets.PORT }} >> .env.production
+          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env.production
+          echo POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} >> .env.production
+          echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env.production
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env.production
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env.production
+          echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env.production
+          echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env.production
+          echo TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }} >> .env.production
+          echo TELEGRAM_LEVEL=${{ secrets.TELEGRAM_LEVEL }} >> .env.production
           cd ..
 
           docker-compose build
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
+          docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-backend:latest
         
