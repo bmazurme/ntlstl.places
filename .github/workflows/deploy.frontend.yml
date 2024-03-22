@@ -30,10 +30,6 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-
-      - name: Build, tag, and push image to Yandex Cloud Container Registry
-        # uses: docker/build-push-action@v3
-        with:
           context: .
           build-args: |
             CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
@@ -43,6 +39,8 @@ jobs:
             PORT: ${{ env.PORT }}
             API_HOST: ${{ secrets.API_HOST }}
             REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
+
+      - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
           CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
