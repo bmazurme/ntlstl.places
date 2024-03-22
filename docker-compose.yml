@@ -22,7 +22,7 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    image: cr.yandex/${REGISTRY_ID}/places-backend:latest
+    image: cr.yandex/${CR_REGISTRY}/places-backend:latest
     platform: linux/amd64
     networks:
       - internal-network
