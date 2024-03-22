@@ -23,6 +23,7 @@
 - [X] prod/dev configs .env
 - [X] fix package.json, scripts
 - [X] fix dockerfile
+- [X] fix remove field email from response users & userId
 - [X] fix docker-compose -> shared
 - [ ] fix update libs
 - [ ] fix logs (live-time, root)
@@ -32,6 +33,8 @@
 - [ ] fix avatar endpoint (sharp)
 - [ ] fix oauth (any services)
 - [ ] fix CORS, CSP configs
+- [ ] fix refactoring - fix structure
+- [ ] fix readme - add manual
 - [ ] feat role
 - [ ] feat tag (location, model, controller, route)
 - [ ] feat note (model, controller, route)

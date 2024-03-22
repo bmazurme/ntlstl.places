@@ -18,15 +18,13 @@
 ![PM2](https://img.shields.io/badge/-PM2-black?style=flat-square&logo=pm2)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
-* framer-motion
-* uuidv4
-* classnames
-
 ### About
 * Photo posting service.
 
 [![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
 [![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
+[![Deploy backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml)
+[![Deploy frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml)
 
 ## Demo
 
@@ -83,13 +81,13 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${REGISTRY_ID}/places:latest
+$ docker push cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
+$ docker pull cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${CR_REGISTRY}/places:latest
 
 $ docker rmi id -f
 

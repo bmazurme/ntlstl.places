@@ -3,18 +3,9 @@ const WHITE_LIST = [
   'http://localhost:8081',
   'http://localhost:3005',
   'http://localhost:3000',
-  // 'http://localhost:1234',
-  // 'http://localhost:4000',
-  // 'http://localhost:3001',
-  // 'http://localhost:3002',
-  // 'http://localhost:3005',
-  // 'http://localhost:8081/',
-  // 'https://localhost:4000',
-  // 'https://localhost:3001',
-  // 'https://localhost:3002',
-  // 'https://localhost:3005',
-  // 'https://localhost:8081',
-  // 'https://places.ntlstl.dev',
+  'http://51.250.9.33:8081',
+  'https://51.250.9.33:8081',
+  'https://places.ntlstl.dev',
 ];
 
 const METHODS = [

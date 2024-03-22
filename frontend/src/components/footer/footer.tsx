@@ -23,7 +23,7 @@ export default function Footer() {
           </a>
         </li>
         <li className={style.item}>
-          <a className={style.contact} href="https://t.me/ntlstl">
+          <a className={style.contact} href="https://www.linkedin.com/in/bogdan-mazur-aba74287">
             <span className={style.icon}>
               <BiLogoLinkedin size={18} />
             </span>

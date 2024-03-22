@@ -28,7 +28,7 @@
 - [X] fix package.json, scripts
 - [X] fix dockerfile
 - [X] docker-compose -> shared
-- [X] fix update libs
+- [ ] fix update libs
 - [ ] fix style-lint config
 - [ ] fix links (color)
 - [ ] fix icon, static
@@ -45,10 +45,12 @@
 - [ ] fix routing (to slide, to auth)
 - [ ] fix routing slide (open card page by id & open slide by click) 
 - [ ] fix mobile, tab modes
-- [ ] fix paginator, carusel
+- [ ] fix paginator, carousel
 - [ ] fix preloader, api (is-loading)
 - [ ] fix users-page - style, likes, comments
 - [ ] fix bundle
+- [ ] fix refactoring - fix structure
+- [ ] fix readme - add manual
 - [ ] feat upload progress files/images widget
 - [ ] feat card page
 - [ ] feat theme-array [custom theme]
@@ -163,3 +165,4 @@ $ sudo certbot --nginx
 
 $ sudo systemctl reload nginx
 ```
+

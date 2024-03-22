@@ -1,4 +1,5 @@
-import path from 'path';
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { merge } from 'webpack-merge';
 import { config as dotEnvConfig } from 'dotenv';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -9,24 +10,13 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 
 import type { Configuration } from 'webpack';
-
-type Environment = 'development' | 'production' | 'none' | undefined;
+import common from './webpack.common';
 
 dotEnvConfig();
 
-const client = (env: { production?: boolean; }) => merge<Configuration & {devServer: any}>({
-  name: 'client',
-  target: 'web',
-  mode: process.env.NODE_ENV as Environment ?? 'development',
-  devtool: 'inline-source-map',
-  entry: ['./src/index.tsx'],
-  output: {
-    publicPath: '/',
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'build'),
-  },
+const client = (env: { production?: boolean; }) => merge<Configuration & {devServer?: any}>(common, {
   optimization: {
-    minimize: process.env.NODE_ENV === 'production',
+    minimize: !!env.production,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -50,15 +40,6 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-  },
-  devServer: {
-    historyApiFallback: true,
-    static: {
-      publicPath: '/',
-      directory: path.join(__dirname, 'public'),
-    },
-    compress: true,
-    port: 3005,
   },
   plugins: [
     new Dotenv({ path: env.production ? './.env.production' : './.env.development' }),
