@@ -32,6 +32,8 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v1.0.1
         with:
           script:
             echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > ./frontend/.env
