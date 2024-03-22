@@ -38,7 +38,6 @@ jobs:
           #   NODE_ENV: ${{ env.NODE_ENV }}
           #   PORT: ${{ env.PORT }}
           #   API_HOST: ${{ secrets.API_HOST }}
-          #   REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
