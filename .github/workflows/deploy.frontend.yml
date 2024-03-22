@@ -43,8 +43,6 @@ jobs:
 
         run: |
           cd frontend
-          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} >> .env.production
-          echo API_HOST=${{ secrets.API_HOST }} >> .env.production
           cd ..
 
           docker-compose build
