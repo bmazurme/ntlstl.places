@@ -46,5 +46,5 @@ jobs:
           echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > .env
           echo API_HOST=${{ secrets.API_HOST }} > .env
 
-          docker build --e .env -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest .
+          docker-compose build
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
