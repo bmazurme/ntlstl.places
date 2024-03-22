@@ -38,7 +38,7 @@ export default function AvatarButton({
       {currentUser?.id === info?.id
         ? (
           <div
-            className={style.image_button}
+            className={style.ibutton}
             style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
             onClick={handleOpenEditAvatarPopup}
             aria-hidden="true"
