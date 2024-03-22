@@ -81,13 +81,13 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${REGISTRY_ID}/places:latest
+$ docker push cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
+$ docker pull cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${CR_REGISTRY}/places:latest
 
 $ docker rmi id -f
 
