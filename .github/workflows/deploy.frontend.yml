@@ -43,7 +43,7 @@ jobs:
 
         run: |
           cd frontend
-          echo ${{ secrets.TEST }} >> .env.production
+          echo ${{ secrets.TEST }} > .env.production
           chmod 600 .env.production
           cd ..
 
