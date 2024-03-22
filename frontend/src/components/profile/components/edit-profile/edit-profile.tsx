@@ -2,7 +2,8 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { Button, InputField } from '../../../form-components';
+import Button from '../../../button';
+import InputField from '../../../input-field';
 
 import style from './edit-profile.module.css';
 
