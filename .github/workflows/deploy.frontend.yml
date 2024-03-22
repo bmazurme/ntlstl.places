@@ -32,7 +32,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           script:
             echo CR_REGISTRY=${{ secrets.CR_REGISTRY }} > frontend/.env
-            echo REGISTRY_ID=${{ secrets.REGISTRY }} > frontend/.env
+            echo REGISTRY_ID=${{ secrets.CR_REGISTRY }} > frontend/.env
             echo CR_REPOSITORY=${{ secrets.CR_REPOSITORY }} > frontend/.env
             echo IMAGE_TAG=${{ secrets.IMAGE_TAG }} > frontend/.env
             echo NODE_ENV=${{ secrets.NODE_ENV }} > frontend/.env
@@ -44,7 +44,7 @@ jobs:
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-          REGISTRY_ID: ${{ secrets.REGISTRY }}
+          REGISTRY_ID: ${{ secrets.CR_REGISTRY }}
           CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
           NODE_ENV: ${{ env.NODE_ENV }}
