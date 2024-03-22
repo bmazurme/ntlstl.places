@@ -30,14 +30,6 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          # context: .
-          # build-args: |
-          #   CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-          #   CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
-          #   IMAGE_TAG: ${{ github.sha }}
-          #   NODE_ENV: ${{ env.NODE_ENV }}
-          #   PORT: ${{ env.PORT }}
-          #   API_HOST: ${{ secrets.API_HOST }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
@@ -51,10 +43,10 @@ jobs:
 
         run: |
           cd frontend
-          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} >> .env.production
-        # echo API_HOST=${{ secrets.API_HOST }} >> .env.production
+          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} API_HOST=${{ secrets.API_HOST }} >> .env.production
           chmod 600 .env.production
           cd ..
 
           docker-compose build
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
+        
