@@ -1,0 +1,72 @@
+.common {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.container {
+  composes: common;
+  margin: 45px auto 0;
+  padding: 0;
+  min-height: 300px;
+  height: 60vh;
+  max-width: 880px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  align-self: flex-start;
+  box-sizing: border-box;
+  color: var(--color);
+  font-weight: 500;
+  font-size: 28px;
+  text-decoration: none;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.item {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.name {
+  margin: 0;
+  margin-left: 10px;
+  padding: 5px;
+  color: var(--color);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.link {
+  color: var(--menu-color);
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.link:visited {
+  color: var(--menu-color-active);
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .title {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

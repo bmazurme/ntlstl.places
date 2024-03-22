@@ -1,0 +1,31 @@
+.slide {
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-color-in);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.name {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: var(--color-in);
+  padding: 5px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.image {
+  object-fit: cover;
+  height: 100%;
+  max-width: 100%;
+  min-height: 282px;
+  margin: 0;
+  padding: 0;
+}

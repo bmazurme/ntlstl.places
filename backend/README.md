@@ -1,20 +1,12 @@
 # Project: ntlstl.places
 ### Tech Stack
-![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
-![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)
-![Redux](https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux)
-![Sharp](https://img.shields.io/badge/-Sharp-black?style=flat-square&logo=sharp)
+![Node](https://img.shields.io/badge/-Node-black?style=flat-square&logo=node)
 ![Express](https://img.shields.io/badge/-Express-black?style=flat-square&logo=express)
+![Sharp](https://img.shields.io/badge/-Sharp-black?style=flat-square&logo=sharp)
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-black?style=flat-square&logo=postgresql)
 ![Sequelize](https://img.shields.io/badge/-Sequelize-black?style=flat-square&logo=sequelize)
-![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)
+![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
 ![Eslint](https://img.shields.io/badge/-Eslint-black?style=flat-square&logo=eslint)
-![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
-![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
-![Webpack](https://img.shields.io/badge/-Webpack-black?style=flat-square&logo=webpack)
-![Jest](https://img.shields.io/badge/-Jest-black?style=flat-square&logo=jest)
-![PostCSS](https://img.shields.io/badge/-PostCSS-black?style=flat-square&logo=postcss)
 ![PM2](https://img.shields.io/badge/-PM2-black?style=flat-square&logo=pm2)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
@@ -22,13 +14,37 @@
 * Photo posting service.
 
 [![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
-[![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
-[![Deploy backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml)
-[![Deploy frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml)
 
 ## Demo
 
 ![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
+
+### To do backend
+- [X] prod/dev configs .env
+- [X] fix package.json, scripts
+- [X] fix dockerfile
+- [X] fix remove field email from response users & userId
+- [X] fix docker-compose -> shared
+- [ ] fix update libs
+- [ ] fix logs (live-time, root)
+- [ ] fix winston telegram config, manual
+- [ ] fix endpoint cards
+- [ ] fix admins endpoints
+- [ ] fix avatar endpoint (sharp)
+- [ ] fix oauth (any services)
+- [ ] fix CORS, CSP configs
+- [ ] fix refactoring - fix structure
+- [ ] fix readme - add manual
+- [ ] feat role
+- [ ] feat tag (location, model, controller, route)
+- [ ] feat note (model, controller, route)
+- [ ] feat comment (model, controller, slides, notes)
+- [ ] feat notification model, controller, route, websocket
+- [ ] express -> nest
+- [ ] sequelize -> type-orm
+- [ ] oauth -> passport
+- [ ] separate file-storage api
+- [ ] size images for upload
 
 ### Installation
 ```bash
@@ -81,13 +97,13 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${CR_REGISTRY}/places:latest
+$ docker push cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker pull cr.yandex/${CR_REGISTRY}/places:latest
+$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run cr.yandex/${CR_REGISTRY}/places:latest
+$ docker run cr.yandex/${REGISTRY_ID}/places:latest
 
-$ docker run -d -p 80:3005 cr.yandex/${CR_REGISTRY}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
 
 $ docker rmi id -f
 
