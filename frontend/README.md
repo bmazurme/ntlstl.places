@@ -34,8 +34,8 @@
 - [ ] fix icon, static
 - [ ] fix footer for mobile mode
 - [ ] fix main-page (custom cards, ads-card)
-- [-] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
-- [-] fix upload form image for card (crop, rotate, scale) - lib AvatarEditor
+- [ ] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
+- [ ] fix upload form image for card (crop, rotate, scale) - lib AvatarEditor
 - [ ] fix atatar component (add preloader)
 - [ ] fix oauth page (wigth, color-scheme)
 - [ ] fix profile style
