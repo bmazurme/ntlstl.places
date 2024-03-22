@@ -52,8 +52,9 @@ jobs:
 
         run: |
           cd frontend
-          echo REACT_APP_OAUTH_YA_ENDPOINT=${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }} > .env.production
+          echo REACT_APP_OAUTH_YA_ENDPOINT=${{ secrets.REACT_APP_OAUTH_YA_ENDPOINT }} > .env
           echo API_HOST=${{ secrets.API_HOST }} > .env.production
+          chmod 600 .env
           chmod 600 .env.production
           cd ..
 
