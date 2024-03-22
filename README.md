@@ -28,7 +28,7 @@
 
 ## Demo
 
-![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
+![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/development/frontend/src/images/places.png "demo")
 
 ### Installation
 ```bash
