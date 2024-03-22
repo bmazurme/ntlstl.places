@@ -30,11 +30,12 @@ jobs:
         uses: yc-actions/yc-cr-login@v1
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-        script:
-          echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > ./frontend/.env
-          echo API_HOST=${{ secrets.API_HOST }} > ./frontend/.env
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
+        with:
+          script:
+            echo YA_ENDPOINT=${{ secrets.YA_ENDPOINT }} > ./frontend/.env
+            echo API_HOST=${{ secrets.API_HOST }} > ./frontend/.env
         env:
           CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
           CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
