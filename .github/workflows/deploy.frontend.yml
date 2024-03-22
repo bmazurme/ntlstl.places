@@ -32,12 +32,15 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           script:
             echo CR_REGISTRY=${{ secrets.CR_REGISTRY }} > frontend/.env
+            echo REGISTRY_ID=${{ secrets.REGISTRY_ID }} > frontend/.env
             echo CR_REPOSITORY=${{ secrets.CR_REPOSITORY }} > frontend/.env
             echo IMAGE_TAG=${{ secrets.IMAGE_TAG }} > frontend/.env
             echo NODE_ENV=${{ secrets.NODE_ENV }} > frontend/.env
             echo PORT=${{ secrets.PORT }} > frontend/.env
+            
 
             echo CR_REGISTRY=${{ secrets.CR_REGISTRY }} > backend/.env
+            echo REGISTRY_ID=${{ secrets.REGISTRY_ID }} > backend/.env
             echo CR_REPOSITORY=${{ secrets.CR_REPOSITORY }} > backend/.env
             echo IMAGE_TAG=${{ secrets.IMAGE_TAG }} > backend/.env
             echo NODE_ENV=${{ secrets.NODE_ENV }} > backend/.env
