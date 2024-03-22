@@ -20,15 +20,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     # needs: set_up_env
-    env:
-      CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-      CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
-      IMAGE_TAG: ${{ github.sha }}
-      NODE_ENV: ${{ env.NODE_ENV }}
-      PORT: ${{ env.PORT }}
-      API_HOST: ${{ secrets.API_HOST }}
-      REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
-      
     steps:
 
       # initialize repo
@@ -41,14 +32,14 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
-        # env:
-        #   CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
-        #   CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
-        #   IMAGE_TAG: ${{ github.sha }}
-        #   NODE_ENV: ${{ env.NODE_ENV }}
-        #   PORT: ${{ env.PORT }}
-        #   API_HOST: ${{ secrets.API_HOST }}
-        #   REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
+        env:
+          CR_REGISTRY: ${{ secrets.CR_REGISTRY }}
+          CR_REPOSITORY: ${{ secrets.CR_REPOSITORY }}
+          IMAGE_TAG: ${{ github.sha }}
+          NODE_ENV: ${{ env.NODE_ENV }}
+          PORT: ${{ env.PORT }}
+          API_HOST: ${{ secrets.API_HOST }}
+          REACT_APP_OAUTH_YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
 
         run: |
           cd frontend
