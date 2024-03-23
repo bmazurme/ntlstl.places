@@ -7,6 +7,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import InterpolateHtmlPlugin from 'interpolate-html-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 
 import type { Configuration } from 'webpack';
@@ -49,6 +51,17 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
     }),
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
+    }),
+    new InterpolateHtmlPlugin({
+      NODE_ENV: 'development',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/manifest.json', to: '.' },
+        { from: 'public/favicon.ico', to: '.' },
+        // { from: 'public/logo192.png', to: '.' },
+        // { from: 'public/logo512.png', to: '.' },
+      ],
     }),
   ],
   module: {

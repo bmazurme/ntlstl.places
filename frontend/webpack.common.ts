@@ -8,6 +8,7 @@ type Environment = 'development' | 'production' | 'none' | undefined;
 
 dotEnvConfig();
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const common = merge<Configuration & {devServer?: any}>({
   name: 'client',
   target: 'web',
