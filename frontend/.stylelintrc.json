@@ -6,7 +6,16 @@
   "rules": {
     "at-rule-no-unknown": null,
     "font-family-no-duplicate-names": true,
-    "color-hex-case": "lower"
+    "shorthand-property-no-redundant-values": true,
+    "color-hex-case": "lower",
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "composes"
+        ]
+      }
+     ]
   },
   "ignoreFiles": [
     "dist/*"
