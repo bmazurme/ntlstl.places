@@ -13,25 +13,21 @@
 ![Nginx](https://img.shields.io/badge/-Nginx-black?style=flat-square&logo=nginx)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
 
-
 ### About
 * Photo posting service.
 
 [![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
-
-## Demo
-
-![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
+[![Deploy frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml)
 
 ### To do frontend
 - [X] prod/dev configs .env
 - [X] fix package.json, scripts
 - [X] fix dockerfile
 - [X] docker-compose -> shared
-- [ ] fix update libs
+- [X] fix update libs
+- [X] fix icon, static
 - [ ] fix style-lint config
 - [ ] fix links (color)
-- [ ] fix icon, static
 - [ ] fix footer for mobile mode
 - [ ] fix main-page (custom cards, ads-card)
 - [ ] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
@@ -56,7 +52,6 @@
 - [ ] feat theme-array [custom theme]
 - [ ] feat tags-page / block (lib)
 - [ ] feat pwa api
-- [ ] feat admin-page (cards, notes, comments, metrik)
 - [ ] feat role
 - [ ] feat ui-kit-page
 - [ ] feat metrik-page
@@ -117,13 +112,13 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${REGISTRY_ID}/places:latest
+$ docker push cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
+$ docker pull cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${CR_REGISTRY}/places:latest
 
 $ docker rmi id -f
 
