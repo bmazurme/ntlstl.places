@@ -1,5 +1,4 @@
 // declare module 'image-to-webp';
-// declare module 'sharp-multer';
 
 type Action<T> = {
   type: string;

@@ -1,6 +1,5 @@
 declare module '*.css';
-declare module 'image-to-webp';
-declare module 'sharp-multer';
+declare module 'interpolate-html-plugin';
 
 type Action<T> = {
   type: string;
