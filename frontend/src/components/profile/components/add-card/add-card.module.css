@@ -6,15 +6,6 @@
   line-height: 29px;
 }
 
-@media screen and (min-width: 320px) and (max-width: 539px) {
-  .title {
-    font-size: 18px;
-    line-height: 22px;
-    max-width: 232px;
-    margin-bottom: 45px;
-  }
-}
-
 .submit {
   margin: 12px 0 0;
   width: 100%;
@@ -29,6 +20,15 @@
 .submit:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 539px) {
+  .title {
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 232px;
+    margin-bottom: 45px;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 539px) {

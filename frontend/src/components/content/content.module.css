@@ -2,15 +2,3 @@
   margin: 0 auto;
   max-width: 880px;
 }
-
-@media screen and (max-width: 899px) {
-  .content {
-
-  }
-}
-
-@media screen and (max-width: 599px) {
-  .content {
-
-  }
-}

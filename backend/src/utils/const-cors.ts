@@ -1,4 +1,4 @@
-const WHITE_LIST = [
+export const WHITE_LIST = [
   'http://localhost:8080',
   'http://localhost:8081',
   'http://localhost:3005',
@@ -8,7 +8,7 @@ const WHITE_LIST = [
   'https://places.ntlstl.dev',
 ];
 
-const METHODS = [
+export const METHODS = [
   'GET',
   'HEAD',
   'PUT',
@@ -17,12 +17,10 @@ const METHODS = [
   'DELETE',
 ];
 
-const ALLOWED_HEADERS = [
+export const ALLOWED_HEADERS = [
   'Content-Type',
   'origin',
   'x-access-token',
   'X-Requested-With',
   'Accept',
 ];
-
-export { METHODS, ALLOWED_HEADERS, WHITE_LIST };

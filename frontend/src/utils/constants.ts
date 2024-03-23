@@ -7,8 +7,8 @@ export const Urls = {
     INDEX: '/oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
-  ADMIN: {
-    INDEX: '/admin',
+  TAGS: {
+    INDEX: '/tags',
   },
   USERS: {
     INDEX: '/users',

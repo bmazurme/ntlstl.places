@@ -17,35 +17,6 @@
   grid-template-rows: 1fr;
 }
 
-@media screen and (max-width: 319px) {
-  .cards {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 599px) {
-  .container {
-    margin-top: 36px;
-    width: calc(100% - 40x);
-    box-sizing: border-box;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media screen and (min-width: 580px) and (max-width: 879px) {
-  .container {
-    width: calc(282px + 282px + 20px);
-  }
-
-  .cards {
-    width: calc(282px + 282px + 20px);
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 .add {
   border-radius: 2px;
   background-color: var(--background-color);
@@ -73,6 +44,35 @@
 
 .add:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 319px) {
+  .cards {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 599px) {
+  .container {
+    margin-top: 36px;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 580px) and (max-width: 879px) {
+  .container {
+    width: calc(282px + 282px + 20px);
+  }
+
+  .cards {
+    width: calc(282px + 282px + 20px);
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 899px) {

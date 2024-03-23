@@ -8,7 +8,10 @@ import {
 } from 'react-icons/fa6';
 
 import UploadButton from '../../../upload-button';
-import { Button } from '../../../form-components';
+import IconButton from '../../../icon-button';
+import Button from '../../../button';
+
+import { BASE_API_URL } from '../../../../utils/constants';
 
 import style from './edit-avatar.module.css';
 
@@ -46,15 +49,14 @@ export default function EditAvatar({
   });
 
   const setAvatar = async () => {
-    const res = await fetch(`http://localhost:4000/files/avatar/${info?.avatar}`);
+    const res = await fetch(`${BASE_API_URL}/files/avatar/${info?.avatar}`);
     const blob = await res.blob();
     const objectURL = URL.createObjectURL(blob);
     setEditor(objectURL);
   };
 
-  const onClickPlus = () => setRotate(rotate + 90 === 360 ? 0 : rotate + 90);
-  const onClickMinus = () => setRotate(rotate - 90 === 0 ? 0 : rotate - 90);
-
+  const onClickRotatePlus = () => setRotate(rotate + 90 === 360 ? 0 : rotate + 90);
+  const onClickRotateMinus = () => setRotate(rotate - 90 === 0 ? 0 : rotate - 90);
   const onClickScalePlus = () => setScale(scale + 0.1 === 1.5 ? 1.5 : scale + 0.1);
   const onClickScaleMinus = () => setScale(scale - 0.1 === 0.5 ? 0.5 : scale - 0.1);
 
@@ -79,24 +81,14 @@ export default function EditAvatar({
             rotate={rotate}
           />
         </div>
-
       )}
       <div className={style.icons}>
         <UploadButton setEditor={setEditor} />
-        <button className={style.icon} type="button" onClick={onClickPlus}>
-          <FaRotateRight />
-        </button>
-        <button className={style.icon} type="button" onClick={onClickMinus}>
-          <FaRotateLeft />
-        </button>
-        <button className={style.icon} type="button" onClick={onClickScalePlus}><FaPlus /></button>
-        <button className={style.icon} type="button" onClick={onClickScaleMinus}><FaMinus /></button>
+        <IconButton component={FaRotateRight} onClick={onClickRotatePlus} />
+        <IconButton component={FaRotateLeft} onClick={onClickRotateMinus} />
+        <IconButton component={FaPlus} onClick={onClickScalePlus} />
+        <IconButton component={FaMinus} onClick={onClickScaleMinus} />
       </div>
-      {/* <Controller
-        control={control}
-        name="avatar"
-        render={({ field }) => <>field</>}
-      /> */}
       <Button className={style.submit} variant="filled">
         {buttonText}
       </Button>
