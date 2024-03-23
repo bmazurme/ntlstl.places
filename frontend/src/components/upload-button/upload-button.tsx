@@ -5,13 +5,10 @@ import React, {
   useCallback,
   type ChangeEvent,
 } from 'react';
-// import AvatarEditor from 'react-avatar-editor';
 import classNames from 'classnames';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import style from './upload-button.module.css';
-
-// type TypeFileChangerProps = { onChange: (formData: FormData) => void; };
 
 export default function UploadButton({ setEditor }
   : { setEditor: (file: File | string | null) => void; }) {
