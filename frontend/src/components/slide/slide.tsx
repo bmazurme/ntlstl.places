@@ -17,8 +17,8 @@ export default function Slide() {
       <div className={style.slide}>
         <motion.img
           initial={{
-            opacity: 0,
-            scale: 0.175,
+            // opacity: 0,
+            // scale: 0.175,
           }}
           animate={MODAL_CONFIG.ANIMATE}
           exit={MODAL_CONFIG.EXIT}
