@@ -1,0 +1,44 @@
+.item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  padding: 0;
+  margin: 0 0 0 10px;
+  color: var(--menu-color);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.link:visited {
+  color: #a9a9a9;
+}
+
+.active:active {
+  color: var(--menu-color-active);
+}
+
+.active:visited {
+  color: var(--menu-color-active);
+}
+
+.active:hover {
+  color: var(--menu-color-active);
+}
+
+@media screen and (min-width: 479px) and (max-width: 639px) {
+  .link {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .item {
+    margin-bottom: 18px;
+  }
+}
