@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-import ThemeContext from '../../../../context/theme-context';
+import ThemeContext from '../../context/theme-context';
 
 import style from './theme-button.module.css';
 
