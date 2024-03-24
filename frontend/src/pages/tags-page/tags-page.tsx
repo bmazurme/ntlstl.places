@@ -1,11 +1,11 @@
 import React from 'react';
 
-import KitLayout from '../../layouts/kit-layout';
+import TagsLayout from '../../layouts/tags-layout';
 import Content from '../../components/content';
 import withUser from '../../hocs/with-user';
 
-function AdminPage() {
-  return (<Content children={(<KitLayout />)} />);
+function TagsPage() {
+  return (<Content children={(<TagsLayout />)} />);
 }
 
-export default withUser(AdminPage, true);
+export default withUser(TagsPage, true);
