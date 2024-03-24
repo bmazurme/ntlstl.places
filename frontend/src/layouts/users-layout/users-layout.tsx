@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Title from '../../components/title';
+
 import { useAppSelector } from '../../hooks';
 import { useGetUsersQuery, usersSelector } from '../../store';
 
@@ -15,9 +17,7 @@ export default function UsersLayout() {
 
   return (
     <div className={style.container}>
-      <h2 className={style.title}>
-        Users
-      </h2>
+      <Title text="Users" />
       {!isLoading
         && (
         <ul className={style.list}>
