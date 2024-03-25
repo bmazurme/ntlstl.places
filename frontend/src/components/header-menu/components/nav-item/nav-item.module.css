@@ -14,13 +14,6 @@
   line-height: 22px;
 }
 
-@media screen and (min-width: 479px) and (max-width: 639px) {
-  .link {
-    font-size: 14px;
-    line-height: 16px;
-  }
-}
-
 .link:visited {
   color: #a9a9a9;
 }
@@ -35,6 +28,13 @@
 
 .active:hover {
   color: var(--menu-color-active);
+}
+
+@media screen and (min-width: 479px) and (max-width: 639px) {
+  .link {
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 479px) {

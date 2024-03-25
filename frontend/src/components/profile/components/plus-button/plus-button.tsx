@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { GoPlus } from 'react-icons/go';
+import { BiPlus } from 'react-icons/bi';
 
 import Modal from '../../../modal';
 import AddCard from '../add-card';
@@ -41,7 +41,7 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
         type="button"
         onClick={handleOpenAddPlacePopup}
       >
-        <GoPlus size={38} />
+        <BiPlus size={38} />
       </button>
       {popup.place
         && (

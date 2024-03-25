@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { MdDelete } from 'react-icons/md';
+import { BiSolidTrashAlt } from 'react-icons/bi';
 import classNames from 'classnames';
 
 import Modal from '../../../modal';
@@ -28,6 +28,7 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
     try {
       await deleteCard(card);
       handleCloseAllPopups();
+
       if (id) {
         await getCards(id);
       }
@@ -46,7 +47,7 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
             className={classNames(style.remove)}
             type="button"
           >
-            <MdDelete size={40} />
+            <BiSolidTrashAlt size={40} />
           </button>
         )}
       {confirmPopup

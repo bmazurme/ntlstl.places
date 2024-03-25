@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
 import React from 'react';
-import { FaAngleDown } from 'react-icons/fa6';
+import { BiChevronDown } from 'react-icons/bi';
+
 import classNames from 'classnames';
 
 import Card from '../card';
@@ -25,7 +25,7 @@ function More({ handler, disabled }: { handler: () => void; disabled: boolean })
       type="button"
       onClick={handler}
     >
-      <FaAngleDown size={36} />
+      <BiChevronDown size={36} />
     </button>
   );
 }

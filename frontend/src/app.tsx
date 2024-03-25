@@ -4,7 +4,6 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import SignInPage from './pages/signin-page';
 import OauthPage from './pages/oauth-page';
 import MainPage from './pages/main-page';
-import KitPage from './pages/kit-page/kit-page';
 import TagsPage from './pages/tags-page';
 import UsersPage from './pages/users-page';
 import UserPage from './pages/user-page';
@@ -35,7 +34,6 @@ export default function App() {
           <Route path={Urls.TAGS.INDEX} element={(<TagsPage />)} />
           <Route path={Urls.USERS.INDEX} element={(<UsersPage />)} />
           <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
-          <Route path={Urls.KIT.INDEX} element={(<KitPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
       </ErrorBoundaryWrapper>

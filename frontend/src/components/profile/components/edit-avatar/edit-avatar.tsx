@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 import AvatarEditor from 'react-avatar-editor';
 import {
-  FaRotateLeft, FaRotateRight, FaPlus, FaMinus,
-} from 'react-icons/fa6';
+  BiRotateLeft, BiRotateRight, BiPlus, BiMinus,
+} from 'react-icons/bi';
 
 import UploadButton from '../../../upload-button';
 import IconButton from '../../../icon-button';
@@ -84,10 +84,10 @@ export default function EditAvatar({
       )}
       <div className={style.icons}>
         <UploadButton setEditor={setEditor} />
-        <IconButton component={FaRotateRight} onClick={onClickRotatePlus} />
-        <IconButton component={FaRotateLeft} onClick={onClickRotateMinus} />
-        <IconButton component={FaPlus} onClick={onClickScalePlus} />
-        <IconButton component={FaMinus} onClick={onClickScaleMinus} />
+        <IconButton component={BiRotateRight} onClick={onClickRotatePlus} />
+        <IconButton component={BiRotateLeft} onClick={onClickRotateMinus} />
+        <IconButton component={BiPlus} onClick={onClickScalePlus} />
+        <IconButton component={BiMinus} onClick={onClickScaleMinus} />
       </div>
       <Button className={style.submit} variant="filled">
         {buttonText}

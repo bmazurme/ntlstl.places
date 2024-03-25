@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-import style from './navbar-item.module.css';
+import style from './nav-item.module.css';
 
 export interface INavItemProps {
   to: string;

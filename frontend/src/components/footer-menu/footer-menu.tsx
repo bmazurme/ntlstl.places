@@ -1,0 +1,28 @@
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { IconType } from 'react-icons';
+
+import style from './footer-menu.module.css';
+
+export type TypeLink = {
+  url: string;
+  label: string;
+  icon: IconType;
+};
+
+export default function FooterMenu({ links }: { links: TypeLink[] }) {
+  return (
+    <ul className={style.items}>
+      {links.map(({ url, label, icon: Component }) => (
+        <li className={style.item} key={uuidv4()}>
+          <a className={style.contact} href={url}>
+            <span className={style.icon}>
+              <Component size={18} />
+            </span>
+            { label }
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}

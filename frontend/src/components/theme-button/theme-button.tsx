@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { BiMoon, BiSun } from 'react-icons/bi';
 
-import ThemeContext from '../../../../context/theme-context';
+import ThemeContext from '../../context/theme-context';
 
 import style from './theme-button.module.css';
 
@@ -20,7 +20,7 @@ export default function ThemeButton() {
       onClick={onToggle}
       aria-label="Switch theme"
     >
-      {isDark === 'light' ? <FaMoon /> : <FaSun />}
+      {isDark === 'light' ? <BiMoon /> : <BiSun />}
     </button>
   );
 }

@@ -6,16 +6,16 @@ import classNames from 'classnames';
 
 import Button from './components/button';
 import NavItem from './components/nav-item';
-import ThemeButton from './components/theme-button';
+import ThemeButton from '../theme-button';
 
 import useUser from '../../hooks/use-user';
 import { useSignOutMutation } from '../../store';
 
 import { Urls } from '../../utils/constants';
 
-import style from './navbar.module.css';
+import style from './header-menu.module.css';
 
-export default function Navbar({ isOpen, handlerClick }
+export default function HeaderMenu({ isOpen, handlerClick }
   : { isOpen: boolean, handlerClick: () => void }) {
   const [signOut] = useSignOutMutation();
   const [email, setEmail] = useState('');

@@ -1,36 +1,34 @@
 import React from 'react';
 import { BiLogoTelegram, BiLogoLinkedin } from 'react-icons/bi';
 
+import FooterMenu from '../footer-menu';
+import { getCurrentYear } from '../../utils/get-current-year';
+
 import style from './footer.module.css';
 
 export default function Footer() {
-  const getYear = () => (new Date().getFullYear().toString());
+  const getYear = getCurrentYear();
+  const links = [
+    {
+      icon: BiLogoTelegram,
+      label: 'Telegram',
+      url: 'https://t.me/ntlstl',
+    },
+    {
+      icon: BiLogoLinkedin,
+      label: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/bogdan-mazur-aba74287',
+    },
+  ];
 
   return (
     <footer className={style.footer}>
       <p className={style.copyright}>
         &copy;
-        {` ${getYear()} mesto by `}
+        {` ${getYear} mesto by `}
         <a className={style.link} href="https://ntlstl.dev/">[ntlstl]</a>
       </p>
-      <ul className={style.items}>
-        <li className={style.item}>
-          <a className={style.contact} href="https://t.me/ntlstl">
-            <span className={style.icon}>
-              <BiLogoTelegram size={18} />
-            </span>
-            Telegram
-          </a>
-        </li>
-        <li className={style.item}>
-          <a className={style.contact} href="https://www.linkedin.com/in/bogdan-mazur-aba74287">
-            <span className={style.icon}>
-              <BiLogoLinkedin size={18} />
-            </span>
-            LinkedIn
-          </a>
-        </li>
-      </ul>
+      <FooterMenu links={links} />
     </footer>
   );
 }
