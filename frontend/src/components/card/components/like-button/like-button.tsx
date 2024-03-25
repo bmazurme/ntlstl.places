@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { BiSolidHeart, BiHeart } from 'react-icons/bi';
 
 import { useChangeLikeMutation, useGetCardsByUserMutation } from '../../../../store';
 
@@ -48,7 +48,7 @@ export default function LikeButton({ user, card }: ILikeProps) {
         name="button-like"
         disabled={!user}
       >
-        {isLiked ? <AiFillHeart size={24} /> : <AiOutlineHeart size={24} />}
+        {isLiked ? <BiSolidHeart size={24} /> : <BiHeart size={24} />}
       </button>
       <p className={style.counter}>{card.likes.length}</p>
     </div>
