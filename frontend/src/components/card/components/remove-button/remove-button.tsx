@@ -28,6 +28,7 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
     try {
       await deleteCard(card);
       handleCloseAllPopups();
+
       if (id) {
         await getCards(id);
       }
