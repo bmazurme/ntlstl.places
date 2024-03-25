@@ -6,7 +6,7 @@ import React, {
   type ChangeEvent,
 } from 'react';
 import classNames from 'classnames';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { BiCloudUpload } from 'react-icons/bi';
 
 import style from './upload-button.module.css';
 
@@ -37,7 +37,7 @@ export default function UploadButton({ setEditor }
           id="file"
           className={classNames(style.input)}
         />
-        <FaCloudUploadAlt />
+        <BiCloudUpload size={36} />
       </label>
       <span className={classNames(style.link)}>{name}</span>
     </div>
