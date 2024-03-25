@@ -1,23 +1,25 @@
-.items {
+.common {
   display: flex;
   flex-direction: row;
+}
+
+.items {
+  composes: common;
   margin: 0;
-  align-self: center;
   padding: 0;
+  align-self: center;
   width: auto;
   justify-content: flex-end;
   list-style: none;
 }
 
 .item {
-  display: flex;
-  flex-direction: row;
+  composes: common;
   margin-left: 10px;
 }
 
 .contact {
-  display: flex;
-  flex-direction: row;
+  composes: common;
   color: var(--menu-color);
   text-decoration: none;
   font-size: 16px;
