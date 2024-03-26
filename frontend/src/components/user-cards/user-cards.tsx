@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { BiChevronDown } from 'react-icons/bi';
 import classNames from 'classnames';
+import { BiChevronDown } from '../../utils/bi';
 
 import Card from '../card';
 import Modal from '../modal';
