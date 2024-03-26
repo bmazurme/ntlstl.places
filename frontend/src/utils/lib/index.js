@@ -1,39 +1,17 @@
-Object.defineProperty(exports, '__esModule', {
-  value: true,
-});
-// const _iconsManifest = require('./iconsManifest');
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
+const __createBinding = (this && this.__createBinding) || (Object.create ? ((o, m, k, k2) => {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, { enumerable: true, get() { return m[k]; } });
+}) : ((o, m, k, k2) => {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+}));
 
-Object.keys(_iconsManifest).forEach((key) => {
-  if (key === 'default' || key === '__esModule') return;
-  if (key in exports && exports[key] === _iconsManifest[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _iconsManifest[key];
-    },
-  });
+const __exportStar = (this && this.__exportStar) || ((m, exports) => {
+  for (const p in m) if (p !== 'default' && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 });
-const _iconBase = require('./iconBase');
 
-Object.keys(_iconBase).forEach((key) => {
-  if (key === 'default' || key === '__esModule') return;
-  if (key in exports && exports[key] === _iconBase[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _iconBase[key];
-    },
-  });
-});
-const _iconContext = require('./iconContext');
-
-Object.keys(_iconContext).forEach((key) => {
-  if (key === 'default' || key === '__esModule') return;
-  if (key in exports && exports[key] === _iconContext[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _iconContext[key];
-    },
-  });
-});
+__exportStar(require('./iconBase'), exports);
+__exportStar(require('./iconContext'), exports);
