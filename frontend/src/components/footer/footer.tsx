@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiLogoTelegram, BiLogoLinkedin } from 'react-icons/bi';
+import { BiLogoTelegram, BiLogoLinkedin } from '../../utils/bi';
 
 import FooterMenu from '../footer-menu';
 import { getCurrentYear } from '../../utils/get-current-year';
