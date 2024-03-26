@@ -1,7 +1,6 @@
 import React from 'react';
-import { BiChevronDown } from 'react-icons/bi';
-
 import classNames from 'classnames';
+import { BiChevronDown } from '../../utils/bi';
 
 import Card from '../card';
 import Modal from '../modal';
