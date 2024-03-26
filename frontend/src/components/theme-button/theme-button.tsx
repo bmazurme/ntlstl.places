@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext } from 'react';
-import { BiMoon, BiSun } from 'react-icons/bi';
+import { BiMoon, BiSun } from '../../utils/bi';
 
 import ThemeContext from '../../context/theme-context';
 
