@@ -25,7 +25,6 @@ type Card = {
   id: string;
   name: string;
   link: string;
-  // likes: string[];
   user_id: number | null;
   createdAt: Date;
   user: { name: string; };
