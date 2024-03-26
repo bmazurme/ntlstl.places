@@ -5,7 +5,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import AvatarEditor from 'react-avatar-editor';
 import {
   BiRotateLeft, BiRotateRight, BiPlus, BiMinus,
-} from 'react-icons/bi';
+} from '../../../../utils/bi';
 
 import UploadButton from '../../../upload-button';
 import IconButton from '../../../icon-button';

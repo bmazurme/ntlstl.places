@@ -1,7 +1,14 @@
 import React from 'react';
-import { IconType } from 'react-icons';
 
 import style from './icon-button.module.css';
+// import { IconType } from '../../utils/lib';
+export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
+  children?: React.ReactNode;
+  size?: string | number;
+  color?: string;
+  title?: string;
+}
+export type IconType = (props: IconBaseProps) => JSX.Element;
 
 export default function EditAvatar({ component: Component, onClick }
   : { component: IconType; onClick: () => void; }) {

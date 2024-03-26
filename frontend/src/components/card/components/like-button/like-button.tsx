@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { BiSolidHeart, BiHeart } from 'react-icons/bi';
 
+import { BiSolidHeart, BiHeart } from '../../../../utils/bi';
 import { useChangeLikeMutation, useGetCardsByUserMutation } from '../../../../store';
 
 import style from './like-button.module.css';

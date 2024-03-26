@@ -1,6 +1,6 @@
 import React from 'react';
 import { useErrorHandler } from 'react-error-boundary';
-import { BiPencil } from 'react-icons/bi';
+import { BiPencil } from '../../../../utils/bi';
 
 import Modal from '../../../modal';
 import EditProfile from '../edit-profile';

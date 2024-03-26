@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { BiSolidTrashAlt } from 'react-icons/bi';
 import classNames from 'classnames';
 
+import { BiSolidTrashAlt } from '../../../../utils/bi';
 import Modal from '../../../modal';
 import WithConfirm from '../../../with-confirm';
 

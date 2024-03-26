@@ -1,8 +1,16 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { IconType } from 'react-icons';
+// import { IconType } from 'react-icons';
 
 import style from './footer-menu.module.css';
+
+export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
+  children?: React.ReactNode;
+  size?: string | number;
+  color?: string;
+  title?: string;
+}
+export type IconType = (props: IconBaseProps) => JSX.Element;
 
 export type TypeLink = {
   url: string;

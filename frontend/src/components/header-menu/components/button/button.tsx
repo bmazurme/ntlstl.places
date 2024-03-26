@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import classNames from 'classnames';
-import { BiMenu, BiX } from 'react-icons/bi';
+import { BiMenu, BiX } from '../../../../utils/bi';
 
 import style from './button.module.css';
 
