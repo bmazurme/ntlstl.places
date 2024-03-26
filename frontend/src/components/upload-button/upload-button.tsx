@@ -6,7 +6,7 @@ import React, {
   type ChangeEvent,
 } from 'react';
 import classNames from 'classnames';
-import { BiCloudUpload } from 'react-icons/bi';
+import { BiCloudUpload } from '../../utils/bi';
 
 import style from './upload-button.module.css';
 
