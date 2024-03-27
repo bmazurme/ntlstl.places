@@ -20,14 +20,21 @@
 
 .contact {
   composes: common;
-  color: var(--menu-color);
+  color: var(--color);
   text-decoration: none;
   font-size: 16px;
   line-height: 20px;
+  transition: opacity 0.5s ease;
+  opacity: 0.8;
+}
+
+.contact:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .contact:visited {
-  color: var(--menu-color-active);
+  color: var(--color);
 }
 
 .icon {
@@ -40,10 +47,6 @@
   padding: 0;
   height: 20px;
   width: 20px;
-}
-
-@media screen and (max-width: 879px) {
-
 }
 
 @media screen and (max-width: 599px) {
