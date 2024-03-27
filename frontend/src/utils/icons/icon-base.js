@@ -10,7 +10,7 @@
 /* eslint-disable react/destructuring-assignment */
 
 import { createElement } from 'react';
-import { IconContext, DefaultContext } from './iconContext';
+import { IconContext, DefaultContext } from './icon-context';
 
 let __assign = (this && this.__assign) || function () {
   __assign = Object.assign || function (t) {

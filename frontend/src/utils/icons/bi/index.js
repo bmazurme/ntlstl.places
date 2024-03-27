@@ -1,4 +1,4 @@
-import { GenIcon } from '../lib';
+import { GenIcon } from '..';
 
 export function BiHeart(props) {
   return GenIcon({

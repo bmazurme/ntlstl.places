@@ -1,5 +1,4 @@
-// THIS FILE IS AUTO GENERATED
-import type { IconType } from '../lib/index';
+import type { IconType } from '../index';
 
 export declare const BiHeart: IconType;
 export declare const BiSolidHeart: IconType;

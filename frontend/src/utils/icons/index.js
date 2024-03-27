@@ -13,5 +13,5 @@ const __exportStar = (this && this.__exportStar) || ((m, exports) => {
   for (const p in m) if (p !== 'default' && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 });
 
-__exportStar(require('./iconBase'), exports);
-__exportStar(require('./iconContext'), exports);
+__exportStar(require('./icon-base'), exports);
+__exportStar(require('./icon-context'), exports);

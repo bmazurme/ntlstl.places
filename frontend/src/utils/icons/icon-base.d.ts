@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import * as React from 'react';
-
+// import { SVGAttributes } from 'react';
 export interface IconTree {
   tag: string;
   attr: {
@@ -8,8 +7,8 @@ export interface IconTree {
   };
   child: IconTree[];
 }
-export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
-  children?: React.ReactNode;
+export interface IconBaseProps extends SVGAttributes<SVGElement> {
+  children?: ReactNode;
   size?: string | number;
   color?: string;
   title?: string;
