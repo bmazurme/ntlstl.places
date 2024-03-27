@@ -2,21 +2,21 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { BiChevronDown } from '../../utils/bi';
+import { BiChevronDown } from '../../utils/icons/bi';
 
-import Card from '../card';
+import Card from '../user-card';
 import Modal from '../modal';
 import Slide from '../slide';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  cardSelector, setCard,
-  userCardsSelector, userCurrentSelector, setUserCurrent, setUserCards, useGetCardsByUserMutation,
+  cardSelector, setCard, userCardsSelector,
+  userCurrentSelector, setUserCurrent, setUserCards, useGetCardsByUserMutation,
 } from '../../store';
 
 import { SHIFT } from '../../utils/constants';
 
-import style from './user-cards.module.css';
+import style from '../cards/cards.module.css';
 
 function More({ handler, disabled }: { handler: () => void; disabled: boolean }) {
   return (
@@ -49,13 +49,13 @@ export default function UserCards() {
   }, [id]);
 
   return (
-    <div className={style.container}>
+    <>
       <section className={style.cards}>
         {current.map((card, i) => (<Card key={card.id} card={card} index={i} />))}
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
         && (<More handler={onMore} disabled={current.length >= cards.length} />)}
-    </div>
+    </>
   );
 }
