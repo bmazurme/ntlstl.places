@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { BiPlus } from '../../../../utils/bi';
+import { BiPlus } from '../../../../utils/icons/bi';
 
 import Modal from '../../../modal';
 import AddCard from '../add-card';
