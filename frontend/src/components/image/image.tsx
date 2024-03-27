@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useAppDispatch } from '../../../../hooks';
-import { setCard } from '../../../../store';
+import { useAppDispatch } from '../../hooks';
+import { setCard } from '../../store';
 
-import { BASE_API_URL } from '../../../../utils/constants';
+import { BASE_API_URL } from '../../utils/constants';
 
 import style from './image.module.css';
 
