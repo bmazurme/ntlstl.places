@@ -1,4 +1,7 @@
 .edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 2px;
   background-repeat: no-repeat;
   background-position: center;
@@ -7,10 +10,9 @@
   border: 1px solid var(--color);
   margin-top: 5px;
   margin-left: 15px;
-  padding: 4px;
   background-color: var(--background-color);
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
 }
 
 .edit:hover {
