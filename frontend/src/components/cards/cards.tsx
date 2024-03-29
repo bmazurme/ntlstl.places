@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { BiChevronDown } from '../../utils/bi';
+import { BiChevronDown } from '../../utils/icons/bi';
 
 import Card from '../card';
 import Modal from '../modal';
@@ -39,13 +39,13 @@ export default function Cards() {
   };
 
   return (
-    <div className={style.container}>
+    <>
       <section className={style.cards}>
         {current.map((card, i) => (<Card key={card.id} card={card} index={i} />))}
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
         && (<More handler={onMore} disabled={current.length >= cards.length} />)}
-    </div>
+    </>
   );
 }

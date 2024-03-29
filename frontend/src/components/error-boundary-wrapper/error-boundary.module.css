@@ -1,17 +1,16 @@
 .boundary {
   margin: 60px auto;
+  padding: 34px;
   z-index: 2;
   background-color: #fff;
-  border: 0;
-  padding: 34px;
   width: 358px;
   min-height: 360px;
+  border: 0;
   border-radius: 10px;
 }
 
 .title {
   margin: 40px 0;
-  padding: 0;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;

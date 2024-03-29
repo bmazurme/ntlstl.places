@@ -1,13 +1,16 @@
 import React from 'react';
 
-import Title from '../../components/title';
-
-import style from './tags-layout.module.css';
+import Board from '../../components/board';
 
 export default function TagsLayout() {
   return (
-    <div className={style.container}>
-      <Title text="Tags" />
-    </div>
+    <Board
+      children={(
+        <ul>
+          <li>tag</li>
+        </ul>
+      )}
+      title="Tags"
+    />
   );
 }

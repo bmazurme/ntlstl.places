@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 
+import Board from '../../components/board';
 import Cards from '../../components/cards';
 import Preloader from '../../components/preloader';
 
@@ -11,7 +12,7 @@ export default function MainLayout() {
 
   return (
     <>
-      {isLoadingCards ? <Preloader /> : <Cards />}
+      {isLoadingCards ? <Preloader /> : <Board children={<Cards />} />}
     </>
   );
 }

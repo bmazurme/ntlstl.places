@@ -1,0 +1,8 @@
+.image {
+  cursor: pointer;
+  max-width: 282px;
+  width: auto;
+  height: 282px;
+  background: #212121;
+  border-radius: 10px 10px 0 0;
+}

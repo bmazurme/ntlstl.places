@@ -12,7 +12,8 @@ export const Urls = {
   },
   USERS: {
     INDEX: '/users',
-    CURRENT: '/user/:id',
+    CURRENT: '/users/:id',
+    CURRENT_EDIT: '/users/:id/:edit',
   },
   KIT: {
     INDEX: '/kit',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiLogoTelegram, BiLogoLinkedin } from '../../utils/bi';
+import { BiLogoTelegram, BiLogoLinkedin } from '../../utils/icons/bi';
 
 import FooterMenu from '../footer-menu';
 import { getCurrentYear } from '../../utils/get-current-year';
@@ -26,7 +26,7 @@ export default function Footer() {
       <p className={style.copyright}>
         &copy;
         {` ${getYear} mesto by `}
-        <a className={style.link} href="https://ntlstl.dev/">[ntlstl]</a>
+        <a className={style.link} href="https://ntlstl.dev/">ntlstl</a>
       </p>
       <FooterMenu links={links} />
     </footer>

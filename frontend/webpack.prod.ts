@@ -61,6 +61,7 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
             },
           ],
         },
+        // minify: CssMinimizerPlugin.cleanCssMinify,
       }),
     ],
   },
@@ -83,6 +84,7 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
       patterns: [
         { from: 'public/manifest.json', to: '.' },
         { from: 'public/favicon.ico', to: '.' },
+        { from: 'public/robots.txt', to: '.' },
         // { from: 'public/logo192.png', to: '.' },
         // { from: 'public/logo512.png', to: '.' },
       ],
