@@ -1,4 +1,4 @@
-.btn {
+.button {
   display: none;
   height: 30px;
   width: 30px;
@@ -10,7 +10,7 @@
   color: var(--color);
 }
 
-.btn:hover {
+.button:hover {
   opacity: 0.6;
 }
 
@@ -19,7 +19,7 @@
     grid-area: button;
   }
 
-  .btn {
+  .button {
     display: flex;
   }
 }
