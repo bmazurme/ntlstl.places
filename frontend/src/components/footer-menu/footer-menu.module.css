@@ -18,7 +18,7 @@
   margin-left: 10px;
 }
 
-.contact {
+.link {
   composes: common;
   color: var(--color);
   text-decoration: none;
@@ -28,12 +28,12 @@
   opacity: 0.8;
 }
 
-.contact:hover {
+.link:hover {
   opacity: 1;
   cursor: pointer;
 }
 
-.contact:visited {
+.link:visited {
   color: var(--color);
 }
 
@@ -67,7 +67,7 @@
     width: 16px;
   }
 
-  .contact {
+  .link {
     font-size: 14px;
     line-height: 16px;
   }
