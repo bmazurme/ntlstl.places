@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './icon-button.module.css';
-// import { IconType } from '../../utils/lib';
+
 export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   children?: React.ReactNode;
   size?: string | number;
