@@ -12,7 +12,7 @@ import style from './profile.module.css';
 export default function Profile({ currentUser }: { currentUser: User; }) {
   const user = useUser();
   const cards = useAppSelector(userCardsSelector);
-  const [popup, setPopup] = useState({ profile: false, avatar: false, place: false });
+  const [popup, setPopup] = useState({ avatar: false, place: false });
 
   return (
     <section className={style.profile}>
