@@ -12,7 +12,7 @@ export default function Button({ isOpen, handlerClick }
       type="button"
       onClick={handlerClick}
       aria-label="Switch menu"
-      className={classNames(style.btn, { [style.opened]: isOpen })}
+      className={classNames(style.button, { [style.opened]: isOpen })}
     >
       {isOpen ? <BiX size={30} /> : <BiMenu size={30} />}
     </button>
