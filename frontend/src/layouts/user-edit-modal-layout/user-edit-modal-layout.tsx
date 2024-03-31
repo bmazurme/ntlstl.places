@@ -38,7 +38,7 @@ export default function UserLayout() {
           info={user}
           onUpdateUser={handleUpdateUserSubmit}
         />
-    )}
+      )}
     />
   );
 }
