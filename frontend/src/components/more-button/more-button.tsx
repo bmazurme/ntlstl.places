@@ -9,7 +9,7 @@ export default function MoreButton({ handler, disabled }
   return (
     <button
       aria-label="Add"
-      className={classNames(style.add, { [style.disabled]: disabled })}
+      className={classNames(style.button, { [style.disabled]: disabled })}
       disabled={disabled}
       type="button"
       onClick={handler}

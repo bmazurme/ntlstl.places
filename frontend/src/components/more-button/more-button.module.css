@@ -1,4 +1,4 @@
-.add {
+.button {
   border-radius: 2px;
   background-color: var(--background-color);
   background-repeat: no-repeat;
@@ -22,12 +22,12 @@
   cursor: default;
 }
 
-.add:hover {
+.button:hover {
   opacity: 0.6;
 }
 
 @media screen and (min-width: 320px) and (max-width: 899px) {
-  .add {
+  .button {
     width: 282px;
     height: 50px;
     margin-top: 36px;
