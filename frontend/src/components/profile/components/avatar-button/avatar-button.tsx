@@ -10,8 +10,8 @@ import { BASE_API_URL } from '../../../../utils/constants';
 import style from './avatar-button.module.css';
 
 type AvatarProps = {
-  popup: { profile: boolean; avatar: boolean; place: boolean; };
-  setPopup: (p: { profile: boolean; avatar: boolean; place: boolean; }) => void;
+  popup: { avatar: boolean; place: boolean; };
+  setPopup: (p: { avatar: boolean; place: boolean; }) => void;
   info: User | null;
   currentUser: User | null;
 };
@@ -22,7 +22,7 @@ export default function AvatarButton({
   const errorHandler = useErrorHandler();
   const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation();
   const handleOpenEditAvatarPopup = () => setPopup({ ...popup, avatar: true });
-  const handleCloseAllPopups = () => setPopup({ profile: false, avatar: false, place: false });
+  const handleCloseAllPopups = () => setPopup({ avatar: false, place: false });
 
   const handleUpdateAvatarSubmit = async (data: FormData) => {
     try {
