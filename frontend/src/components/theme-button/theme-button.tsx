@@ -15,7 +15,7 @@ export default function ThemeButton() {
 
   return (
     <button
-      className={style.icon}
+      className={style.button}
       type="button"
       onClick={onToggle}
       aria-label="Switch theme"
