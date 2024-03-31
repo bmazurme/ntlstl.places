@@ -1,10 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
-import { BiChevronDown } from '../../utils/icons/bi';
 
 import Card from '../card';
 import Modal from '../modal';
 import Slide from '../slide';
+import MoreButton from '../more-button';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -14,20 +13,6 @@ import {
 import { SHIFT } from '../../utils/constants';
 
 import style from './cards.module.css';
-
-function More({ handler, disabled }: { handler: () => void; disabled: boolean }) {
-  return (
-    <button
-      aria-label="Add"
-      className={classNames(style.add, { [style.disabled]: disabled })}
-      disabled={disabled}
-      type="button"
-      onClick={handler}
-    >
-      <BiChevronDown size={36} />
-    </button>
-  );
-}
 
 export default function Cards() {
   const dispatch = useAppDispatch();
@@ -45,7 +30,7 @@ export default function Cards() {
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
-        && (<More handler={onMore} disabled={current.length >= cards.length} />)}
+        && (<MoreButton handler={onMore} disabled={current.length >= cards.length} />)}
     </>
   );
 }
