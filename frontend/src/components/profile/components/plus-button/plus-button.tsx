@@ -10,8 +10,8 @@ import { useAddCardMutation, useGetCardsByUserMutation } from '../../../../store
 import style from './plus-button.module.css';
 
 type PlusProps = {
-  popup: { profile: boolean; avatar: boolean; place: boolean; };
-  setPopup: (p: { profile: boolean; avatar: boolean; place: boolean; }) => void;
+  popup: { avatar: boolean; place: boolean; };
+  setPopup: (p: { avatar: boolean; place: boolean; }) => void;
 };
 
 export default function PlusButton({ popup, setPopup }: PlusProps) {
@@ -20,11 +20,12 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
   const errorHandler = useErrorHandler();
   const [addCard, { isLoading: isLoadingCard }] = useAddCardMutation();
   const handleOpenAddPlacePopup = () => setPopup({ ...popup, place: true });
-  const handleCloseAllPopups = () => setPopup({ profile: false, avatar: false, place: false });
+  const handleCloseAllPopups = () => setPopup({ avatar: false, place: false });
   const handleAddPlaceSubmit = async (data: FormData) => {
     try {
       await addCard(data);
       handleCloseAllPopups();
+
       if (id) {
         await getCards(id);
       }
