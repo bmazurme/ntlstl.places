@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 import classNames from 'classnames';
 
-import { BiSolidTrashAlt } from '../../../../utils/icons/bi';
 import Modal from '../../../modal';
 import WithConfirm from '../../../with-confirm';
+import { BiSolidTrashAlt } from '../../../../utils/icons/bi';
 
 import { useDeleteCardMutation, useGetCardsByUserMutation } from '../../../../store';
 
@@ -44,7 +44,7 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
           <button
             onClick={() => setConfirmPopup(true)}
             aria-label="Remove"
-            className={classNames(style.remove)}
+            className={classNames(style.button)}
             type="button"
           >
             <BiSolidTrashAlt size={40} />
