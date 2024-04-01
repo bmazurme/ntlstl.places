@@ -22,7 +22,6 @@ describe('user', () => {
       type: usersApiEndpoints.endpoints.getUserMe.matchFulfilled,
       payload: {},
     };
-
     expect(reducer(initialState, action)).toEqual(initialState);
   });
 });
