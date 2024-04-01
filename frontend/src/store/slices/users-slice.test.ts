@@ -16,13 +16,12 @@ const initialState = {
   }],
 };
 
-describe('user', () => {
+describe('users', () => {
   it('...', async () => {
     const action = {
       type: usersApiEndpoints.endpoints.getUsers.matchFulfilled,
       payload: {},
     };
-
     expect(reducer(initialState, action)).toEqual(initialState);
   });
 });
