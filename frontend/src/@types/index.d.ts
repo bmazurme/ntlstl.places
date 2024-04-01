@@ -14,7 +14,6 @@ type User = {
   about: string;
   avatar: string;
   email: string;
-  password: string;
 };
 
 type Like = {
