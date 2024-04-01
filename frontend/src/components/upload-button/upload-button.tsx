@@ -5,13 +5,10 @@ import React, {
   useCallback,
   type ChangeEvent,
 } from 'react';
-// import AvatarEditor from 'react-avatar-editor';
 import classNames from 'classnames';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { BiCloudUpload } from '../../utils/icons/bi';
 
 import style from './upload-button.module.css';
-
-// type TypeFileChangerProps = { onChange: (formData: FormData) => void; };
 
 export default function UploadButton({ setEditor }
   : { setEditor: (file: File | string | null) => void; }) {
@@ -32,7 +29,7 @@ export default function UploadButton({ setEditor }
 
   return (
     <div className={style.container}>
-      <label className={classNames(style.upload)} htmlFor="file">
+      <label className={classNames(style.label)} htmlFor="file">
         <input
           ref={elementInputFile}
           type="file"
@@ -40,7 +37,7 @@ export default function UploadButton({ setEditor }
           id="file"
           className={classNames(style.input)}
         />
-        <FaCloudUploadAlt />
+        <BiCloudUpload size={36} />
       </label>
       <span className={classNames(style.link)}>{name}</span>
     </div>

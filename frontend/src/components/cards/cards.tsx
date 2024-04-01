@@ -1,11 +1,9 @@
-/* eslint-disable max-len */
 import React from 'react';
-import { FaAngleDown } from 'react-icons/fa6';
-import classNames from 'classnames';
 
 import Card from '../card';
 import Modal from '../modal';
 import Slide from '../slide';
+import MoreButton from '../more-button';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -15,20 +13,6 @@ import {
 import { SHIFT } from '../../utils/constants';
 
 import style from './cards.module.css';
-
-function More({ handler, disabled }: { handler: () => void; disabled: boolean }) {
-  return (
-    <button
-      aria-label="Add"
-      className={classNames(style.add, { [style.disabled]: disabled })}
-      disabled={disabled}
-      type="button"
-      onClick={handler}
-    >
-      <FaAngleDown size={36} />
-    </button>
-  );
-}
 
 export default function Cards() {
   const dispatch = useAppDispatch();
@@ -40,13 +24,13 @@ export default function Cards() {
   };
 
   return (
-    <div className={style.container}>
+    <>
       <section className={style.cards}>
         {current.map((card, i) => (<Card key={card.id} card={card} index={i} />))}
         {selectedCard && (<Modal children={<Slide />} onClose={() => dispatch(setCard(null))} />)}
       </section>
       {cards.length > SHIFT
-        && (<More handler={onMore} disabled={current.length >= cards.length} />)}
-    </div>
+        && (<MoreButton handler={onMore} disabled={current.length >= cards.length} />)}
+    </>
   );
 }

@@ -1,11 +1,7 @@
-.common {
+.layout {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.layout {
-  composes: common;
   width: 100vw;
   height: 100vh;
 }

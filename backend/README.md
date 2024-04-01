@@ -14,10 +14,8 @@
 * Photo posting service.
 
 [![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
+[![Deploy backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml)
 
-## Demo
-
-![Alt-text](https://github.com/bmazurme/ntlstl.mesto/blob/main/src/images/places.png "demo")
 
 ### To do backend
 - [X] prod/dev configs .env
@@ -97,13 +95,13 @@ $ docker-compose stop
 
 $ docker system prune -a
 
-$ docker push cr.yandex/${REGISTRY_ID}/places:latest
+$ docker push cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker pull cr.yandex/${REGISTRY_ID}/places:latest
+$ docker pull cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run cr.yandex/${CR_REGISTRY}/places:latest
 
-$ docker run -d -p 80:3005 cr.yandex/${REGISTRY_ID}/places:latest
+$ docker run -d -p 80:3005 cr.yandex/${CR_REGISTRY}/places:latest
 
 $ docker rmi id -f
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import Logo from '../logo';
-import Navbar from '../navbar';
+import Navbar from '../header-menu';
 
 import style from './header.module.css';
 

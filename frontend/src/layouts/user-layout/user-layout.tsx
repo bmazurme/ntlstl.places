@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
+import Board from '../../components/board';
 import Profile from '../../components/profile';
 import UserCards from '../../components/user-cards';
 
@@ -22,7 +23,7 @@ export default function UserLayout() {
   return (
     <>
       {user && <Profile currentUser={user} />}
-      <UserCards />
+      <Board children={<UserCards />} />
     </>
   );
 }

@@ -7,12 +7,13 @@ export const Urls = {
     INDEX: '/oauth',
     YANDEX: 'https://oauth.yandex.ru',
   },
-  ADMIN: {
-    INDEX: '/admin',
+  TAGS: {
+    INDEX: '/tags',
   },
   USERS: {
     INDEX: '/users',
-    CURRENT: '/user/:id',
+    CURRENT: '/users/:id',
+    CURRENT_EDIT: '/users/:id/:edit',
   },
   KIT: {
     INDEX: '/kit',

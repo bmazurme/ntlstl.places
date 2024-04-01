@@ -1,6 +1,5 @@
 declare module '*.css';
-declare module 'image-to-webp';
-declare module 'sharp-multer';
+declare module 'interpolate-html-plugin';
 
 type Action<T> = {
   type: string;
@@ -15,7 +14,6 @@ type User = {
   about: string;
   avatar: string;
   email: string;
-  password: string;
 };
 
 type Like = {
@@ -27,9 +25,7 @@ type Card = {
   id: string;
   name: string;
   link: string;
-  // likes: string[];
   user_id: number | null;
-  createdAt: Date;
   user: { name: string; };
   likes: { user_id: number; }[];
 };
