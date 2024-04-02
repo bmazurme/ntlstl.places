@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Urls } from '../../../../utils/constants';
 import { BiPencil } from '../../../../utils/icons/bi';
+import { Urls } from '../../../../utils/constants';
 
 import style from './profile-button.module.css';
 

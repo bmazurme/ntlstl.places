@@ -1,4 +1,4 @@
-.icon {
+.button {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +17,6 @@
   border: 1px solid var(--color);
 }
 
-.icon:hover {
+.button:hover {
   opacity: 1;
 }

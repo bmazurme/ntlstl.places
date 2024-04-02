@@ -41,10 +41,7 @@ export default function LikeButton({ user, card }: ILikeProps) {
         type="button"
         onClick={() => onCardLike(card)}
         aria-label="Like"
-        className={classNames(
-          style.button,
-          { [style.disabled]: !user },
-        )}
+        className={classNames(style.button, { [style.disabled]: !user })}
         name="button-like"
         disabled={!user}
       >

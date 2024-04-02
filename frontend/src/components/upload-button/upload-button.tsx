@@ -29,7 +29,7 @@ export default function UploadButton({ setEditor }
 
   return (
     <div className={style.container}>
-      <label className={classNames(style.upload)} htmlFor="file">
+      <label className={classNames(style.label)} htmlFor="file">
         <input
           ref={elementInputFile}
           type="file"

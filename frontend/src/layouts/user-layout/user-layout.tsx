@@ -12,7 +12,6 @@ import { useGetUserByIdQuery } from '../../store';
 export default function UserLayout() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const { data: user, error } = useGetUserByIdQuery(id!);
 
   useEffect(() => {

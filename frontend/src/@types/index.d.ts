@@ -14,7 +14,6 @@ type User = {
   about: string;
   avatar: string;
   email: string;
-  password: string;
 };
 
 type Like = {
@@ -27,7 +26,6 @@ type Card = {
   name: string;
   link: string;
   user_id: number | null;
-  createdAt: Date;
   user: { name: string; };
   likes: { user_id: number; }[];
 };

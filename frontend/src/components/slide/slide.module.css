@@ -1,9 +1,9 @@
 .slide {
+  display: flex;
+  justify-content: center;
   height: 100%;
   width: 100%;
   background-color: var(--background-color-in);
-  display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -26,6 +26,4 @@
   height: 100%;
   max-width: 100%;
   min-height: 282px;
-  margin: 0;
-  padding: 0;
 }

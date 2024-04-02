@@ -15,6 +15,9 @@ export const Urls = {
     CURRENT: '/users/:id',
     CURRENT_EDIT: '/users/:id/:edit',
   },
+  CARDS: {
+    CURRENT: '/card/:id',
+  },
   KIT: {
     INDEX: '/kit',
   },

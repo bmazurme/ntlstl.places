@@ -14,6 +14,7 @@ import useUser from '../../hooks/use-user';
 import { Urls } from '../../utils/constants';
 
 import style from '../card/card.module.css';
+import inputstyle from './card.module.css';
 
 export default function Card({ card, index }: { card: Card; index: number; }) {
   const user = useUser();
@@ -46,13 +47,13 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
               <>
                 <label
                   htmlFor="text"
-                  className={style.label}
+                  className={inputstyle.label}
                 >
                   Title:
                 </label>
                 <input
                   id="text"
-                  className={style.input}
+                  className={inputstyle.input}
                   type="text"
                   name="name"
                   readOnly={user?.id !== card.user_id}

@@ -1,13 +1,20 @@
 .card {
   display: flex;
-  box-sizing: border-box;
   flex-direction: column;
+  box-sizing: border-box;
   position: relative;
   border-radius: 10px;
   width: 282px;
   height: 360px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 .group {
@@ -22,10 +29,6 @@
   border-bottom-right-radius: 10px;
 }
 
-.label {
-  display: none;
-}
-
 .name {
   margin: 2px 0;
   max-width: 200px;
@@ -36,19 +39,9 @@
   font-weight: 900;
   font-size: 22px;
   line-height: 22px;
-  border: 0;
-  border-radius: 4px;
   background-color: var(--card-background-color);
   padding: 5px 10px;
   box-sizing: border-box;
-}
-
-.input {
-  composes: name;
-}
-
-.input:hover {
-  background-color: #e1e1e1;
 }
 
 .user {
@@ -68,11 +61,4 @@
 
 .user:visited {
   color: var(--color-in);
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
 }

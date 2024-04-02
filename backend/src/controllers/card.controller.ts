@@ -178,6 +178,31 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
   }
 };
 
+export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const cards = await Card.findOne(
+      {
+        where: { id: req.params.id },
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+          {
+            model: Like,
+            attributes: ['user_id'],
+          },
+        ],
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+      },
+    );
+
+    return res.status(200).send(cards);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const like = await Like.create(
