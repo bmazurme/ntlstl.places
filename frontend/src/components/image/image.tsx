@@ -11,7 +11,7 @@ export default function Image({ card, index }: { card: Card; index: number; }) {
     <Link
       to={`/card/${card?.id}`}
       state={{ pathname: location.pathname, from: location.pathname }}
-      className={style.edit}
+      className={style.link}
     >
       <img
         className={style.image}
