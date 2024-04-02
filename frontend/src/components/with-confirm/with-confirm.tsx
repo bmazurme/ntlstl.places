@@ -1,7 +1,5 @@
 import React from 'react';
 
-import style from './with-confirm.module.css';
-
 export default function WithConfirm({
   card, title, buttonText, onSubmit, isLoading,
 } : {
@@ -22,8 +20,8 @@ export default function WithConfirm({
       noValidate
       onSubmit={handleSubmit}
     >
-      <h2 className={style.title}>{title}</h2>
-      <button aria-label="Delete" className={style.submit} type="submit">
+      <h2 className="title">{title}</h2>
+      <button aria-label="Delete" className="submit" type="submit">
         {isLoading ? 'Deleting...' : buttonText}
       </button>
     </form>
