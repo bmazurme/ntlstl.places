@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-
-import { useAppSelector } from '../../hooks';
-import { cardSelector } from '../../store';
+import { useGetCardByIdMutation } from '../../store';
 
 import { MODAL_CONFIG } from '../../utils';
 import { BASE_API_URL } from '../../utils/constants';
@@ -10,7 +9,14 @@ import { BASE_API_URL } from '../../utils/constants';
 import style from './slide.module.css';
 
 export default function Slide() {
-  const card = useAppSelector(cardSelector);
+  const params = useParams();
+  const [getCardById, { data: card }] = useGetCardByIdMutation();
+
+  useEffect(() => {
+    if (params.id) {
+      getCardById(params.id);
+    }
+  }, []);
 
   return (
     <AnimatePresence>
