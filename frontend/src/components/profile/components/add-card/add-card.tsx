@@ -6,8 +6,6 @@ import Button from '../../../button';
 import InputField from '../../../input-field';
 import UploadButton from '../../../upload-button';
 
-import style from './add-card.module.css';
-
 type FormPayload = {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,7 +51,7 @@ export default function AddCard({ isLoading, onAddPlace }
 
   return (
     <form className="form form_type_edit" onSubmit={onSubmit}>
-      <h2 className={style.title}>New place</h2>
+      <h2 className="title">New place</h2>
       {inputs.map((input) => (
         <Controller
           key={input.name}
@@ -73,13 +71,8 @@ export default function AddCard({ isLoading, onAddPlace }
           )}
         />
       ))}
-      {/* <Controller
-        control={control}
-        name="file"
-        render={({ field }) => (<UploadButton onChange={field.onChange} />)}
-      /> */}
       <UploadButton setEditor={setEditor} />
-      <Button className={style.submit} variant="filled">
+      <Button className="submit" variant="filled">
         {buttonText}
       </Button>
     </form>
