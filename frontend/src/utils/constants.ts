@@ -18,6 +18,9 @@ export const Urls = {
   CARDS: {
     CURRENT: '/card/:id',
   },
+  CARD: {
+    CURRENT: '/card',
+  },
   KIT: {
     INDEX: '/kit',
   },

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import SignInPage from './pages/signin-page';
 import OauthPage from './pages/oauth-page';
@@ -18,20 +18,17 @@ import { Urls } from './utils/constants';
 
 import ThemeContext from './context/theme-context';
 import useDarkTheme from './hooks/use-dark-theme';
+import { useAppLocation } from './hooks/use-app-location';
 
 export default function App() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const location: any = useLocation();
+  const location = useAppLocation();
+  const background = location.state?.pathname;
   const { providerValue } = useDarkTheme();
-
-  useEffect(() => {
-    location.state = null;
-  }, []);
 
   return (
     <ThemeContext.Provider value={providerValue}>
       <ErrorBoundaryWrapper>
-        <Routes location={location.state?.pathname || location}>
+        <Routes location={background || location}>
           <Route path={Urls.BASE} element={(<MainPage />)} />
           <Route path={Urls.CARDS.CURRENT} element={(<CardPage />)} />
           <Route path={Urls.SIGNIN} element={(<SignInPage />)} />
@@ -41,7 +38,7 @@ export default function App() {
           <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
-        {location.state?.pathname
+        {background
         && (
         <Routes>
           <Route path={Urls.USERS.CURRENT_EDIT} element={(<UserEditModalPage />)} />

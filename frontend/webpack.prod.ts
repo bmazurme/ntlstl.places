@@ -4,6 +4,7 @@ import { merge } from 'webpack-merge';
 import { config as dotEnvConfig } from 'dotenv';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackPreconnectPlugin from 'html-webpack-preconnect-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -17,7 +18,7 @@ import common from './webpack.common';
 
 dotEnvConfig();
 
-const client = (env: { production?: boolean; }) => merge<Configuration & {devServer?: any}>(common, {
+const client = (env: { production?: boolean; }) => merge<Configuration & { devServer?: any; }>(common, {
   optimization: {
     minimize: !!env.production,
     splitChunks: {
@@ -73,7 +74,11 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      preconnect: [
+        'https://api.places.ntlstl.dev',
+      ],
     }),
+    new HtmlWebpackPreconnectPlugin(),
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
     }),

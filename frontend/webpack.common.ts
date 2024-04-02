@@ -13,7 +13,6 @@ const common = merge<Configuration & {devServer?: any}>({
   name: 'client',
   target: 'web',
   mode: process.env.NODE_ENV as Environment ?? 'development',
-  devtool: 'inline-source-map',
   entry: ['./src/index.tsx'],
   output: {
     publicPath: '/',
