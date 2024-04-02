@@ -6,3 +6,9 @@
   background: #212121;
   border-radius: 10px 10px 0 0;
 }
+
+.link {
+  margin: 0;
+  padding: 0;
+  height: 282px;
+}
