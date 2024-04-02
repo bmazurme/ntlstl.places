@@ -7,6 +7,7 @@ import {
   likeCard,
   dislikeCard,
   updateCard,
+  getCardById,
 } from '../controllers/card.controller';
 import { UrlsApi } from '../utils/routers';
 import { updateFiles } from '../controllers/file.controller';
@@ -15,6 +16,7 @@ const upload = multer({ dest: 'uploads/' });
 const router = Router();
 
 router.post(UrlsApi.CARDS.INDEX, upload.array('files'), createCard);
+router.get(UrlsApi.CARDS.ID, getCardById);
 router.delete(UrlsApi.CARDS.ID, deleteCard);
 router.patch(UrlsApi.CARDS.ID, updateCard);
 router.put(UrlsApi.CARDS.LIKES, likeCard);
