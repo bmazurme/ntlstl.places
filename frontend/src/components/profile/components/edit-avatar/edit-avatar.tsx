@@ -15,8 +15,7 @@ import { BASE_API_URL } from '../../../../utils/constants';
 
 import style from './edit-avatar.module.css';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FormPayload = { avatar: any; };
+type FormPayload = { avatar: File; };
 
 export default function EditAvatar({
   isLoading, info, updateUserAvatar,
@@ -66,7 +65,7 @@ export default function EditAvatar({
 
   return (
     <form className="form form_type_edit" onSubmit={onSubmit}>
-      <h2 className={style.title}>Update avatar</h2>
+      <h2 className="title">Update avatar</h2>
       {editor && (
         <div className={style.editor}>
           <AvatarEditor
@@ -89,7 +88,7 @@ export default function EditAvatar({
         <IconButton component={BiPlus} onClick={onClickScalePlus} />
         <IconButton component={BiMinus} onClick={onClickScaleMinus} />
       </div>
-      <Button className={style.submit} variant="filled">
+      <Button className="submit" variant="filled">
         {buttonText}
       </Button>
     </form>

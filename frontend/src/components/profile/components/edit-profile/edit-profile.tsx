@@ -5,8 +5,6 @@ import { useErrorHandler } from 'react-error-boundary';
 import Button from '../../../button';
 import InputField from '../../../input-field';
 
-import style from './edit-profile.module.css';
-
 type FormPayload = {
   name: string;
   about: string;
@@ -57,7 +55,7 @@ export default function EditProfile({ info, isLoading, onUpdateUser }
 
   return (
     <form className="form form_type_edit" onSubmit={onSubmit}>
-      <h2 className={style.title}>Update profile</h2>
+      <h2 className="title">Update profile</h2>
       {inputs.map((input) => (
         <Controller
           key={input.name}
@@ -77,7 +75,7 @@ export default function EditProfile({ info, isLoading, onUpdateUser }
           )}
         />
       ))}
-      <Button className={style.submit} variant="filled">
+      <Button className="submit" variant="filled">
         {buttonText}
       </Button>
     </form>

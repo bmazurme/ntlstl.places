@@ -5,12 +5,14 @@ import { useErrorHandler } from 'react-error-boundary';
 import Preloader from '../../components/preloader';
 
 import { useSignInWitOauthYaMutation } from '../../store/api';
+import { useAppLocation } from '../../hooks/use-app-location';
 
 import { Urls } from '../../utils/constants';
 
 import style from './oauth-layout.module.css';
 
 export default function Oauth() {
+  const location = useAppLocation();
   const navigate = useNavigate();
   const errorHandler = useErrorHandler();
   const [searchParams] = useSearchParams();
@@ -24,6 +26,7 @@ export default function Oauth() {
 
         if (data) {
           setTimeout(() => navigate(Urls.BASE), 1000);
+          navigate(location?.state?.from || Urls.BASE); // ref oauth to api
         }
       } catch (err) {
         errorHandler(err);

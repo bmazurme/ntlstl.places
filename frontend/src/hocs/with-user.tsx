@@ -6,6 +6,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import Preloader from '../components/preloader';
 
 import useUser from '../hooks/use-user';
+import { useAppLocation } from '../hooks/use-app-location';
 import { useGetUserMeMutation } from '../store';
 
 export default function withUser<P extends Record<string, unknown>>(
@@ -13,6 +14,7 @@ export default function withUser<P extends Record<string, unknown>>(
   shouldBeAuthorized = true,
 ) {
   return function WithUser(pageProps: P & { user?: User }) {
+    const location = useAppLocation();
     const handleErrors = useErrorHandler();
     let userData: User | null = useUser();
     const [getUser, {
@@ -46,6 +48,6 @@ export default function withUser<P extends Record<string, unknown>>(
       return <div>Something went wrong</div>;
     }
 
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin" state={{ from: location.pathname }} />;
   };
 }
