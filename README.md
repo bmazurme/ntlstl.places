@@ -14,6 +14,7 @@
 ![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
 ![Webpack](https://img.shields.io/badge/-Webpack-black?style=flat-square&logo=webpack)
 ![Jest](https://img.shields.io/badge/-Jest-black?style=flat-square&logo=jest)
+![Cypress](https://img.shields.io/badge/-Cypress-black?style=flat-square&logo=cypress)
 ![PostCSS](https://img.shields.io/badge/-PostCSS-black?style=flat-square&logo=postcss)
 ![PM2](https://img.shields.io/badge/-PM2-black?style=flat-square&logo=pm2)
 ![Docker](https://img.shields.io/badge/-Docker-black?style=flat-square&logo=docker)
@@ -112,6 +113,10 @@ $ sudo ufw enable
 $ sudo systemctl enable --now nginx
 
 $ sudo nano /etc/nginx/sites-available/default
+
+$ sudo nano /etc/nginx/sites-available/domain.com
+
+$ sudo ln -s /etc/nginx/sites-available/domain.com /etc/nginx/sites-enabled/domain.com
 
 $ sudo nginx -t
 
