@@ -5,9 +5,7 @@ import { Urls } from '../../../../utils/constants';
 
 import style from './profile-button.module.css';
 
-type ProfileProps = {
-  info: User | null;
-};
+type ProfileProps = { info: User | null; };
 
 export default function ProfileButton({ info }: ProfileProps) {
   const location = useLocation();

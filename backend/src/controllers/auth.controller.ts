@@ -17,20 +17,14 @@ export const getUserMe = async (req: unknown, res: Response, next: NextFunction)
   try {
     const user = await User.findOne({
       where: { email: (req as Request & { user: { default_email: string; } }).user.default_email },
-      // attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
     });
 
     if (!user) {
       return next(new NotFoundError('User not found'));
     }
 
-    return res.send({
-      email: user.email,
-      name: user.name,
-      about: user.about,
-      avatar: user.avatar,
-      id: user.id,
-    });
+    return res.send(user);
   } catch (err) {
     next(err);
   }

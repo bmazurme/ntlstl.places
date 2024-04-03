@@ -9,13 +9,6 @@ import { BASE_API_URL } from '../../../../utils/constants';
 
 import style from './avatar-button.module.css';
 
-type AvatarProps = {
-  popup: { avatar: boolean; place: boolean; };
-  setPopup: (p: { avatar: boolean; place: boolean; }) => void;
-  info: User | null;
-  currentUser: User | null;
-};
-
 export default function AvatarButton({
   info, popup, setPopup, currentUser,
 }: AvatarProps) {
@@ -35,21 +28,12 @@ export default function AvatarButton({
 
   return (
     <>
-      {currentUser?.id === info?.id
-        ? (
-          <div
-            className={style.ibutton}
-            style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
-            onClick={handleOpenEditAvatarPopup}
-            aria-hidden="true"
-          />
-        ) : (
-          <div
-            className={style.image}
-            style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
-            aria-hidden="true"
-          />
-        )}
+      <div
+        className={currentUser?.id === info?.id ? style.ibutton : style.image}
+        style={{ backgroundImage: `url(${BASE_API_URL}/files/avatar/${currentUser?.avatar})` }}
+        {...((currentUser?.id === info?.id) && { onClick: handleOpenEditAvatarPopup })}
+        aria-hidden="true"
+      />
 
       {popup.avatar
         && (

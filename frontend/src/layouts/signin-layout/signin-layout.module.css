@@ -21,7 +21,7 @@
 
 .form {
   composes: common;
-  min-height: 400px;
+  min-height: 60vh;
   max-width: 300px;
   width: 100%;
   margin: 20px;

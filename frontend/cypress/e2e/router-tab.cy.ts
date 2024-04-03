@@ -1,7 +1,7 @@
 describe('app works correctly with routes', () => {
   before(() => {
     cy.visit('/');
-    cy.viewport(1800, 1200);
+    cy.viewport(768, 1024);
   });
 
   it('main to 404 & signin', () => {

@@ -180,7 +180,7 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
 
 export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = await Card.findOne(
+    const card = await Card.findOne(
       {
         where: { id: req.params.id },
         include: [
@@ -197,7 +197,13 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
       },
     );
 
-    return res.status(200).send(cards);
+    console.log(card);
+
+    if (!card) {
+      return next(new NotFoundError('карточка не найдена'));
+    }
+
+    return res.status(200).send(card);
   } catch (err) {
     next(err);
   }

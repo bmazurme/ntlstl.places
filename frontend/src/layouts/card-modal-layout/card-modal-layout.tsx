@@ -1,19 +1,18 @@
-/* eslint-disable no-undef */
 import React, { useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Modal from '../../components/modal';
 import Slide from '../../components/slide';
 
 import { setCard } from '../../store';
 import { useAppDispatch } from '../../hooks';
+import { useAppLocation } from '../../hooks/use-app-location';
 
 import { Urls } from '../../utils/constants';
 
 export default function UserLayout() {
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { state }: any = useLocation();
+  const { state } = useAppLocation();
   const navigate = useNavigate();
 
   const handleClose = useCallback(() => {

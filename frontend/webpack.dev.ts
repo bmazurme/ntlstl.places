@@ -17,7 +17,7 @@ import common from './webpack.common';
 dotEnvConfig();
 
 const client = (env: { production?: boolean; }) => merge<Configuration & {devServer?: any}>(common, {
-  // devtool: 'inline-source-map',
+  devtool: 'inline-source-map',
   optimization: {
     minimize: false,
     minimizer: [
@@ -82,6 +82,12 @@ const client = (env: { production?: boolean; }) => merge<Configuration & {devSer
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              modules: {
+                mode: 'local',
+                auto: true,
+                exportGlobals: true,
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
             },
           },
           'postcss-loader',

@@ -9,5 +9,7 @@ describe('app works correctly with routes', () => {
     cy.get('#root')
       .should('have.css', 'background-color')
       .and('eq', 'rgba(0, 0, 0, 0)');
+
+    cy.getAllLocalStorage('ms-theme');
   });
 });
