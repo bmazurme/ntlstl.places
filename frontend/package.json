@@ -11,7 +11,9 @@
     "lint": "npx eslint ./src",
     "slint": "npx stylelint '**/*.css' --fix",
     "test": "jest",
-    "test:cyp": "./node_modules/.bin/cypress open"
+    "test:cyp": "cypress open",
+    "cy:run": "cypress run --browser chrome",
+    "tests": "npm run test & npm run cy:run"
   },
   "repository": {
     "type": "git",
