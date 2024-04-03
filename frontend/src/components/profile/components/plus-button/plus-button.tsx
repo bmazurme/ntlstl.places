@@ -1,17 +1,22 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
-import { BiPlus } from '../../../../utils/icons/bi';
 
 import Modal from '../../../modal';
 import AddCard from '../add-card';
+import MoreButton from '../../../more-button';
+import { BiPlus } from '../../../../utils/icons/bi';
 import { useAddCardMutation, useGetCardsByUserMutation } from '../../../../store';
 
 import style from './plus-button.module.css';
 
 type PlusProps = {
+  disabled?: boolean;
+  extraClass?: CSSImportRule;
   popup: { avatar: boolean; place: boolean; };
   setPopup: (p: { avatar: boolean; place: boolean; }) => void;
+
 };
 
 export default function PlusButton({ popup, setPopup }: PlusProps) {
@@ -36,14 +41,7 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
 
   return (
     <>
-      <button
-        aria-label="Add"
-        className={style.add}
-        type="button"
-        onClick={handleOpenAddPlacePopup}
-      >
-        <BiPlus size={38} />
-      </button>
+      <MoreButton children={BiPlus} handler={handleOpenAddPlacePopup} extraClass={style.button} />
       {popup.place
         && (
           <Modal
