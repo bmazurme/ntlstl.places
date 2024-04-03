@@ -30,3 +30,10 @@ type Card = {
   user: { name: string; };
   likes: { user_id: number; }[];
 };
+
+type AvatarProps = {
+  popup: { avatar: boolean; place: boolean; };
+  setPopup: (p: { avatar: boolean; place: boolean; }) => void;
+  info: User | null;
+  currentUser: User | null;
+};

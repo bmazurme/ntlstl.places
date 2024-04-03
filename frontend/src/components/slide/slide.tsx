@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
 import { useGetCardByIdMutation } from '../../store';
 
 import { MODAL_CONFIG } from '../../utils';
@@ -10,12 +12,22 @@ import style from './slide.module.css';
 
 export default function Slide() {
   const params = useParams();
+  const navigate = useNavigate();
   const [getCardById, { data: card }] = useGetCardByIdMutation();
 
-  useEffect(() => {
+  const getCard = async () => {
     if (params.id) {
-      getCardById(params.id);
+      const result = await getCardById(params.id);
+      const { error } = result as { error: FetchBaseQueryError | SerializedError; };
+
+      if (error && (error as FetchBaseQueryError & { status: number; }).status === 404) {
+        navigate('/not-found-page');
+      }
     }
+  };
+
+  useEffect(() => {
+    getCard();
   }, []);
 
   return (
