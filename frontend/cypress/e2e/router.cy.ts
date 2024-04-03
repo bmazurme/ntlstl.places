@@ -10,13 +10,11 @@ describe('app works correctly with routes', () => {
     cy.contains('Telegram');
     cy.contains('LinkedIn');
     cy.contains('Sign in');
-    cy.wait(1000);
 
     cy.visit('/404');
     cy.contains('404');
     cy.contains('Page not found');
     cy.contains('Home');
-    cy.wait(1000);
 
     cy.visit('/signin');
     cy.contains('Sign In');
