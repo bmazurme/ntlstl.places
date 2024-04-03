@@ -8,7 +8,5 @@
 }
 
 .link {
-  margin: 0;
-  padding: 0;
-  height: 282px;
+  display: flex;
 }
