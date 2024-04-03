@@ -1,20 +1,22 @@
 import React from 'react';
 import classNames from 'classnames';
+import { IconType } from 'utils/icons';
 import { BiChevronDown } from '../../utils/icons/bi';
 
 import style from './more-button.module.css';
 
-export default function MoreButton({ handler, disabled }
-  : { handler: () => void; disabled: boolean }) {
+export default function MoreButton({
+  handler, disabled, extraClass, children: Component,
+} : { handler: () => void; disabled?: boolean; extraClass?: CSSImportRule; children?: IconType}) {
   return (
     <button
       aria-label="Add"
-      className={classNames(style.button, { [style.disabled]: disabled })}
+      className={classNames(style.button, { [style.disabled]: disabled }, extraClass)}
       disabled={disabled}
       type="button"
       onClick={handler}
     >
-      <BiChevronDown size={36} />
+      {Component ? <Component size={36} /> : <BiChevronDown size={36} />}
     </button>
   );
 }
