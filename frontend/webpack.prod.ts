@@ -73,6 +73,7 @@ const client = (env: { production?: boolean; }) => merge<Configuration & { devSe
     new Dotenv({ path: env.production ? './.env.production' : './.env.development' }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
+      inject: true,
       template: './public/index.html',
       preconnect: [
         'https://api.places.ntlstl.dev',
