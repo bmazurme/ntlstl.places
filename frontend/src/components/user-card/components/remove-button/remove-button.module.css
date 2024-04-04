@@ -12,4 +12,10 @@
   background-color: rgb(0 0 0 / 0%);
   border: 0;
   color: #fff;
+  opacity: 0.8;
+  transition: opacity 0.5s ease;
+}
+
+.button:hover {
+  opacity: 1;
 }
