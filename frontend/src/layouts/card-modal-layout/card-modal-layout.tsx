@@ -10,7 +10,7 @@ import { useAppLocation } from '../../hooks/use-app-location';
 
 import { Urls } from '../../utils/constants';
 
-export default function UserLayout() {
+export default function CardModalLayout() {
   const dispatch = useAppDispatch();
   const { state } = useAppLocation();
   const navigate = useNavigate();
