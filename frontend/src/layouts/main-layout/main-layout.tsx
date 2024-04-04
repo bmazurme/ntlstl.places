@@ -10,9 +10,5 @@ import { useGetCardsQuery } from '../../store';
 export default function MainLayout() {
   const { isLoading: isLoadingCards } = useGetCardsQuery();
 
-  return (
-    <>
-      {isLoadingCards ? <Preloader /> : <Board children={<Cards />} />}
-    </>
-  );
+  return (<Board children={isLoadingCards ? <Preloader /> : <Cards />} />);
 }

@@ -10,7 +10,7 @@ import EditProfile from '../../components/profile/components/edit-profile';
 import { useUpdateUserMutation } from '../../store';
 import useUser from '../../hooks/use-user';
 
-export default function UserLayout() {
+export default function UserEditModalLayout() {
   const errorHandler = useErrorHandler();
   const user = useUser();
   const location = useLocation();

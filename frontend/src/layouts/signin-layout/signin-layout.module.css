@@ -1,28 +1,24 @@
-.common {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.layout {
-  composes: common;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
 .title {
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   text-align: center;
   color: var(--color);
-  margin: 60px auto 20px;
+  margin: 80px auto 20px;
+}
+
+.link {
+  margin-top: 100px;
+  margin-bottom: 60px;
+  padding: 0;
 }
 
 .form {
-  composes: common;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   min-height: 60vh;
-  max-width: 300px;
   width: 100%;
   margin: 20px;
   border-radius: 10px;

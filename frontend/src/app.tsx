@@ -10,6 +10,7 @@ import UserPage from './pages/user-page';
 import CardPage from './pages/card-page';
 import CardModalPage from './pages/card-modal-page';
 import UserEditModalPage from './pages/user-edit-modal-page';
+import InternalServerErrorPage from './pages/500';
 import NotFoundPage from './pages/404';
 
 import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
@@ -36,6 +37,7 @@ export default function App() {
           <Route path={Urls.TAGS.INDEX} element={(<TagsPage />)} />
           <Route path={Urls.USERS.INDEX} element={(<UsersPage />)} />
           <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
+          <Route path={Urls[500]} element={(<InternalServerErrorPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
         {background

@@ -7,5 +7,7 @@
 @import "./styles/form/form.css";
 @import "./styles/form/_identity/form_identity.css";
 
+@import "./styles/errors/errors.css";
+
 /* preloader */
 @import "./styles/preloader/preloader.css";
