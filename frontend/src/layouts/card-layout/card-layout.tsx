@@ -4,7 +4,7 @@ import Slide from '../../components/slide';
 
 import style from './card-layout.module.css';
 
-export default function UserLayout() {
+export default function CardLayout() {
   return (
     <div className={style.slide}>
       <Slide />
