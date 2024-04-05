@@ -13,7 +13,8 @@
     "test": "jest",
     "test:cyp": "cypress open",
     "cy:run": "cypress run --browser chrome",
-    "tests": "npm run test & npm run cy:run"
+    "tests": "npm run test & npm run cy:run",
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "eslint-webpack-plugin": "3.2.0",
     "html-webpack-plugin": "5.6.0",
     "html-webpack-preconnect-plugin": "1.2.1",
+    "husky": "9.0.11",
     "interpolate-html-plugin": "4.0.0",
     "jest": "29.7.0",
     "jest-fetch-mock": "3.0.3",
@@ -113,5 +115,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
   }
 }
