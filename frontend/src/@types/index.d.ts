@@ -23,12 +23,13 @@ type Like = {
 };
 
 type Card = {
-  id: string;
+  id: number;
   name: string;
   link: string;
-  user_id: number | null;
-  user: { name: string; };
-  likes: { user_id: number; }[];
+  userid: number;
+  count: number;
+  isliked: boolean | null;
+  username: string;
 };
 
 type AvatarProps = {
