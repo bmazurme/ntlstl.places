@@ -22,4 +22,7 @@ export const UrlsApi = {
     COVERS: '/files/covers/:filename',
     UPDATE: '/files',
   },
+  TAGS: {
+    INDEX: '/tags',
+  },
 };

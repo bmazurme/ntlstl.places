@@ -24,7 +24,7 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
 
   const onSubmit = async () => {
     try {
-      if (user?.id === card.user_id) {
+      if (user?.id === card.userid) {
         if (values.name !== '') {
           await updateCard({ name: values.name, id: card.id });
         } else {
@@ -42,7 +42,7 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
       <Image card={card} index={index} />
       <div className={style.group}>
         <form className={style.box}>
-          {user?.id === card.user_id
+          {user?.id === card.userid
             ? (
               <>
                 <label
@@ -56,7 +56,7 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
                   className={inputstyle.input}
                   type="text"
                   name="name"
-                  readOnly={user?.id !== card.user_id}
+                  readOnly={user?.id !== card.userid}
                   value={values.name}
                   onChange={handleChange}
                   onBlur={onSubmit}
@@ -64,8 +64,8 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
               </>
             )
             : <h2 className={style.name}>{card.name}</h2>}
-          <Link to={`${Urls.USERS.INDEX}/${card.user_id}`} className={style.user}>
-            {card.user.name}
+          <Link to={`${Urls.USERS.INDEX}/${card.userid}`} className={style.user}>
+            {card.username}
           </Link>
         </form>
         <LikeButton card={card} user={user} />
