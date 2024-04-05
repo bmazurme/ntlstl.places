@@ -18,13 +18,12 @@ export default function LikeButton({ user, card }: ILikeProps) {
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
   const [getCards] = useGetCardsByUserMutation();
-  const isLiked = card.likes.some(({ user_id }) => user_id === user?.id);
 
   const onCardLike = async (c: Card) => {
     try {
       await changeLike({
         cardId: c.id,
-        value: card.likes.some(({ user_id }) => user_id === user?.id),
+        value: c.isliked,
       });
 
       if (id) {
@@ -45,9 +44,9 @@ export default function LikeButton({ user, card }: ILikeProps) {
         name="button-like"
         disabled={!user}
       >
-        {isLiked ? <BiSolidHeart size={24} /> : <BiHeart size={24} />}
+        {card.isliked ? <BiSolidHeart size={24} /> : <BiHeart size={24} />}
       </button>
-      <p className={style.counter}>{card.likes.length}</p>
+      <p className={style.counter}>{card.count}</p>
     </div>
   );
 }
