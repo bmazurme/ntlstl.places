@@ -8,12 +8,13 @@ fetchMock.enableMocks();
 
 const initialState = {
   data: {
-    id: '0',
+    id: 0,
     name: 'name',
     link: 'link',
-    user_id: 0,
-    user: { name: 'string' },
-    likes: [{ user_id: 0 }],
+    userid: 0,
+    count: 1,
+    isliked: false,
+    username: 'string',
   },
 };
 
