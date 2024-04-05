@@ -5,6 +5,7 @@ import path from 'path';
 import sharp from 'sharp';
 import { v4 as uuidv4 } from 'uuid';
 
+import { QueryTypes } from 'sequelize';
 import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 
 import User from '../models/user.model';
@@ -127,22 +128,15 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
 export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = await Card.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-        {
-          model: Like,
-          attributes: ['user_id'],
-        },
-      ],
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-      order: [
-        ['createdAt', 'DESC'],
-      ],
-    });
+    const currentUser = (req as any).user.id;
+    const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM
+      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
+      FROM cards c
+      LEFT JOIN likes l ON c.id = l.card_id
+      GROUP BY c.id) t
+    LEFT JOIN users u ON t.user_id = u.id
+    ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
 
     return res.status(200).send(cards);
   } catch (err) {
@@ -152,25 +146,16 @@ export const getCards = async (req: Request, res: Response, next: NextFunction) 
 
 export const getCardsByUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const cards = await Card.findAll(
-      {
-        where: { user_id: req.params.id },
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-          },
-          {
-            model: Like,
-            attributes: ['user_id'],
-          },
-        ],
-        attributes: { exclude: ['createdAt', 'updatedAt'] },
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-      },
-    );
+    const currentUser = (req as Request & { user: User }).user.id;
+    const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM
+      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
+      FROM cards c
+      LEFT JOIN likes l ON c.id = l.card_id
+      WHERE c.user_id = ${req.params.id}
+      GROUP BY c.id) t
+    LEFT JOIN users u ON t.user_id = u.id
+    ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
 
     return res.status(200).send(cards);
   } catch (err) {
@@ -211,14 +196,14 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
 
 export const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const like = await Like.create(
+    const { id, card_id, user_id } = await Like.create(
       {
         card_id: Number(req.params.id),
         user_id: Number((req as Request & { user: User }).user.id),
       },
     );
 
-    return res.status(201).send(like);
+    return res.status(201).send({ id, card_id, user_id });
   } catch (error: unknown) {
     if ((error as Error).name === 'SequelizeForeignKeyConstraintError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));

@@ -35,5 +35,17 @@ html[ms-theme="dark"] {
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
   transition: background-color var(--transition-default);
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.root::-webkit-scrollbar {
+  width: 8px;
+}
+.root::-webkit-scrollbar-track {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+}
+.root::-webkit-scrollbar-thumb {
+  background-color: #a9a9a9;
+  border-radius: 4px;
 }

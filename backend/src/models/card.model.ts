@@ -8,12 +8,15 @@ import {
   DataType,
   HasMany,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { NonAttribute } from '@sequelize/core';
 import { Optional } from 'sequelize';
 
 import User from './user.model';
 import Like from './like.model';
+import Tag from './tag.model';
+import CardTag from './card-tag.model';
 
 interface CardAttributes {
   id: number;
@@ -50,4 +53,7 @@ export default class Card extends Model<CardAttributes, CardCreationAttributes> 
 
   @HasMany(() => Like)
   declare likes: Like[];
+
+  @BelongsToMany(() => Tag, { through: () => CardTag })
+  declare cardTags?: NonAttribute<Tag[]>;
 }

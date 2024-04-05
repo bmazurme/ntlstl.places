@@ -4,6 +4,8 @@ import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import User from './models/user.model';
 import Card from './models/card.model';
 import Like from './models/like.model';
+import Tag from './models/tag.model';
+import CardTag from './models/card-tag.model';
 
 dotEnvConfig({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -17,7 +19,7 @@ const sequelizeOptions: SequelizeOptions = {
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
-sequelize.addModels([User, Card, Like]);
+sequelize.addModels([User, Card, Like, Tag, CardTag]);
 
 const dbConnect = async () => {
   try {
