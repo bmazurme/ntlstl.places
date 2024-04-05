@@ -128,7 +128,7 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
 export const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const currentUser = (req as any).user.id;
+    const currentUser = (req as any).user?.id || -1;
     const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
     FROM
       (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
