@@ -18,8 +18,8 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
       <div className={style.group}>
         <div className={style.box}>
           <h2 className={style.name}>{card.name}</h2>
-          <Link to={`${Urls.USERS.INDEX}/${card.user_id}`} className={style.user}>
-            {card.user.name}
+          <Link to={`${Urls.USERS.INDEX}/${card.userid}`} className={style.user}>
+            {card.username}
           </Link>
         </div>
         <LikeButton card={card} user={user} />
