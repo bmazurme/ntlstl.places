@@ -12,6 +12,7 @@ env:
   NODE_ENV: production
   PORT: 4000
   IMAGE_NAME: cr.yandex/${{ secrets.CR_REGISTRY }}/${{ secrets.CR_REPOSITORY }}-frontend:latest
+  HOST: ${{ secrets.HOST }}
   API_HOST: ${{ secrets.API_HOST }}
   YA_ENDPOINT: ${{ secrets.YA_ENDPOINT }}
 
