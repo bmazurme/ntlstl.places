@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
-import { useGetCardByIdMutation } from '../../store';
+import classNames from 'classnames';
 
+import IconButton from '../icon-button';
+import { BiLogoTelegram } from '../../utils/icons/bi';
+
+import { useGetCardByIdMutation } from '../../store';
 import { MODAL_CONFIG } from '../../utils';
-import { BASE_API_URL } from '../../utils/constants';
+import { BASE_API_URL, BASE_HOST_URL } from '../../utils/constants';
 
 import style from './slide.module.css';
 
 export default function Slide() {
   const params = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
-  const [getCardById, { data: card }] = useGetCardByIdMutation();
+  const [getCardById, { data: card, isLoading }] = useGetCardByIdMutation();
+  console.log(BASE_HOST_URL);
 
   const getCard = async () => {
     if (params.id) {
@@ -24,6 +30,9 @@ export default function Slide() {
         navigate('/not-found-page');
       }
     }
+  };
+  const onShare = () => {
+    window.open(`https://telegram.me/share/url?url=${BASE_HOST_URL}${location.pathname}&text=${card?.name}`, '_blank', 'rel=noopener noreferrer');
   };
 
   useEffect(() => {
@@ -46,7 +55,10 @@ export default function Slide() {
           height="100%"
           width="100%"
         />
-        <p className={style.name}>{card?.name ?? ''}</p>
+        <div className={style.footer}>
+          <p className={classNames(style.name, { [style.loading]: isLoading })}>{card?.name ?? ''}</p>
+          <IconButton component={BiLogoTelegram} onClick={onShare} />
+        </div>
       </div>
     </AnimatePresence>
   );
