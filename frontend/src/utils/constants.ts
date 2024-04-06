@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 export const SHIFT = 30;
 export const Urls = {
   BASE: '/',
@@ -32,5 +33,4 @@ export const Regexp = {
 };
 export const BASE_API_URL = process.env.API_HOST;
 export const BASE_HOST_URL = process.env.HOST;
-// eslint-disable-next-line prefer-destructuring
 export const YA_ENDPOINT = process.env.YA_ENDPOINT;
