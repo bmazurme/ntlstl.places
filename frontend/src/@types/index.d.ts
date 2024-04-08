@@ -32,6 +32,11 @@ type Card = {
   username: string;
 };
 
+type Tag = {
+  id: number;
+  name: string;
+};
+
 type AvatarProps = {
   popup: { avatar: boolean; place: boolean; };
   setPopup: (p: { avatar: boolean; place: boolean; }) => void;
