@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link, useLocation, useNavigate, useParams,
+} from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { SerializedError } from '@reduxjs/toolkit';
@@ -10,7 +12,7 @@ import { BiLogoTelegram } from '../../utils/icons/bi';
 
 import { useGetCardByIdMutation } from '../../store';
 import { MODAL_CONFIG } from '../../utils';
-import { BASE_API_URL, BASE_HOST_URL } from '../../utils/constants';
+import { BASE_API_URL, BASE_HOST_URL, Urls } from '../../utils/constants';
 
 import style from './slide.module.css';
 
@@ -19,7 +21,6 @@ export default function Slide() {
   const location = useLocation();
   const navigate = useNavigate();
   const [getCardById, { data: card, isLoading }] = useGetCardByIdMutation();
-  console.log(BASE_HOST_URL);
 
   const getCard = async () => {
     if (params.id) {
@@ -39,6 +40,8 @@ export default function Slide() {
     getCard();
   }, []);
 
+  console.log(card);
+
   return (
     <AnimatePresence>
       <div className={style.slide}>
@@ -56,7 +59,12 @@ export default function Slide() {
           width="100%"
         />
         <div className={style.footer}>
-          <p className={classNames(style.name, { [style.loading]: isLoading })}>{card?.name ?? ''}</p>
+          <div className={style.info}>
+            <p className={classNames(style.name, { [style.loading]: isLoading })}>{card?.name ?? ''}</p>
+            <Link to={`${Urls.USERS.INDEX}/${card?.userid}`} className={style.user}>
+              {card?.username}
+            </Link>
+          </div>
           <IconButton component={BiLogoTelegram} onClick={onShare} />
         </div>
       </div>
