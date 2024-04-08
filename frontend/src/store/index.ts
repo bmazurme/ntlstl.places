@@ -9,6 +9,7 @@ import {
   userApi,
   cardsApi,
   filesApi,
+  tagsApi,
 } from './api';
 import userReducer from './slices/user-slice';
 import usersReducer from './slices/users-slice';
@@ -23,6 +24,7 @@ export * from './api/auth-api/endpoints';
 export * from './api/user-api/endpoints';
 export * from './api/card-api/endpoints';
 export * from './api/file-api/endpoints';
+export * from './api/tag-api/endpoints';
 export * from './slices';
 
 // global redeclared types
@@ -51,6 +53,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [cardsApi.reducerPath]: cardsApi.reducer,
     [filesApi.reducerPath]: filesApi.reducer,
+    [tagsApi.reducerPath]: tagsApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -60,6 +63,7 @@ export const store = configureStore({
       userApi.middleware,
       cardsApi.middleware,
       filesApi.middleware,
+      tagsApi.middleware,
       routerMiddleware,
     ),
 });
