@@ -10,6 +10,7 @@ export const Urls = {
   },
   TAGS: {
     INDEX: '/tags',
+    CURRENT: '/tags/:id',
   },
   USERS: {
     INDEX: '/users',

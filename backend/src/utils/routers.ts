@@ -15,6 +15,7 @@ export const UrlsApi = {
     LIKES: '/cards/:id/likes',
     LIKES_ID: '/cards/likes/:id',
     USER: '/cards/user/:id',
+    TAG: '/cards/tag/:id',
   },
   FILES: {
     INDEX: '/files/:filename',

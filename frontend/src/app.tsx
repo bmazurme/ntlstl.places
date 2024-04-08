@@ -12,6 +12,7 @@ const MainPage = lazy(() => import('./pages/main-page'));
 const SignInPage = lazy(() => import('./pages/signin-page'));
 const OauthPage = lazy(() => import('./pages/oauth-page'));
 const TagsPage = lazy(() => import('./pages/tags-page'));
+const TagPage = lazy(() => import('./pages/tag-page'));
 const UserPage = lazy(() => import('./pages/user-page'));
 const UsersPage = lazy(() => import('./pages/users-page'));
 const CardPage = lazy(() => import('./pages/card-page'));
@@ -35,6 +36,7 @@ export default function App() {
             <Route path={Urls.SIGNIN} element={(<SignInPage />)} />
             <Route path={Urls.OAUTH.INDEX} element={(<OauthPage />)} />
             <Route path={Urls.TAGS.INDEX} element={(<TagsPage />)} />
+            <Route path={Urls.TAGS.CURRENT} element={(<TagPage />)} />
             <Route path={Urls.USERS.INDEX} element={(<UsersPage />)} />
             <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
             <Route path={Urls[500]} element={(<InternalServerErrorPage />)} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import Card from '../user-card';
@@ -6,8 +6,7 @@ import MoreButton from '../more-button';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  userCardsSelector, userCurrentSelector,
-  setUserCurrent, setUserCards, useGetCardsByUserMutation,
+  userCardsSelector, userCurrentSelector, setUserCurrent, useGetCardsByUserQuery,
 } from '../../store';
 
 import { SHIFT } from '../../utils/constants';
@@ -19,15 +18,10 @@ export default function UserCards() {
   const dispatch = useAppDispatch();
   const cards = useAppSelector(userCardsSelector);
   const current = useAppSelector(userCurrentSelector);
-  const [getCards, { data = [] }] = useGetCardsByUserMutation();
+  useGetCardsByUserQuery(id!);
   const onMore = () => {
     dispatch(setUserCurrent([...current, ...cards.slice(current.length, current.length + SHIFT)]));
   };
-
-  useEffect(() => {
-    getCards(id!);
-    dispatch(setUserCards(data));
-  }, [id]);
 
   return (
     <>

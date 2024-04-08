@@ -146,7 +146,7 @@ export const getCards = async (req: Request, res: Response, next: NextFunction) 
 
 export const getCardsByUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const currentUser = (req as Request & { user: User }).user.id;
+    const currentUser = (req as Request & { user: User }).user.id || -1;
     const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
     FROM
       (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
@@ -163,32 +163,62 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
+export const getCardsByTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findOne(
-      {
-        where: { id: req.params.id },
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-          },
-          {
-            model: Like,
-            attributes: ['user_id'],
-          },
-        ],
-        attributes: { exclude: ['createdAt', 'updatedAt'] },
-      },
-    );
+    const currentUser = (req as Request & { user: User }).user.id;
+    const cards = await Card.sequelize?.query(`SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname FROM
+    (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tag, tags.name tagsname FROM
+      (SELECT t.id, t.name, t.link, t.user_id, t.count::int, t.liked, u.name userName, tg.id tag FROM
+        (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as liked
+        FROM cards c
+        LEFT JOIN likes l ON c.id = l.card_id
+        GROUP BY c.id) t
+      LEFT JOIN users u ON t.user_id = u.id
+      LEFT JOIN "cardTags" tg ON t.id = tg."cardId") tt
+      LEFT JOIN tags ON tt.tag = tags.id) rslt
+      WHERE tagsname = '${req.params.id}'
+    ORDER BY rslt.id DESC`, { type: QueryTypes.SELECT });
 
-    console.log(card);
+    return res.status(200).send(cards);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
+  const currentUser = (req as Request & { user: User }).user.id;
+  try {
+    const card = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM
+      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
+      FROM cards c
+      LEFT JOIN likes l ON c.id = l.card_id
+      WHERE c.id = ${req.params.id}
+      GROUP BY c.id) t
+    LEFT JOIN users u ON t.user_id = u.id
+    ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
+    // const card = await Card.findOne(
+    //   {
+    //     where: { id: req.params.id },
+    //     include: [
+    //       {
+    //         model: User,
+    //         attributes: ['name'],
+    //       },
+    //       {
+    //         model: Like,
+    //         attributes: ['user_id'],
+    //       },
+    //     ],
+    //     attributes: { exclude: ['createdAt', 'updatedAt'] },
+    //   },
+    // );
 
     if (!card) {
       return next(new NotFoundError('карточка не найдена'));
     }
 
-    return res.status(200).send(card);
+    return res.status(200).send(...card);
   } catch (err) {
     next(err);
   }
