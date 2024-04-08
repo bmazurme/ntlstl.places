@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { BiSolidHeart, BiHeart } from '../../utils/icons/bi';
@@ -18,6 +18,7 @@ export default function LikeButton({ user, card }: ILikeProps) {
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
   const [getCards] = useGetCardsByUserMutation();
+  const location = useLocation();
 
   const onCardLike = async (c: Card) => {
     try {
@@ -26,8 +27,10 @@ export default function LikeButton({ user, card }: ILikeProps) {
         value: c.isliked,
       });
 
-      if (id) {
+      if (id && location.pathname.includes('users')) { // ref -> shared endpoint
         await getCards(id);
+      } else if (id && location.pathname.includes('tags')) {
+        console.log('tags');
       }
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
