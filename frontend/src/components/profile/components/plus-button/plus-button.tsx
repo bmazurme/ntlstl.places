@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
 import Modal from '../../../modal';
 import AddCard from '../add-card';
 import MoreButton from '../../../more-button';
 import { BiPlus } from '../../../../utils/icons/bi';
-import { useAddCardMutation, useGetCardsByUserMutation } from '../../../../store';
+import { useAddCardMutation } from '../../../../store';
 
 import style from './plus-button.module.css';
 
@@ -20,8 +19,6 @@ type PlusProps = {
 };
 
 export default function PlusButton({ popup, setPopup }: PlusProps) {
-  const { id } = useParams();
-  const [getCards] = useGetCardsByUserMutation();
   const errorHandler = useErrorHandler();
   const [addCard, { isLoading: isLoadingCard }] = useAddCardMutation();
   const handleOpenAddPlacePopup = () => setPopup({ ...popup, place: true });
@@ -30,10 +27,6 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
     try {
       await addCard(data);
       handleCloseAllPopups();
-
-      if (id) {
-        await getCards(id);
-      }
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
