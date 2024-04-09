@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { cardsApiEndpoints } from '../api/card-api/endpoints';
+// import { cardsApiEndpoints } from '../api/card-api/endpoints';
 
 import type { RootState } from '..';
 
-import { SHIFT } from '../../utils/constants';
+// import { SHIFT } from '../../utils/constants';
 
 export type CurrentState = {
   data: Card[],
@@ -24,33 +24,7 @@ const slice = createSlice({
       { payload: data }: PayloadAction<Card[]>,
     ) => ({ ...state, data }),
   },
-  extraReducers: (builder) => {
-    builder
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCards.matchFulfilled,
-        (state, action) => ({ ...state, data: action.payload.slice(0, SHIFT) }),
-      )
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCards.matchRejected,
-        (state, action) => {
-          if (action.error.name !== 'ConditionError') {
-            console.log('rejected', action);
-          }
-        },
-      )
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCardsByTag.matchFulfilled,
-        (state, action) => ({ ...state, data: action.payload }),
-      )
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCardsByTag.matchRejected,
-        (state, action) => {
-          if (action.error.name !== 'ConditionError') {
-            console.log('rejected', action);
-          }
-        },
-      );
-  },
+  // extraReducers: (builder) => {},
 });
 
 export const { setCurrent } = slice.actions;

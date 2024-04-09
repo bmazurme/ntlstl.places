@@ -11,7 +11,7 @@ const cardsApiEndpoints = cardsApi
           url: '/cards',
           method: 'GET',
         }),
-        providesTags: ['Cards'],
+        // providesTags: ['Cards'],
       }),
       getCardsByTag: builder.query<Card[], string>({
         query: (tag) => ({
@@ -39,7 +39,7 @@ const cardsApiEndpoints = cardsApi
           url: `/cards/${cardId}`,
           method: 'GET',
         }),
-        invalidatesTags: ['Cards'],
+        // invalidatesTags: ['Cards'],
       }),
       addCard: builder.mutation({
         query: (data) => ({

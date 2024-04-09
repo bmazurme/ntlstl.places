@@ -136,7 +136,8 @@ export const getCards = async (req: Request, res: Response, next: NextFunction) 
       LEFT JOIN likes l ON c.id = l.card_id
       GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
-    ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
+    ORDER BY t.id DESC
+    LIMIT 3`, { type: QueryTypes.SELECT });
 
     return res.status(200).send(cards);
   } catch (err) {
@@ -256,7 +257,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
       return next(new NotFoundError('card was not found'));
     }
 
-    return res.sendStatus(200);
+    return res.status(200).send({ disId: Number(req.params.id) });
   } catch (error) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
