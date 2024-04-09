@@ -40,8 +40,6 @@ export default function Slide() {
     getCard();
   }, []);
 
-  console.log(card);
-
   return (
     <AnimatePresence>
       <div className={style.slide}>
