@@ -1,29 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import Card from '../card';
-// import MoreButton from '../more-button';
+import CardLoader from '../card-loader';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  cardsSelector, setCards, useGetCardByIdMutation, // currentSelector,
-} from '../../store';
-
-// import { SHIFT } from '../../utils/constants';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { cardsSelector, setCards, useGetCardsByPageMutation } from '../../store';
 
 import style from './cards.module.css';
 
 export default function Cards() {
+  const params = useParams();
   const dispatch = useAppDispatch();
   const cards = useAppSelector(cardsSelector);
-  // const current = useAppSelector(currentSelector);
-  const [getCards] = useGetCardByIdMutation();
-  const [nextPageUrl, setNextPageUrl] = useState<any>(300);
+  const [getCards, { isLoading }] = useGetCardsByPageMutation();
+  const [nextPageUrl, setNextPageUrl] = useState<number | null>(1);
   const [fetching, setFetching] = useState(false);
-
-  useEffect(() => {
-    dispatch(setCards([...cards]));
-  }, []);
 
   const fetchItems = useCallback(
     async () => {
@@ -32,48 +26,30 @@ export default function Cards() {
       }
 
       setFetching(true);
+      const { data } = await getCards(`${nextPageUrl}`) as any;
 
-      try {
-        const { data } = await getCards(nextPageUrl) as { data: Card };
-
-        if (data) {
-          // dispatch(setCards([...cards, data]));
-        }
-
-        if (data?.id) {
-          setNextPageUrl(nextPageUrl + 1);
-        } else {
-          setNextPageUrl(null);
-        }
-      } finally {
-        setFetching(false);
-      }
+      setNextPageUrl(data && data.length > 0 && nextPageUrl ? nextPageUrl + 1 : null);
+      setFetching(false);
     },
-    [cards, fetching, nextPageUrl],
+    [isLoading, nextPageUrl, cards],
   );
 
   const hasMoreItems = !!nextPageUrl;
 
-  const loader = (
-    <div key="loader" className="loader">
-      Loading ...
-    </div>
-  );
-  // const dispatch = useAppDispatch();
-  // const cards = useAppSelector(cardsSelector);
-  // const current = useAppSelector(currentSelector);
-  // const onMore = () => {
-  //   dispatch(setCurrent([...current, ...cards.slice(current.length, current.length + SHIFT)]));
-  // };
+  useEffect(() => {
+    dispatch(setCards([]));
+    setNextPageUrl(1);
+  }, [params.id]);
 
   return (
     <InfiniteScroll
+      pageStart={1}
       loadMore={fetchItems}
       hasMore={hasMoreItems}
-      loader={loader}
+      loader={<CardLoader key="loader" />}
     >
       <section className={style.cards}>
-        {cards.map((card: Card, i: number) => (<Card key={card?.id} card={card} index={i} />))}
+        {cards.map((card, i) => (<Card key={card?.id} card={card} index={i} />))}
       </section>
     </InfiniteScroll>
   );
