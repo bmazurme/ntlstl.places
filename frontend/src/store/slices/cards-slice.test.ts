@@ -22,7 +22,7 @@ const initialState = {
 describe('cards', () => {
   it('...', async () => {
     const action = {
-      type: cardsApiEndpoints.endpoints.getCards.matchFulfilled,
+      type: cardsApiEndpoints.endpoints.getCardsByPage.matchFulfilled,
       payload: {},
     };
     expect(reducer(initialState, action)).toEqual(initialState);
