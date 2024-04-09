@@ -4,13 +4,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { cardsApiEndpoints } from '../api/card-api/endpoints';
 import type { RootState } from '..';
 
-export type CardsState = {
-  data: Card[],
-};
-
-export const initialStateCards: CardsState = {
-  data: [],
-};
+export type CardsState = { data: Card[] };
+export const initialStateCards: CardsState = { data: [] };
 
 const slice = createSlice({
   name: 'cards',
@@ -20,58 +15,82 @@ const slice = createSlice({
       state,
       { payload: data }: PayloadAction<Card[]>,
     ) => ({ ...state, data }),
-    setLike: (
-      state,
-      { payload }: PayloadAction<{ data: { id?: number, disId?: number } }>,
-    ) => ({
-      ...state,
-      data: state.data.map((x) => {
-        if (Number(payload.data?.disId) === x.id) {
-          console.log(1, payload.data?.id, payload.data?.disId, x.id);
-          return { ...x, isliked: false, count: x.count - 1 };
-        } if (Number(payload.data?.id) === x.id) {
-          console.log(2, payload.data?.id, payload.data?.disId, x.id);
-          return { ...x, isliked: true, count: x.count + 1 };
-        }
-        console.log(3);
-        return x;
-      }),
-    }),
   },
   extraReducers: (builder) => {
     builder
-      // .addMatcher(
-      //   cardsApiEndpoints.endpoints.getCards.matchFulfilled,
-      //   (state, action) => ({ ...state, data: action.payload }),
-      // )
-      // .addMatcher(
-      //   cardsApiEndpoints.endpoints.getCards.matchRejected,
-      //   (state, action) => {
-      //     if (action.error.name !== 'ConditionError') {
-      //       console.log('rejected', action);
-      //     }
-      //   },
-      // )
       .addMatcher(
-        cardsApiEndpoints.endpoints.getCardById.matchFulfilled,
-        (state, action) => ({ ...state, data: [...state.data, action.payload].filter((x) => x) }),
+        cardsApiEndpoints.endpoints.getCardsByPage.matchFulfilled,
+        (state, action) => ({ ...state, data: [...state.data, ...action.payload] }),
       )
-      // .addMatcher(
-      //   cardsApiEndpoints.endpoints.changeLike.matchFulfilled,
-      //   (state, action) => ({
-      //     ...state,
-      //     data: state.data.map((c) => {
-      //       console.log(state.data);
-      //       if (c.id === action.payload?.disId) {
-      //         return { ...c, isliked: false, count: c.count - 1 };
-      //       } if (c.id === action.payload?.id) {
-      //         return { ...c, isliked: true, count: c.count + 1 };
-      //       }
+      .addMatcher(
+        cardsApiEndpoints.endpoints.getCardsByPage.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.getCardsByUser.matchFulfilled,
+        (state, action) => ({ ...state, data: [...state.data, ...action.payload] }),
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.getCardsByUser.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.deleteCard.matchFulfilled,
+        (state, action) => {
+          console.log(action);
+          return {
+            ...state,
+            data: state.data.filter((c) => c.id !== Number(action.payload.id)),
+          };
+        },
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.deleteCard.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.addCard.matchFulfilled,
+        (state, action) => ({
+          ...state,
+          data: [action.payload, ...state.data],
+        }),
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.addCard.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
 
-      //       return c;
-      //     }),
-      //   }),
-      // )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.changeLike.matchFulfilled,
+        (state, action) => ({
+          ...state,
+          data: state.data.map((c) => (c.id === action.payload.id ? action.payload : c)),
+        }),
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.changeLike.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
       .addMatcher(
         cardsApiEndpoints.endpoints.getCardsByTag.matchFulfilled,
         (state, action) => ({ ...state, data: action.payload }),
@@ -88,5 +107,5 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setCards, setLike } = slice.actions;
+export const { setCards } = slice.actions;
 export const cardsSelector = (state: RootState) => state.cards.data;
