@@ -3,8 +3,7 @@ import classNames from 'classnames';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { BiSolidHeart, BiHeart } from '../../utils/icons/bi';
-import { useChangeLikeMutation, setLike } from '../../store';
-import { useAppDispatch } from '../../hooks';
+import { useChangeLikeMutation } from '../../store';
 
 import style from './like-button.module.css';
 
@@ -14,17 +13,12 @@ interface ILikeProps {
 }
 
 export default function LikeButton({ user, card }: ILikeProps) {
-  const dispatch = useAppDispatch();
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
 
-  const onCardLike = async (c: Card) => {
+  const onCardLike = async ({ id: cardId, isliked: value }: Card) => {
     try {
-      const res: any = await changeLike({
-        cardId: c.id,
-        value: c.isliked,
-      });
-      dispatch(setLike(res));
+      await changeLike({ cardId, value });
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
