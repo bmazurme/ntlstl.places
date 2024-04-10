@@ -112,7 +112,7 @@ const client = (env: { production?: boolean; }) => merge<Configuration & { devSe
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader, {
             loader: 'css-loader',
