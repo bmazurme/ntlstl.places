@@ -26,7 +26,7 @@ export default function Profile({ currentUser }: { currentUser: User; }) {
       <div className={style.info}>
         <h2 className={style.name}>{currentUser?.name}</h2>
         <p className={style.profession}>{currentUser?.about}</p>
-        <p className={style.count}>{`Posts: ${data?.count}`}</p>
+        <p className={style.count}>{`Cards: ${data?.count}`}</p>
         {currentUser?.id === user?.id && <ProfileButton info={currentUser} />}
       </div>
       {(user?.id === 1 || user?.id === 2) && <PlusButton popup={popup} setPopup={setPopup} />}
