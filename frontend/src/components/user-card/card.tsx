@@ -19,8 +19,8 @@ import inputstyle from './card.module.css';
 export default function Card({ card, index }: { card: Card; index: number; }) {
   const user = useUser();
   const errorHandler = useErrorHandler();
-  const { values, handleChange, resetForm } = useFormWithValidation({ name: card.name });
   const [updateCard] = useUpdateCardMutation();
+  const { values, handleChange, resetForm } = useFormWithValidation({ name: card.name });
 
   const onSubmit = async () => {
     try {

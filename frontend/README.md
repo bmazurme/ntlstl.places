@@ -26,19 +26,19 @@
 - [X] docker-compose -> shared
 - [X] fix update libs
 - [X] fix icon, static
-- [ ] fix style-lint config
+- [X] fix style-lint config
 - [ ] fix links (color)
 - [ ] fix footer for mobile mode
 - [ ] fix main-page (custom cards, ads-card)
 - [X] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
 - [ ] fix upload form image for card (crop, rotate, scale) - lib AvatarEditor
 - [ ] fix atatar component (add preloader)
-- [ ] fix oauth page (wigth, color-scheme)
+- [X] fix oauth page (wigth, color-scheme)
 - [ ] fix profile style
 - [ ] fix slide style, effect, edit mode, edit template / grid
-- [ ] fix slide-image preloader
+- [X] fix slide-image preloader
 - [X] fix edit-profile form
-- [ ] fix routing (to slide, to auth)
+- [X] fix routing (to slide, to auth)
 - [ ] fix routing slide (open card page by id & open slide by click) 
 - [ ] fix mobile, tab modes
 - [ ] fix paginator, carousel

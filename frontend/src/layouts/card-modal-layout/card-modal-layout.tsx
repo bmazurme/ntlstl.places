@@ -12,15 +12,13 @@ import { Urls } from '../../utils/constants';
 
 export default function CardModalLayout() {
   const dispatch = useAppDispatch();
-  const { state } = useAppLocation();
   const navigate = useNavigate();
+  const { state } = useAppLocation();
 
   const handleClose = useCallback(() => {
     navigate(state?.from || Urls.BASE);
     dispatch(setCard(null));
   }, [state, navigate]);
 
-  return (
-    <Modal children={<Slide />} onClose={handleClose} />
-  );
+  return (<Modal children={<Slide />} onClose={handleClose} />);
 }

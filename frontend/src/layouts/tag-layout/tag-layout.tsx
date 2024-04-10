@@ -1,17 +1,17 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Board from '../../components/board';
 import Cards from '../../components/cards';
 
+import { cardsSelector, useGetCardsByTagMutation, setCards } from '../../store';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { cardsSelector, setCards, useGetCardsByPageMutation } from '../../store';
 
-export default function MainLayout() {
+export default function TagLayout() {
   const params = useParams();
   const dispatch = useAppDispatch();
   const cards = useAppSelector(cardsSelector);
-  const [getCards, { isLoading }] = useGetCardsByPageMutation();
+  const [getCards, { isLoading }] = useGetCardsByTagMutation();
   const [nextPageUrl, setNextPageUrl] = useState<number | null>(1);
   const [fetching, setFetching] = useState(false);
 
@@ -22,7 +22,10 @@ export default function MainLayout() {
       }
 
       setFetching(true);
-      const { data } = await getCards(`${nextPageUrl}`) as unknown as { data: Card[] };
+      const { data } = await getCards({
+        tagName: params.id!,
+        pageId: nextPageUrl!,
+      }) as unknown as { data: Card[] };
 
       setNextPageUrl(data && data.length > 0 && nextPageUrl ? nextPageUrl + 1 : null);
       setFetching(false);
@@ -46,6 +49,7 @@ export default function MainLayout() {
           cards={cards}
         />
       )}
+      title={params.id}
     />
   );
 }

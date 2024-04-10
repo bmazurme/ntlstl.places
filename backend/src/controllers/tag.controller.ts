@@ -38,7 +38,7 @@ export const bindCardAndTag = async (req: Request, res: Response, next: NextFunc
 
 export const getTags = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const tags = await Tag.findAll();
+    const tags = await Tag.findAll({ attributes: { exclude: ['createdAt', 'updatedAt'] } });
 
     return res.status(201).send(tags);
   } catch (error: unknown) {

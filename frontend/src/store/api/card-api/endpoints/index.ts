@@ -6,16 +6,23 @@ const cardsApiEndpoints = cardsApi
   })
   .injectEndpoints({
     endpoints: (builder) => ({
-      getCards: builder.query<Card[], void>({
-        query: () => ({
-          url: '/cards',
+      getCardsCount: builder.query<{ count: number }, string>({
+        query: (userId) => ({
+          url: `/cards/count/${userId}`,
           method: 'GET',
         }),
         providesTags: ['Cards'],
       }),
-      getCardsByUser: builder.mutation<Card[], string>({
-        query: (id) => ({
-          url: `/cards/user/${id}`,
+      getCardsByTag: builder.mutation<Card[], { tagName: string; pageId: number; }>({
+        query: ({ tagName, pageId }) => ({
+          url: `/cards/tag/${tagName}/page/${pageId}`,
+          method: 'GET',
+        }),
+        invalidatesTags: ['Cards'],
+      }),
+      getCardsByUser: builder.mutation<Card[], { userId: number; pageId: number; }>({
+        query: ({ userId, pageId }) => ({
+          url: `/cards/user/${userId}/page/${pageId}`,
           method: 'GET',
         }),
         invalidatesTags: ['Cards'],
@@ -24,6 +31,13 @@ const cardsApiEndpoints = cardsApi
         query: (cardId) => ({
           url: `/cards/${cardId}`,
           method: 'PATCH',
+        }),
+        invalidatesTags: ['Cards'],
+      }),
+      getCardsByPage: builder.mutation<Card[], string>({
+        query: (cardId) => ({
+          url: `/cards/page/${cardId}`,
+          method: 'GET',
         }),
         invalidatesTags: ['Cards'],
       }),
@@ -75,7 +89,7 @@ const cardsApiEndpoints = cardsApi
   });
 
 export const {
-  useGetCardsQuery,
+  useGetCardsByTagMutation,
   useGetCardsByUserMutation,
   useGetCardMutation,
   useDeleteCardMutation,
@@ -84,5 +98,7 @@ export const {
   useGetLikesQuery,
   useUpdateCardMutation,
   useGetCardByIdMutation,
+  useGetCardsByPageMutation,
+  useGetCardsCountQuery,
 } = cardsApiEndpoints;
 export { cardsApiEndpoints };
