@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server",
-    "build": "webpack --mode production --env production --config webpack.prod.ts",
+    "build": "npm run clear && webpack --mode production --env production --config webpack.prod.ts",
     "dev": "webpack serve --mode development --open --hot --env development --config webpack.dev.ts",
     "clear": "rm -rf build/",
     "lint": "npx eslint ./src",
