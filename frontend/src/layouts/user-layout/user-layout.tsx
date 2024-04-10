@@ -15,8 +15,8 @@ export default function UserLayout() {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { data: user, error } = useGetUserByIdQuery(params.id!);
   const cards = useAppSelector(cardsSelector);
+  const { data: user, error } = useGetUserByIdQuery(params.id!);
   const [getCards, { isLoading }] = useGetCardsByUserMutation();
   const [nextPageUrl, setNextPageUrl] = useState<number | null>(1);
   const [fetching, setFetching] = useState(false);
