@@ -7,7 +7,7 @@ import style from './more-button.module.css';
 
 export default function MoreButton({
   handler, disabled, extraClass, children: Component,
-} : { handler: () => void; disabled?: boolean; extraClass?: CSSImportRule; children?: IconType}) {
+} : { handler: () => void; disabled?: boolean; extraClass?: CSSImportRule; children?: IconType; }) {
   return (
     <button
       aria-label="Add"
