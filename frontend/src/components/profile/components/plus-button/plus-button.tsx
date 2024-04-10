@@ -15,7 +15,6 @@ type PlusProps = {
   extraClass?: CSSImportRule;
   popup: { avatar: boolean; place: boolean; };
   setPopup: (p: { avatar: boolean; place: boolean; }) => void;
-
 };
 
 export default function PlusButton({ popup, setPopup }: PlusProps) {
