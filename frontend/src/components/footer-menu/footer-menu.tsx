@@ -17,7 +17,7 @@ export type TypeLink = {
   icon: IconType;
 };
 
-export default function FooterMenu({ links }: { links: TypeLink[] }) {
+export default function FooterMenu({ links }: { links: TypeLink[]; }) {
   return (
     <ul className={style.items}>
       {links.map(({ url, label, icon: Component }) => (
