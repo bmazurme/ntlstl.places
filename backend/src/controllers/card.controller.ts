@@ -75,7 +75,13 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
 
 export const deleteCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const card = await Card.findOne({ where: { id: req.params.id } });
+    const { id } = req.params;
+
+    if (Number.isNaN(+id)) {
+      return next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    const card = await Card.findOne({ where: { id } });
 
     if (!card) {
       return new NotFoundError('карточка не найдена');
@@ -134,28 +140,15 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-// export const getCards = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const currentUser = (req as any).user?.id || -1;
-//     const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-//     FROM
-//       (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-//       FROM cards c
-//       LEFT JOIN likes l ON c.id = l.card_id
-//       GROUP BY c.id) t
-//     LEFT JOIN users u ON t.user_id = u.id
-//     ORDER BY t.id DESC
-//     LIMIT 3`, { type: QueryTypes.SELECT });
-
-//     return res.status(200).send(cards);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 export const getCardsByPage = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+
+  if (Number.isNaN(+id)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
+
   try {
-    const page = ((req as any).params.id - 1) * 3 || 0;
+    const page = (Number(id) - 1) * 3 || 0;
     const currentUser = (req as any).user?.id || -1;
     const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
     FROM
@@ -175,9 +168,14 @@ export const getCardsByPage = async (req: Request, res: Response, next: NextFunc
 };
 
 export const getCardsByUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { userId, pageId } = req.params;
+
+  if (Number.isNaN(+userId) || Number.isNaN(+pageId)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
+
   try {
-    const page = ((req as any).params.pageId - 1) * 3 || 0;
-    const { userId } = req.params;
+    const page = (Number(pageId) - 1) * 3;
     const currentUser = (req as Request & { user: User }).user.id || -1;
     const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
     FROM
@@ -198,9 +196,14 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
 };
 
 export const getCardsByTag = async (req: Request, res: Response, next: NextFunction) => {
+  const { tagName, pageId } = req.params;
+
+  if (!tagName || Number.isNaN(+pageId)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
+
   try {
-    const page = ((req as any).params.pageId - 1) * 3 || 0;
-    const { tagName } = req.params;
+    const page = (Number(pageId) - 1) * 3;
     const currentUser = (req as Request & { user: User }).user.id;
     const cards = await Card.sequelize?.query(`SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname FROM
     (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tag, tags.name tagsname FROM
@@ -225,6 +228,12 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
 
 export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
   const currentUser = (req as Request & { user: User }).user.id;
+  const { id } = req.params;
+
+  if (Number.isNaN(+id)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
+
   try {
     const card = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
     FROM
@@ -235,24 +244,8 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
       GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
-    // const card = await Card.findOne(
-    //   {
-    //     where: { id: req.params.id },
-    //     include: [
-    //       {
-    //         model: User,
-    //         attributes: ['name'],
-    //       },
-    //       {
-    //         model: Like,
-    //         attributes: ['user_id'],
-    //       },
-    //     ],
-    //     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    //   },
-    // );
 
-    if (!card) {
+    if (!card || !card[0]) {
       return next(new NotFoundError('карточка не найдена'));
     }
 
@@ -264,11 +257,16 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
 
 export const likeCard = async (req: Request, res: Response, next: NextFunction) => {
   const currentUser = (req as Request & { user: User }).user.id;
+  const { id } = req.params;
+
+  if (Number.isNaN(+id)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
 
   try {
     const { card_id } = await Like.create(
       {
-        card_id: Number(req.params.id),
+        card_id: Number(id),
         user_id: Number((req as Request & { user: User }).user.id),
       },
     );
@@ -299,10 +297,16 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
 
 export const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
   const currentUser = (req as Request & { user: User }).user.id;
+  const { id } = req.params;
+
+  if (Number.isNaN(+id)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
+
   try {
     const like = await Like.destroy({
       where: {
-        card_id: Number(req.params.id),
+        card_id: Number(id),
         user_id: Number((req as Request & { user: User }).user.id),
       },
     });
@@ -337,6 +341,10 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
 
 export const getCardCount = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params;
+
+  if (Number.isNaN(+userId)) {
+    return next(new BadRequestError('переданы некорректные данные в метод'));
+  }
 
   try {
     const cards = await Card.findAll({ where: { user_id: userId } });
