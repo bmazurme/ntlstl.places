@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';

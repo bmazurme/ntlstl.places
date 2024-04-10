@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server",
-    "build": "webpack --mode production --env production --config webpack.prod.ts",
+    "build": "npm run clear && webpack --mode production --env production --config webpack.prod.ts",
     "dev": "webpack serve --mode development --open --hot --env development --config webpack.dev.ts",
     "clear": "rm -rf build/",
     "lint": "npx eslint ./src",
@@ -96,6 +96,7 @@
     "react-infinite-scroller": "1.2.6",
     "react-redux": "8.0.5",
     "react-router-dom": "6.3.0",
+    "react-toastify": "10.0.5",
     "redux": "4.2.0",
     "redux-first-history": "5.1.1",
     "uuid": "9.0.0"

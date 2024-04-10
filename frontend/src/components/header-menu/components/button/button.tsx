@@ -6,7 +6,7 @@ import { BiMenu, BiX } from '../../../../utils/icons/bi';
 import style from './button.module.css';
 
 export default function Button({ isOpen, handlerClick }
-  : { isOpen: boolean; handlerClick: () => void }) {
+  : { isOpen: boolean; handlerClick: () => void; }) {
   return (
     <button
       type="button"

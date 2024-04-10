@@ -13,12 +13,12 @@ const cardsApiEndpoints = cardsApi
         }),
         providesTags: ['Cards'],
       }),
-      getCardsByTag: builder.query<Card[], string>({
-        query: (tag) => ({
-          url: `/cards/tag/${tag}`,
+      getCardsByTag: builder.mutation<Card[], { tagName: string; pageId: number; }>({
+        query: ({ tagName, pageId }) => ({
+          url: `/cards/tag/${tagName}/page/${pageId}`,
           method: 'GET',
         }),
-        providesTags: ['Cards'],
+        invalidatesTags: ['Cards'],
       }),
       getCardsByUser: builder.mutation<Card[], { userId: number; pageId: number; }>({
         query: ({ userId, pageId }) => ({
@@ -89,7 +89,7 @@ const cardsApiEndpoints = cardsApi
   });
 
 export const {
-  useGetCardsByTagQuery,
+  useGetCardsByTagMutation,
   useGetCardsByUserMutation,
   useGetCardMutation,
   useDeleteCardMutation,

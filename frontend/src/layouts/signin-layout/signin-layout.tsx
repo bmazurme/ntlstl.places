@@ -31,7 +31,7 @@ export default function SigninLayout() {
             <img src={yaOauth} alt="Sign in with Yandex ID" />
           </a>
         </div>
-    )}
+      )}
     />
   );
 }
