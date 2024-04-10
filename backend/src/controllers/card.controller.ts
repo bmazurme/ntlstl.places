@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
@@ -198,6 +199,8 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
 
 export const getCardsByTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const page = ((req as any).params.pageId - 1) * 3 || 0;
+    const { tagName } = req.params;
     const currentUser = (req as Request & { user: User }).user.id;
     const cards = await Card.sequelize?.query(`SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname FROM
     (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tag, tags.name tagsname FROM
@@ -209,8 +212,10 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
       LEFT JOIN users u ON t.user_id = u.id
       LEFT JOIN "cardTags" tg ON t.id = tg."cardId") tt
       LEFT JOIN tags ON tt.tag = tags.id) rslt
-      WHERE tagsname = '${req.params.id}'
-    ORDER BY rslt.id DESC`, { type: QueryTypes.SELECT });
+      WHERE tagsname = '${tagName}'
+    ORDER BY rslt.id DESC
+    OFFSET ${page} ROWS
+    FETCH NEXT 3 ROWS ONLY`, { type: QueryTypes.SELECT });
 
     return res.status(200).send(cards);
   } catch (err) {
