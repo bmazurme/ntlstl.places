@@ -16,7 +16,7 @@ import { Urls } from '../../utils/constants';
 import style from './header-menu.module.css';
 
 export default function HeaderMenu({ isOpen, handlerClick }
-  : { isOpen: boolean, handlerClick: () => void }) {
+  : { isOpen: boolean; handlerClick: () => void; }) {
   const [signOut] = useSignOutMutation();
   const [email, setEmail] = useState('');
   const user = useUser();

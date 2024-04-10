@@ -1,4 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { toast, type ToastOptions } from 'react-toastify';
 
 import { BASE_API_URL } from '../utils/constants';
 
@@ -9,4 +11,35 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
 });
 
-export default baseQuery;
+const options: ToastOptions = {
+  position: 'top-right',
+  autoClose: 5000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  type: 'error',
+};
+
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError | null
+> = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+
+  if (result.error && result.error.status === 400) {
+    toast('400 Bad Request ', options);
+  } else if (result.error && result.error.status === 401) {
+    // console.log('result', 401);
+  } else if (result.error && result.error.status === 404) {
+    // console.log('result', 404);
+  } else if (result.error && result.error.status === 500) {
+    toast('500 Internal Server Error', options);
+  }
+
+  return result;
+};
+
+export default baseQueryWithReauth;

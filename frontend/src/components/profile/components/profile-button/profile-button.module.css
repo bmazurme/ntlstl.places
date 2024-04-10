@@ -11,6 +11,7 @@
   margin-top: 5px;
   margin-left: 15px;
   background-color: var(--background-color);
+  transition: background-color var(--transition-default);
   height: 22px;
   width: 22px;
 }

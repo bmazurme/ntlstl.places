@@ -12,10 +12,12 @@ export const UrlsApi = {
   CARDS: {
     INDEX: '/cards',
     ID: '/cards/:id',
+    PAGE: '/cards/page/:id',
     LIKES: '/cards/:id/likes',
     LIKES_ID: '/cards/likes/:id',
-    USER: '/cards/user/:id',
-    TAG: '/cards/tag/:id',
+    USER: '/cards/user/:userId/page/:pageId',
+    TAG: '/cards/tag/:tagName/page/:pageId',
+    COUNT: '/cards/count/:userId',
   },
   FILES: {
     INDEX: '/files/:filename',

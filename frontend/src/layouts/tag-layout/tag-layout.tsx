@@ -1,15 +1,55 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Board from '../../components/board';
-import Preloader from '../../components/preloader';
 import Cards from '../../components/cards';
 
-import { useGetCardsByTagQuery } from '../../store';
+import { cardsSelector, useGetCardsByTagMutation, setCards } from '../../store';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 
 export default function TagLayout() {
   const params = useParams();
-  const { isLoading: isLoadingCards } = useGetCardsByTagQuery(params.id!);
+  const dispatch = useAppDispatch();
+  const cards = useAppSelector(cardsSelector);
+  const [getCards, { isLoading }] = useGetCardsByTagMutation();
+  const [nextPageUrl, setNextPageUrl] = useState<number | null>(1);
+  const [fetching, setFetching] = useState(false);
 
-  return (<Board children={isLoadingCards ? <Preloader /> : <Cards />} title={params.id} />);
+  const fetchItems = useCallback(
+    async () => {
+      if (fetching) {
+        return;
+      }
+
+      setFetching(true);
+      const { data } = await getCards({
+        tagName: params.id!,
+        pageId: nextPageUrl!,
+      }) as unknown as { data: Card[] };
+
+      setNextPageUrl(data && data.length > 0 && nextPageUrl ? nextPageUrl + 1 : null);
+      setFetching(false);
+    },
+    [isLoading, nextPageUrl, cards],
+  );
+
+  const hasMoreItems = !!nextPageUrl;
+
+  useEffect(() => {
+    dispatch(setCards([]));
+    setNextPageUrl(1);
+  }, [params.id]);
+
+  return (
+    <Board
+      children={(
+        <Cards
+          fetchItems={fetchItems}
+          hasMoreItems={hasMoreItems}
+          cards={cards}
+        />
+      )}
+      title={params.id}
+    />
+  );
 }

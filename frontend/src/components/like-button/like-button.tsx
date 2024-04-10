@@ -16,12 +16,9 @@ export default function LikeButton({ user, card }: ILikeProps) {
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
 
-  const onCardLike = async (c: Card) => {
+  const onCardLike = async ({ id: cardId, isliked: value }: Card) => {
     try {
-      await changeLike({
-        cardId: c.id,
-        value: c.isliked,
-      });
+      await changeLike({ cardId, value });
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import type { PropsWithChildren } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
