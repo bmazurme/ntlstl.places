@@ -43,6 +43,18 @@ const slice = createSlice({
         },
       )
       .addMatcher(
+        cardsApiEndpoints.endpoints.getCardsByTag.matchFulfilled,
+        (state, action) => ({ ...state, data: [...state.data, ...action.payload] }),
+      )
+      .addMatcher(
+        cardsApiEndpoints.endpoints.getCardsByTag.matchRejected,
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
+      )
+      .addMatcher(
         cardsApiEndpoints.endpoints.deleteCard.matchFulfilled,
         (state, action) => {
           console.log(action);
@@ -85,18 +97,6 @@ const slice = createSlice({
       )
       .addMatcher(
         cardsApiEndpoints.endpoints.changeLike.matchRejected,
-        (state, action) => {
-          if (action.error.name !== 'ConditionError') {
-            console.log('rejected', action);
-          }
-        },
-      )
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCardsByTag.matchFulfilled,
-        (state, action) => ({ ...state, data: action.payload }),
-      )
-      .addMatcher(
-        cardsApiEndpoints.endpoints.getCardsByTag.matchRejected,
         (state, action) => {
           if (action.error.name !== 'ConditionError') {
             console.log('rejected', action);
