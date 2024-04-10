@@ -34,7 +34,6 @@ export default function AvatarButton({
         {...((currentUser?.id === info?.id) && { onClick: handleOpenEditAvatarPopup })}
         aria-hidden="true"
       />
-
       {popup.avatar
         && (
         <Modal
