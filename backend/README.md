@@ -23,7 +23,7 @@
 - [X] fix dockerfile
 - [X] fix remove field email from response users & userId
 - [X] fix docker-compose -> shared
-- [ ] fix update libs
+- [X] fix update libs
 - [ ] fix logs (live-time, root)
 - [ ] fix winston telegram config, manual
 - [ ] fix endpoint cards

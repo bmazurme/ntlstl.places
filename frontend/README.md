@@ -38,7 +38,7 @@
 - [ ] fix slide style, effect, edit mode, edit template / grid
 - [X] fix slide-image preloader
 - [X] fix edit-profile form
-- [ ] fix routing (to slide, to auth)
+- [X] fix routing (to slide, to auth)
 - [ ] fix routing slide (open card page by id & open slide by click) 
 - [ ] fix mobile, tab modes
 - [ ] fix paginator, carousel
