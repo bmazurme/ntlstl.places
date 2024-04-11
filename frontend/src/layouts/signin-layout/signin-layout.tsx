@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Board from '../../components/board';
 import useUser from '../../hooks/use-user';
 import { YA_ENDPOINT } from '../../utils/constants';
+import ThemeContext from '../../context/theme-context';
 
 import yaOauth from '../../images/ya-oauth.svg';
+import yaOauthWhite from '../../images/ya-oauth-white.svg';
 
 import style from './signin-layout.module.css';
 
 export default function SigninLayout() {
+  const { isDark } = useContext(ThemeContext);
   const navigate = useNavigate();
   const userData = useUser();
 
@@ -28,7 +31,7 @@ export default function SigninLayout() {
             className={style.link}
             href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${YA_ENDPOINT}`}
           >
-            <img src={yaOauth} alt="Sign in with Yandex ID" />
+            <img src={isDark === 'light' ? yaOauth : yaOauthWhite} alt="Sign in with Yandex ID" />
           </a>
         </div>
       )}
