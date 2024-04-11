@@ -42,6 +42,7 @@ export default function TagLayout() {
 
   return (
     <Board
+      title={params.id}
       children={(
         <Cards
           fetchItems={fetchItems}
@@ -49,7 +50,6 @@ export default function TagLayout() {
           cards={cards}
         />
       )}
-      title={params.id}
     />
   );
 }

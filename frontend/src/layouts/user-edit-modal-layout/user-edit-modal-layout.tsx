@@ -14,7 +14,7 @@ export default function UserEditModalLayout() {
   const user = useUser();
   const location = useLocation();
   const navigate = useNavigate();
-  const [updateUser, { isLoading: isLoadingUser }] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const handleClose = useCallback(() => {
     navigate(`${Urls.USERS.INDEX}/${user?.id}`);
@@ -33,7 +33,7 @@ export default function UserEditModalLayout() {
       onClose={handleClose}
       children={(
         <EditProfile
-          isLoading={isLoadingUser}
+          isLoading={isLoading}
           info={user}
           onUpdateUser={handleUpdateUserSubmit}
         />

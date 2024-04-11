@@ -52,9 +52,7 @@ export default function App() {
             </Routes>
           </Suspense>
         )}
-        <ToastContainer
-          theme={providerValue.isDark}
-        />
+        <ToastContainer theme={providerValue.isDark} />
       </ErrorBoundaryWrapper>
     </ThemeContext.Provider>
   );
