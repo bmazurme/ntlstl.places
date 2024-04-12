@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -16,7 +17,7 @@ export default function Cards({ fetchItems, hasMoreItems, cards }
       loader={<CardLoader key="loader" />}
     >
       <section className={style.cards}>
-        {cards.map((card, i) => (<Card key={card?.id} card={card} index={i} />))}
+        {cards.map((card, i) => (<Card key={uuidv4()} card={card} index={i} />))}
       </section>
     </InfiniteScroll>
   );
