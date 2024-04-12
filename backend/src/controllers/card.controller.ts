@@ -13,10 +13,22 @@ import { BadRequestError, NotFoundError, ForbiddenError } from '../errors';
 import User from '../models/user.model';
 import Card from '../models/card.model';
 import Like from '../models/like.model';
+import Tag from '../models/tag.model';
+import CardTag from '../models/card-tag.model';
 
 export const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const { name } = (req as Request).body;
+    const { name, tagName } = (req as Request).body;
+    const tag = await Tag.findOne({ where: { name: tagName } });
+    let tagId = null;
+
+    if (!tag) {
+      const { id } = await Tag.create({ name: tagName });
+      tagId = id;
+    } else {
+      tagId = tag.id;
+    }
+
     const tempPath = req.files[0].path;
     const fileName = req.files[0].originalname;
     const uniqName = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
@@ -60,6 +72,10 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
       link: uniqName,
       user_id: (req as & { user: User }).user.id,
     });
+
+    if (tagId) {
+      await CardTag.create({ cardId: card.id, tagId });
+    }
 
     return res.send({
       id: card.id, name: card.name, link: card.link, userid: user?.id, username: user?.name,
@@ -206,15 +222,15 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
     const page = (Number(pageId) - 1) * 3;
     const currentUser = (req as Request & { user: User }).user.id;
     const cards = await Card.sequelize?.query(`SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname FROM
-    (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tag, tags.name tagsname FROM
-      (SELECT t.id, t.name, t.link, t.user_id, t.count::int, t.liked, u.name userName, tg.id tag FROM
+    (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tagid, tags.name tagsname FROM
+      (SELECT t.id, t.name, t.link, t.user_id, t.count::int, t.liked, u.name userName, tg."tagId" tagid FROM
         (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as liked
         FROM cards c
         LEFT JOIN likes l ON c.id = l.card_id
         GROUP BY c.id) t
       LEFT JOIN users u ON t.user_id = u.id
       LEFT JOIN "cardTags" tg ON t.id = tg."cardId") tt
-      LEFT JOIN tags ON tt.tag = tags.id) rslt
+      LEFT JOIN tags ON tt.tagid = tags.id) rslt
       WHERE tagsname = '${tagName}'
     ORDER BY rslt.id DESC
     OFFSET ${page} ROWS
