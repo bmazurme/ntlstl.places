@@ -7,12 +7,26 @@ import CardTag from '../models/card-tag.model';
 
 type User = { id: number; };
 
+export const getCardTags = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const cardTags = await CardTag.findAll({ attributes: { exclude: ['createdAt', 'updatedAt'] } });
+
+    return res.status(201).send(cardTags);
+  } catch (error: unknown) {
+    if ((error as Error).name === 'CastError') {
+      return next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    next(error);
+  }
+};
+
 export const bindCardAndTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { cardId, tagId } = req.body;
     const link = await CardTag.create({ cardId, tagId });
 
-    return res.status(201).send(link);
+    return res.status(201).send({ id: link.id, cardId, tagId });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
