@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable consistent-return */
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
@@ -9,7 +10,7 @@ import { NotFoundError, BadRequestError } from '../errors/index';
 
 import User from '../models/user.model';
 
-export const getUsers = async (req: any, res: Response, next: NextFunction) => {
+export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await User.findAll({
       attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
@@ -33,7 +34,7 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
     });
 
     if (!user) {
-      return next(new NotFoundError('пользователь не найден'));
+      return next(new NotFoundError('user was not found'));
     }
 
     return res.status(200).send(user);
@@ -46,17 +47,17 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const updateAvatar = async (req: any, res: Response, next: NextFunction) => {
+export const updateAvatar = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await User.findOne({
-      where: { id: (req as & { user: User }).user.id },
+      where: { id: (req as Request & { user: User }).user.id },
       attributes: { exclude: ['email', 'createdAt', 'updatedAt'] },
     });
 
     if (!user) {
-      return next(new NotFoundError('пользователь не найден'));
+      return next(new NotFoundError('user was not found'));
     }
-    const tempPath = req.files[0].path;
+    const tempPath = (req as any).files[0].path;
     const uniqName = `user_${user.id}_${uuidv4()}.webp`.toLowerCase();
     const targetPath = path.join(__dirname, '..', '..', 'uploads', 'avatars', uniqName);
 
@@ -100,7 +101,7 @@ export const updateUser = async (req: unknown, res: Response, next: NextFunction
     );
 
     if (!user) {
-      return next(new NotFoundError('пользователь не найден'));
+      return next(new NotFoundError('user was not found'));
     }
 
     await user.update({ name, about });

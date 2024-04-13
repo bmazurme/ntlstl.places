@@ -10,22 +10,22 @@ import {
 import { NonAttribute } from '@sequelize/core';
 import { Optional } from 'sequelize';
 
-import Card from './card.model';
-import CardTag from './card-tag.model';
+import User from './user.model';
+import UserRole from './user-role.model';
 
-interface TagAttributes {
+interface RoleAttributes {
   id: number;
   name: string;
 }
 
-export type TagCreationAttributes = Optional<TagAttributes, 'id'>;
+export type RoleCreationAttributes = Optional<RoleAttributes, 'id'>;
 
 @Table({
   timestamps: true,
-  tableName: 'tags',
-  modelName: 'Tag',
+  tableName: 'roles',
+  modelName: 'Role',
 })
-export default class Tag extends Model<TagAttributes, TagCreationAttributes> {
+export default class Tag extends Model<RoleAttributes, RoleCreationAttributes> {
   @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
@@ -34,6 +34,6 @@ export default class Tag extends Model<TagAttributes, TagCreationAttributes> {
   @Column(DataType.STRING)
   declare name: string;
 
-  @BelongsToMany(() => Card, { through: () => CardTag })
+  @BelongsToMany(() => User, { through: () => UserRole })
   declare cardTags?: NonAttribute<Card[]>;
 }
