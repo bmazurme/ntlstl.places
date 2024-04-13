@@ -56,12 +56,6 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
       }
     });
 
-    fs.unlink(tempPath, (err) => {
-      if (err) {
-        next(err);
-      }
-    });
-
     const user = await User.findOne({
       where: { id: (req as & { user: User }).user.id },
     });
