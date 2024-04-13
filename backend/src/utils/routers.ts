@@ -27,5 +27,10 @@ export const UrlsApi = {
   },
   TAGS: {
     INDEX: '/tags',
+    ID: '/tags/:id',
+  },
+  CARD_TAGS: {
+    INDEX: '/card-tags',
+    ID: '/card-tags/:id',
   },
 };
