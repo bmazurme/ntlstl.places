@@ -15,15 +15,18 @@ describe('app works correctly with routes', () => {
     cy.contains('Users');
     cy.contains('Sign Out');
 
-    cy.visit('/users');
+    cy.visit('/users/');
     cy.contains('Users');
 
     cy.visit('/users/1');
-    cy.contains('Posts');
+    cy.contains('Cards');
 
     cy.visit('/404');
     cy.contains('404');
     cy.contains('Page not found');
     cy.contains('Home');
+
+    cy.visit('/tags');
+    cy.contains('Tags');
   });
 });

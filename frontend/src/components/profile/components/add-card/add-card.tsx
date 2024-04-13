@@ -8,6 +8,7 @@ import UploadButton from '../../../upload-button';
 
 type FormPayload = {
   name: string;
+  tagName: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   file: any;
 };
@@ -24,6 +25,17 @@ const inputs = [
     required: true,
     autoComplete: 'current-name',
   },
+  {
+    name: 'tagName',
+    label: 'Tag',
+    pattern: {
+      value: /^[\s+$.a-zA-Z0-9_-]{3,25}$/,
+      message: 'Tag is invalid',
+    },
+    // disabled: false,
+    required: true,
+    autoComplete: 'current-name',
+  },
 ];
 
 export default function AddCard({ isLoading, onAddPlace }
@@ -32,7 +44,7 @@ export default function AddCard({ isLoading, onAddPlace }
   const [editor, setEditor] = useState<File | string | null>(null);
   const buttonText = isLoading ? 'Loading...' : 'Save';
   const { control, handleSubmit } = useForm<FormPayload>({
-    defaultValues: { name: '', file: '' },
+    defaultValues: { name: '', file: '', tagName: '' },
   });
   const onSubmit = handleSubmit(async (data: FormPayload) => {
     try {
@@ -40,6 +52,7 @@ export default function AddCard({ isLoading, onAddPlace }
 
       if (editor) {
         form.append('name', data.name);
+        form.append('tagName', data.tagName);
         form.append('files', editor);
       }
 
