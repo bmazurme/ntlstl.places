@@ -18,7 +18,7 @@ import CardTag from '../models/card-tag.model';
 
 export const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
-    const { name, tagName } = (req as Request).body;
+    const { name, tagName } = req.body;
     const tag = await Tag.findOne({ where: { name: tagName } });
     let tagId = null;
 
@@ -100,7 +100,7 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
     const card = await Card.findOne({ where: { id } });
 
     if (!card) {
-      return new NotFoundError('карточка не найдена');
+      return new NotFoundError('card was not found');
     }
 
     if (card.user_id !== Number((req as Request & { user: User }).user.id)) {
@@ -138,7 +138,7 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
 export const updateCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const card = await Card.findOne({ where: { id: req.params.id } });
-    const { name } = (req as Request).body;
+    const { name } = req.body;
 
     if (!card) {
       return new NotFoundError('card was not found');
@@ -158,6 +158,7 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
 export const getCardsByPage = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
+  const currentUser = (req as any).user?.id || -1;
 
   if (Number.isNaN(+id)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -165,13 +166,12 @@ export const getCardsByPage = async (req: Request, res: Response, next: NextFunc
 
   try {
     const page = (Number(id) - 1) * 3 || 0;
-    const currentUser = (req as any).user?.id || -1;
-    const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-    FROM
-      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-      FROM cards c
-      LEFT JOIN likes l ON c.id = l.card_id
-      GROUP BY c.id) t
+    const cards = await Card.sequelize?.query(`
+    SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
+          FROM cards c
+          LEFT JOIN likes l ON c.id = l.card_id
+          GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC
     OFFSET ${page} ROWS
@@ -185,6 +185,7 @@ export const getCardsByPage = async (req: Request, res: Response, next: NextFunc
 
 export const getCardsByUser = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, pageId } = req.params;
+  const currentUser = (req as Request & { user: User }).user.id || -1;
 
   if (Number.isNaN(+userId) || Number.isNaN(+pageId)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -192,14 +193,13 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
 
   try {
     const page = (Number(pageId) - 1) * 3;
-    const currentUser = (req as Request & { user: User }).user.id || -1;
-    const cards = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-    FROM
-      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-      FROM cards c
-      LEFT JOIN likes l ON c.id = l.card_id
-      WHERE c.user_id = ${userId}
-      GROUP BY c.id) t
+    const cards = await Card.sequelize?.query(`
+    SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
+          FROM cards c
+          LEFT JOIN likes l ON c.id = l.card_id
+          WHERE c.user_id = ${userId}
+          GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC
     OFFSET ${page} ROWS
@@ -213,6 +213,7 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
 
 export const getCardsByTag = async (req: Request, res: Response, next: NextFunction) => {
   const { tagName, pageId } = req.params;
+  const { id: userId } = (req as Request & { user: User }).user;
 
   if (!tagName || Number.isNaN(+pageId)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -220,18 +221,18 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
 
   try {
     const page = (Number(pageId) - 1) * 3;
-    const currentUser = (req as Request & { user: User }).user.id;
-    const cards = await Card.sequelize?.query(`SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname FROM
-    (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tagid, tags.name tagsname FROM
-      (SELECT t.id, t.name, t.link, t.user_id, t.count::int, t.liked, u.name userName, tg."tagId" tagid FROM
-        (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as liked
-        FROM cards c
-        LEFT JOIN likes l ON c.id = l.card_id
-        GROUP BY c.id) t
-      LEFT JOIN users u ON t.user_id = u.id
-      LEFT JOIN "cardTags" tg ON t.id = tg."cardId") tt
-      LEFT JOIN tags ON tt.tagid = tags.id) rslt
-      WHERE tagsname = '${tagName}'
+    const cards = await Card.sequelize?.query(`
+    SELECT rslt.id, rslt.name, rslt.link, rslt.user_id userid, rslt.count::int, rslt.liked isliked, rslt.userName, rslt.tagsname tagsname
+    FROM (SELECT tt.id, tt.name, tt.link, tt.user_id, tt.count::int, tt.liked, tt.userName, tt.tagid, tags.name tagsname
+          FROM (SELECT t.id, t.name, t.link, t.user_id, t.count::int, t.liked, u.name userName, tg."tagId" tagid
+                FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${userId}) as liked
+                      FROM cards c
+                      LEFT JOIN likes l ON c.id = l.card_id
+                      GROUP BY c.id) t
+                LEFT JOIN users u ON t.user_id = u.id
+                LEFT JOIN "cardTags" tg ON t.id = tg."cardId") tt
+          LEFT JOIN tags ON tt.tagid = tags.id) rslt
+    WHERE tagsname = '${tagName}'
     ORDER BY rslt.id DESC
     OFFSET ${page} ROWS
     FETCH NEXT 3 ROWS ONLY`, { type: QueryTypes.SELECT });
@@ -243,26 +244,26 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
 };
 
 export const getCardById = async (req: Request, res: Response, next: NextFunction) => {
-  const currentUser = (req as Request & { user: User }).user.id;
-  const { id } = req.params;
+  const { id: userId } = (req as Request & { user: User }).user;
+  const { id: cardId } = req.params;
 
-  if (Number.isNaN(+id)) {
+  if (Number.isNaN(+cardId)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
   }
 
   try {
-    const card = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-    FROM
-      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-      FROM cards c
-      LEFT JOIN likes l ON c.id = l.card_id
-      WHERE c.id = ${req.params.id}
-      GROUP BY c.id) t
+    const card = await Card.sequelize?.query(`
+    SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${userId}) as isLiked
+          FROM cards c
+          LEFT JOIN likes l ON c.id = l.card_id
+          WHERE c.id = ${cardId}
+          GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
 
     if (!card || !card[0]) {
-      return next(new NotFoundError('карточка не найдена'));
+      return next(new NotFoundError('card was not found'));
     }
 
     return res.status(200).send(...card);
@@ -272,33 +273,33 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
 };
 
 export const likeCard = async (req: Request, res: Response, next: NextFunction) => {
-  const currentUser = (req as Request & { user: User }).user.id;
-  const { id } = req.params;
+  const { id: userId } = (req as Request & { user: User }).user;
+  const { id: cardId } = req.params;
 
-  if (Number.isNaN(+id)) {
+  if (Number.isNaN(+cardId)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
   }
 
   try {
     const { card_id } = await Like.create(
       {
-        card_id: Number(id),
-        user_id: Number((req as Request & { user: User }).user.id),
+        card_id: Number(cardId),
+        user_id: Number(userId),
       },
     );
 
-    const card = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-    FROM
-      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-      FROM cards c
-      LEFT JOIN likes l ON c.id = l.card_id
-      WHERE c.id = ${card_id}
-      GROUP BY c.id) t
+    const card = await Card.sequelize?.query(`
+    SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${userId}) as isLiked
+          FROM cards c
+          LEFT JOIN likes l ON c.id = l.card_id
+          WHERE c.id = ${card_id}
+          GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
 
     if (!card) {
-      return next(new NotFoundError('карточка не найдена'));
+      return next(new NotFoundError('card was not found'));
     }
 
     return res.status(201).send(...card);
@@ -312,7 +313,7 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
 };
 
 export const dislikeCard = async (req: Request, res: Response, next: NextFunction) => {
-  const currentUser = (req as Request & { user: User }).user.id;
+  const { id: userId } = (req as Request & { user: User }).user;
   const { id } = req.params;
 
   if (Number.isNaN(+id)) {
@@ -328,21 +329,21 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
     });
 
     if (!like) {
-      return next(new NotFoundError('card was not found'));
+      return next(new NotFoundError('like was not found'));
     }
 
-    const card = await Card.sequelize?.query(`SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
-    FROM
-      (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${currentUser}) as isLiked
-      FROM cards c
-      LEFT JOIN likes l ON c.id = l.card_id
-      WHERE c.id = ${req.params.id}
-      GROUP BY c.id) t
+    const card = await Card.sequelize?.query(`
+    SELECT t.id, t.name, t.link, t.user_id userId, t.count::int, t.isLiked, u.name userName
+    FROM (SELECT c.id, c.name, c.link, c.user_id, COUNT(l.card_id) as count, bool_or(l.user_id = ${userId}) as isLiked
+          FROM cards c
+          LEFT JOIN likes l ON c.id = l.card_id
+          WHERE c.id = ${req.params.id}
+          GROUP BY c.id) t
     LEFT JOIN users u ON t.user_id = u.id
     ORDER BY t.id DESC`, { type: QueryTypes.SELECT });
 
     if (!card) {
-      return next(new NotFoundError('карточка не найдена'));
+      return next(new NotFoundError('caed was not find'));
     }
 
     return res.status(201).send(...card);
