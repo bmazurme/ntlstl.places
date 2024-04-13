@@ -4,15 +4,12 @@ import {
   Column,
   AutoIncrement,
   PrimaryKey,
-  AllowNull,
-  ForeignKey,
   DataType,
   BelongsToMany,
 } from 'sequelize-typescript';
 import { NonAttribute } from '@sequelize/core';
 import { Optional } from 'sequelize';
 
-// import User from './user.model';
 import Card from './card.model';
 import CardTag from './card-tag.model';
 
