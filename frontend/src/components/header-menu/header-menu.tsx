@@ -39,7 +39,8 @@ export default function HeaderMenu({ isOpen, handlerClick }
         className={classNames(style.navbar, { [style.opened]: isOpen })}
       >
         {!user && <NavItem to={Urls.SIGNIN} value="Sign in" />}
-        {user?.email && <NavItem to={`${Urls.USERS.INDEX}/`} value="Users" />}
+        {user?.email && <NavItem to={`${Urls.TAGS.INDEX}`} value="Tags" />}
+        {user?.email && <NavItem to={`${Urls.USERS.INDEX}`} value="Users" />}
         {user?.email && <NavItem to={`${Urls.USER.INDEX}/${user.id}`} value={email} />}
         {user?.email && <NavItem to={Urls.SIGNIN} value="Sign Out" onClick={onSignOut} />}
       </ul>
