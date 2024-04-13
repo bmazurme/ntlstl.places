@@ -12,7 +12,7 @@ export const createTag = async (req: Request, res: Response, next: NextFunction)
     const { name }: { name: string } = req.body;
     const tag = await Tag.create({ name });
 
-    return res.status(201).send(tag);
+    return res.status(201).send({ id: tag.id, name: tag.name });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
