@@ -64,7 +64,7 @@ export default function Card({ card, index }: { card: Card; index: number; }) {
               </>
             )
             : <h2 className={style.name}>{card.name}</h2>}
-          <Link to={`${Urls.USERS.INDEX}/${card.userid}`} className={style.user}>
+          <Link to={`${Urls.USER.INDEX}/${card.userid}`} className={style.user}>
             {card.username}
           </Link>
         </form>

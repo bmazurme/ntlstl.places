@@ -10,12 +10,15 @@ export const Urls = {
   },
   TAGS: {
     INDEX: '/tags',
-    CURRENT: '/tags/:id',
+    CURRENT: '/tag/:id',
+  },
+  USER: {
+    INDEX: '/user',
   },
   USERS: {
     INDEX: '/users',
-    CURRENT: '/users/:id',
-    CURRENT_EDIT: '/users/:id/:edit',
+    CURRENT: '/user/:id',
+    CURRENT_EDIT: '/user/:id/:edit',
   },
   CARDS: {
     CURRENT: '/card/:id',

@@ -17,7 +17,7 @@ export default function UserEditModalLayout() {
   const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const handleClose = useCallback(() => {
-    navigate(`${Urls.USERS.INDEX}/${user?.id}`);
+    navigate(`${Urls.USER.INDEX}/${user?.id}`);
   }, [location.state, navigate]);
   const handleUpdateUserSubmit = async (data: Record<string, string>) => {
     try {

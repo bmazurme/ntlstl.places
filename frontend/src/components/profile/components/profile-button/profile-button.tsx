@@ -12,7 +12,7 @@ export default function ProfileButton({ info }: ProfileProps) {
 
   return (
     <Link
-      to={`${Urls.USERS.INDEX}/${info?.id}/edit`}
+      to={`${Urls.USER.INDEX}/${info?.id}/edit`}
       state={{ pathname: location.pathname }}
       className={style.edit}
     >
