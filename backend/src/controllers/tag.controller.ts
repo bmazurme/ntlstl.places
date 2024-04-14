@@ -9,10 +9,10 @@ type User = { id: number; };
 
 export const createTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name }: { name: string } = req.body;
-    const tag = await Tag.create({ name });
+    const { name } = req.body;
+    const { id } = await Tag.create({ name });
 
-    return res.status(201).send({ id: tag.id, name: tag.name });
+    return res.status(201).send({ id, name });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
@@ -38,33 +38,33 @@ export const getTags = async (req: Request, res: Response, next: NextFunction) =
 
 export const deleteTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id: tagId } = req.params;
+    const { id } = req.params;
     const { id: userId } = (req as Request & { user: User }).user;
 
     if (userId !== 1) {
       return next(new ForbiddenError('access denied'));
     }
 
-    if (Number.isNaN(+tagId)) {
+    if (Number.isNaN(+id)) {
       return next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
-    const tag = await Tag.findOne({ where: { id: tagId } });
+    const tag = await Tag.findOne({ where: { id } });
 
     if (!tag) {
       return new NotFoundError('tag was not find');
     }
 
-    await Tag.destroy({ where: { id: tagId } });
+    await Tag.destroy({ where: { id } });
 
-    return res.status(200).send({ message: 'card was deleted', id: (req as Request).params.id });
+    return res.status(200).send({ message: 'card was deleted', id });
   } catch (err) {
     next(err);
   }
 };
 
 export const updateTag = async (req: Request, res: Response, next: NextFunction) => {
-  const { id: tagId } = req.params;
+  const { id } = req.params;
   const { name } = req.body;
   const { id: userId } = (req as Request & { user: User }).user;
 
@@ -72,12 +72,12 @@ export const updateTag = async (req: Request, res: Response, next: NextFunction)
     return next(new ForbiddenError('access denied'));
   }
 
-  if (Number.isNaN(+tagId)) {
+  if (Number.isNaN(+id)) {
     return next(new BadRequestError('переданы некорректные данные в метод'));
   }
 
   try {
-    const tag = await Tag.findOne({ where: { id: tagId } });
+    const tag = await Tag.findOne({ where: { id } });
 
     if (!tag) {
       return new NotFoundError('card was not found');
