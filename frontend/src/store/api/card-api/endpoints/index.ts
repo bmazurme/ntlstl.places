@@ -6,7 +6,7 @@ const cardsApiEndpoints = cardsApi
   })
   .injectEndpoints({
     endpoints: (builder) => ({
-      getCardsCount: builder.query<{ count: number }, string>({
+      getCardsCount: builder.query<{ count: number; }, string>({
         query: (userId) => ({
           url: `/cards/count/${userId}`,
           method: 'GET',

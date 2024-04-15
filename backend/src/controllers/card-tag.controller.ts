@@ -83,9 +83,9 @@ export const updateCardTag = async (req: Request, res: Response, next: NextFunct
       return new NotFoundError('card was not found');
     }
 
-    await cardTag.update({ cardId, tagId });
+    const link = await cardTag.update({ cardId, tagId });
 
-    return res.status(200).send(cardTag);
+    return res.status(200).send({ id: link.id, cardId: link.cardId, tagId: link.tagId });
   } catch (err) {
     next(err);
   }
