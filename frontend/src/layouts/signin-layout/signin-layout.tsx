@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import Board from '../../components/board';
 import useUser from '../../hooks/use-user';
-import { YA_ENDPOINT } from '../../utils/constants';
 import ThemeContext from '../../context/theme-context';
 
 import yaOauth from '../../images/ya-oauth.svg';
 import yaOauthWhite from '../../images/ya-oauth-white.svg';
+
+import { YA_ENDPOINT } from '../../utils/constants';
 
 import style from './signin-layout.module.css';
 
