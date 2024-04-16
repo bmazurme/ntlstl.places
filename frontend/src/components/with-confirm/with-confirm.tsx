@@ -6,7 +6,8 @@ export default function WithConfirm({
   card: Card;
   title: string;
   buttonText: string;
-  onSubmit: (c: Card) => void; isLoading: boolean;
+  isLoading: boolean;
+  onSubmit: (c: Card) => void;
 }) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

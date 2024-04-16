@@ -9,6 +9,7 @@
 }
 
 .error__title {
+  width: 100%;
   margin: 0;
   padding: 0;
   text-overflow: ellipsis;
@@ -18,7 +19,6 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  width: 100%;
   text-align: center;
 }
 

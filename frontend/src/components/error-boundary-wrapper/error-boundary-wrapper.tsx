@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import type { PropsWithChildren } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import Content from '../content';
 import Button from '../button';
-import Header from '../header';
-import Footer from '../footer';
 
 import style from './error-boundary.module.css';
 
@@ -14,10 +13,9 @@ type ErrorBoundaryWrapperProps = PropsWithChildren<unknown>;
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
-    <div className={style.content}>
-      <Header />
-      <div className={style.boundary}>
-        <div className={style.title}>
+    <Content
+      children={(
+        <div className={style.boundary}>
           <h2 className={style.title}>APP-ERROR</h2>
           <p className={style.message}>{error.message}</p>
           <div className={style.block}>
@@ -37,15 +35,12 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
             </Button>
           </div>
         </div>
-      </div>
-      <Footer />
-    </div>
+      )}
+    />
   );
 }
 
-export default function ErrorBoundaryWrapper({
-  children,
-}: ErrorBoundaryWrapperProps) {
+export default function ErrorBoundaryWrapper({ children }: ErrorBoundaryWrapperProps) {
   return (
     <ErrorBoundary onReset={() => console.log('reset')} FallbackComponent={ErrorFallback}>
       {children}
