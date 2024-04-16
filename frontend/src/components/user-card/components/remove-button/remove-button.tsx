@@ -17,7 +17,7 @@ interface IRemoveProps {
 
 export default function RemoveButton({ user, card }: IRemoveProps) {
   const errorHandler = useErrorHandler();
-  const [deleteCard, { isLoading: isLoadingCard }] = useDeleteCardMutation();
+  const [deleteCard, { isLoading }] = useDeleteCardMutation();
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
   const isOwn = card?.userid === user?.id;
   const handleCloseAllPopups = () => setConfirmPopup(false);
@@ -35,10 +35,10 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
       {isOwn
         && (
           <button
-            onClick={() => setConfirmPopup(true)}
+            type="button"
             aria-label="Remove"
             className={classNames(style.button)}
-            type="button"
+            onClick={() => setConfirmPopup(true)}
           >
             <BiSolidTrashAlt size={40} />
           </button>
@@ -50,9 +50,9 @@ export default function RemoveButton({ user, card }: IRemoveProps) {
             children={(
               <WithConfirm
                 card={card}
-                isLoading={isLoadingCard}
+                isLoading={isLoading}
                 title="Вы уверены?"
-                buttonText={isLoadingCard ? 'Удаляется...' : 'Удалить'}
+                buttonText={isLoading ? 'Удаляется...' : 'Удалить'}
                 onSubmit={handleCardDelete}
               />
             )}

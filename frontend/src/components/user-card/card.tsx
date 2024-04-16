@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useErrorHandler } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { useUpdateCardMutation } from '../../store';
 

@@ -13,7 +13,6 @@ type OwnProps = {
   errorText?: string;
   readonly?: boolean;
 };
-
 export type InputProps = OwnProps & Omit<InputHTMLAttributes<HTMLInputElement>, 'pattern'>;
 
 const InputField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {

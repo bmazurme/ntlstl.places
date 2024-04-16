@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
-import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory, createMemoryHistory } from 'history';
+// import { createReduxHistoryContext } from 'redux-first-history';
+// import { createBrowserHistory, createMemoryHistory } from 'history';
 
 import {
   authApi,
@@ -16,7 +16,7 @@ import usersReducer from './slices/users-slice';
 import cardReducer from './slices/card-slice';
 import cardsReducer from './slices/cards-slice';
 import userCardsReducer from './slices/user-cards-slice';
-import { isServer } from '../utils';
+// import { isServer } from '../utils';
 
 export * from './api/auth-api/endpoints';
 export * from './api/user-api/endpoints';
@@ -32,13 +32,13 @@ declare global {
   }
 }
 
-const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
-  history: !isServer ? createBrowserHistory() : createMemoryHistory(),
-});
+// const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
+//   history: !isServer ? createBrowserHistory() : createMemoryHistory(),
+// });
 
 export const store = configureStore({
   reducer: {
-    router: routerReducer,
+    // router: routerReducer,
     // Add the generated reducer as a specific top-level slice
     user: userReducer,
     users: usersReducer,
@@ -60,16 +60,14 @@ export const store = configureStore({
       cardsApi.middleware,
       filesApi.middleware,
       tagsApi.middleware,
-      routerMiddleware,
+      // routerMiddleware,
     ),
 });
 
-export const history = createReduxHistory(store);
-
+// export const history = createReduxHistory(store);
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
 setupListeners(store.dispatch);
-
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

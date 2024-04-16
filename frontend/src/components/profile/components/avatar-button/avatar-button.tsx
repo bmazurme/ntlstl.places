@@ -13,7 +13,7 @@ export default function AvatarButton({
   info, popup, setPopup, currentUser,
 }: AvatarProps) {
   const errorHandler = useErrorHandler();
-  const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation();
+  const [updateUserAvatar, { isLoading }] = useUpdateUserAvatarMutation();
   const handleOpenEditAvatarPopup = () => setPopup({ ...popup, avatar: true });
   const handleCloseAllPopups = () => setPopup({ avatar: false, place: false });
 
@@ -40,7 +40,7 @@ export default function AvatarButton({
           onClose={handleCloseAllPopups}
           children={(
             <EditAvatar
-              isLoading={isLoadingAvatar}
+              isLoading={isLoading}
               info={info}
               updateUserAvatar={handleUpdateAvatarSubmit}
             />

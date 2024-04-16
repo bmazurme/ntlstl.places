@@ -39,10 +39,7 @@ export default function EditProfile({ info, isLoading, onUpdateUser }
   const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Loading...' : 'Save';
   const { control, handleSubmit } = useForm<FormPayload>({
-    defaultValues: info ?? {
-      name: '',
-      about: '',
-    },
+    defaultValues: info ?? { name: '', about: '' },
   });
 
   const onSubmit = handleSubmit(async (data: FormPayload) => {

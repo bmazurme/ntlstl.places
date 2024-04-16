@@ -17,8 +17,8 @@ export default function ThemeButton() {
     <button
       className={style.button}
       type="button"
-      onClick={onToggle}
       aria-label="Switch theme"
+      onClick={onToggle}
     >
       {isDark === 'light' ? <BiMoon /> : <BiSun />}
     </button>
