@@ -19,7 +19,7 @@ type PlusProps = {
 
 export default function PlusButton({ popup, setPopup }: PlusProps) {
   const errorHandler = useErrorHandler();
-  const [addCard, { isLoading: isLoadingCard }] = useAddCardMutation();
+  const [addCard, { isLoading }] = useAddCardMutation();
   const handleOpenAddPlacePopup = () => setPopup({ ...popup, place: true });
   const handleCloseAllPopups = () => setPopup({ avatar: false, place: false });
   const handleAddPlaceSubmit = async (data: FormData) => {
@@ -38,7 +38,7 @@ export default function PlusButton({ popup, setPopup }: PlusProps) {
         && (
           <Modal
             onClose={handleCloseAllPopups}
-            children={<AddCard isLoading={isLoadingCard} onAddPlace={handleAddPlaceSubmit} />}
+            children={<AddCard isLoading={isLoading} onAddPlace={handleAddPlaceSubmit} />}
           />
         )}
     </>
