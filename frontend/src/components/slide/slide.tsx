@@ -9,7 +9,6 @@ import classNames from 'classnames';
 
 import IconButton from '../icon-button';
 import { BiLogoTelegram } from '../../utils/icons/bi';
-
 import { useGetCardByIdMutation } from '../../store';
 import { MODAL_CONFIG } from '../../utils';
 import { BASE_API_URL, BASE_HOST_URL, Urls } from '../../utils/constants';

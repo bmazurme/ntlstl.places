@@ -28,10 +28,10 @@ export default function LikeButton({ user, card }: ILikeProps) {
     <div className={style.like}>
       <button
         type="button"
-        onClick={() => onCardLike(card)}
         aria-label="Like"
-        className={classNames(style.button, { [style.disabled]: !user })}
         name="button-like"
+        onClick={() => onCardLike(card)}
+        className={classNames(style.button, { [style.disabled]: !user })}
         disabled={!user}
       >
         {card.isliked ? <BiSolidHeart size={24} /> : <BiHeart size={24} />}

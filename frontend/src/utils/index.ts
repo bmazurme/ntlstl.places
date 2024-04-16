@@ -3,8 +3,8 @@ export const populateArray = (size: number, multiplier = 1) => [...Array(size)]
 
 export const shuffleArray = (array: number[]) => {
   const result = [...array];
-  // eslint-disable-next-line no-plusplus
-  for (let i = result.length - 1; i > 0; i--) {
+
+  for (let i = result.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = result[i];
     result[i] = result[j];
@@ -14,13 +14,13 @@ export const shuffleArray = (array: number[]) => {
   return result;
 };
 
-export const isServer = !(
-  typeof window !== 'undefined'
-    && window.document
-    && window.document.createElement
-);
+// export const isServer = !(
+//   typeof window !== 'undefined'
+//     && window.document
+//     && window.document.createElement
+// );
 
-const MODAL_CONFIG = {
+export const MODAL_CONFIG = {
   INITIAL: {
     opacity: 0,
     scale: 0.75,
@@ -42,5 +42,3 @@ const MODAL_CONFIG = {
     },
   },
 };
-
-export { MODAL_CONFIG };

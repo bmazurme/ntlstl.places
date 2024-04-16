@@ -2,15 +2,16 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { BASE_API_URL, Urls } from '../../utils/constants';
+
 import style from './image.module.css';
 
 export default function Image({ card, index }: { card: Card; index: number; }) {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <Link
       to={`${Urls.CARD.CURRENT}/${card?.id}`}
-      state={{ pathname: location.pathname, from: location.pathname }}
+      state={{ pathname, from: pathname }}
       className={style.link}
       aria-label={card.name}
     >

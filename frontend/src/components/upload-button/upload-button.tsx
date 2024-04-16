@@ -6,6 +6,7 @@ import React, {
   type ChangeEvent,
 } from 'react';
 import classNames from 'classnames';
+
 import { BiCloudUpload } from '../../utils/icons/bi';
 
 import style from './upload-button.module.css';
@@ -31,10 +32,10 @@ export default function UploadButton({ setEditor }
     <div className={style.container}>
       <label className={classNames(style.label)} htmlFor="file">
         <input
-          ref={elementInputFile}
-          type="file"
-          onChange={onInputChange}
           id="file"
+          type="file"
+          ref={elementInputFile}
+          onChange={onInputChange}
           className={classNames(style.input)}
         />
         <BiCloudUpload size={36} />

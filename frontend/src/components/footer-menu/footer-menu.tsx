@@ -10,7 +10,6 @@ export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   title?: string;
 }
 export type IconType = (props: IconBaseProps) => JSX.Element;
-
 export type TypeLink = {
   url: string;
   label: string;

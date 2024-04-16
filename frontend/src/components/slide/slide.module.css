@@ -7,11 +7,11 @@
 
 .slide {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100%;
   width: 100%;
   background-color: #fff;
-  flex-direction: column;
 }
 
 .footer {
@@ -20,8 +20,6 @@
   margin: 0;
   padding: 10px;
   border: 1px solid var(--card-background-color);
-
-  /* background-color: var(--card-background-color); */
 }
 
 .info {

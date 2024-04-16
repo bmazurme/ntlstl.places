@@ -1,6 +1,6 @@
 import React from 'react';
-import { BiLogoTelegram, BiLogoLinkedin } from '../../utils/icons/bi';
 
+import { BiLogoTelegram, BiLogoLinkedin } from '../../utils/icons/bi';
 import FooterMenu from '../footer-menu';
 import { getCurrentYear } from '../../utils/get-current-year';
 
