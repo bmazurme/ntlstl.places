@@ -15,7 +15,7 @@ export const createTag = async (req: Request, res: Response, next: NextFunction)
     return res.status(201).send({ id, name });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -29,7 +29,7 @@ export const getTags = async (req: Request, res: Response, next: NextFunction) =
     return res.status(201).send(tags);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -39,14 +39,14 @@ export const getTags = async (req: Request, res: Response, next: NextFunction) =
 export const deleteTag = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const { id: userId } = (req as Request & { user: User }).user;
+    const { user: { id: userId } } = (req as Request & { user: User });
 
     if (userId !== 1) {
       return next(new ForbiddenError('access denied'));
     }
 
     if (Number.isNaN(+id)) {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     const tag = await Tag.findOne({ where: { id } });
@@ -66,14 +66,14 @@ export const deleteTag = async (req: Request, res: Response, next: NextFunction)
 export const updateTag = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { name } = req.body;
-  const { id: userId } = (req as Request & { user: User }).user;
+  const { user: { id: userId } } = (req as Request & { user: User });
 
   if (userId !== 1) {
     return next(new ForbiddenError('access denied'));
   }
 
   if (Number.isNaN(+id)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
