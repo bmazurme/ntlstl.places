@@ -76,7 +76,7 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
     });
   } catch (error: unknown) {
     if ((error as Error).name === 'ValidationError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -88,7 +88,7 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
     const { id } = req.params;
 
     if (Number.isNaN(+id)) {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     const card = await Card.findOne({ where: { id } });
@@ -155,7 +155,7 @@ export const getCardsByPage = async (req: Request, res: Response, next: NextFunc
   const currentUser = (req as any).user?.id || -1;
 
   if (Number.isNaN(+id)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -182,7 +182,7 @@ export const getCardsByUser = async (req: Request, res: Response, next: NextFunc
   const currentUser = (req as Request & { user: User }).user.id || -1;
 
   if (Number.isNaN(+userId) || Number.isNaN(+pageId)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -210,7 +210,7 @@ export const getCardsByTag = async (req: Request, res: Response, next: NextFunct
   const { id: userId } = (req as Request & { user: User }).user;
 
   if (!tagName || Number.isNaN(+pageId)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -242,7 +242,7 @@ export const getCardById = async (req: Request, res: Response, next: NextFunctio
   const { id: cardId } = req.params;
 
   if (Number.isNaN(+cardId)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -271,7 +271,7 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
   const { id: cardId } = req.params;
 
   if (Number.isNaN(+cardId)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -299,7 +299,7 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
     return res.status(201).send(...card);
   } catch (error: unknown) {
     if ((error as Error).name === 'SequelizeForeignKeyConstraintError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -311,7 +311,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
   const { id } = req.params;
 
   if (Number.isNaN(+id)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -343,7 +343,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
     return res.status(201).send(...card);
   } catch (error) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -354,7 +354,7 @@ export const getCardCount = async (req: Request, res: Response, next: NextFuncti
   const { userId } = req.params;
 
   if (Number.isNaN(+userId)) {
-    return next(new BadRequestError('переданы некорректные данные в метод'));
+    return next(new BadRequestError('bad request'));
   }
 
   try {
@@ -363,7 +363,7 @@ export const getCardCount = async (req: Request, res: Response, next: NextFuncti
     return res.status(201).send({ count: cards.length });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
