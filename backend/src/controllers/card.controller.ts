@@ -123,7 +123,7 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
 
     await Card.destroy({ where: { id: (req as Request).params.id } });
 
-    return res.status(200).send({ message: 'карточка удалена', id: (req as Request).params.id });
+    return res.status(200).send({ message: 'card was deleted', id: (req as Request).params.id });
   } catch (err) {
     next(err);
   }
