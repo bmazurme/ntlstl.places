@@ -14,7 +14,7 @@ export const getCardTags = async (req: Request, res: Response, next: NextFunctio
     return res.status(201).send(cardTags);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -29,7 +29,7 @@ export const bindCardAndTag = async (req: Request, res: Response, next: NextFunc
     return res.status(201).send({ id: link.id, cardId, tagId });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -46,18 +46,18 @@ export const deleteCardTag = async (req: Request, res: Response, next: NextFunct
     }
 
     if (Number.isNaN(+cardTagId)) {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     const cardTag = await CardTag.findOne({ where: { id: cardTagId } });
 
     if (!cardTag) {
-      return new NotFoundError('tag was not find');
+      return new NotFoundError('card-tag was not find');
     }
 
     await CardTag.destroy({ where: { id: cardTagId } });
 
-    return res.status(200).send({ message: 'link was deleted', id: cardTag });
+    return res.status(200).send({ message: 'card-tag was deleted', id: cardTag });
   } catch (err) {
     next(err);
   }
@@ -74,13 +74,13 @@ export const updateCardTag = async (req: Request, res: Response, next: NextFunct
     }
 
     if (Number.isNaN(+cardTagId)) {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     const cardTag = await CardTag.findOne({ where: { id: cardTagId } });
 
     if (!cardTag) {
-      return new NotFoundError('card was not found');
+      return new NotFoundError('card-tag was not found');
     }
 
     const link = await cardTag.update({ cardId, tagId });

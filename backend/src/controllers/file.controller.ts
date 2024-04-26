@@ -20,7 +20,7 @@ export const getFile = async (req: Request, res: Response, next: NextFunction) =
     res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'slides', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -38,7 +38,7 @@ export const getCoverFile = async (req: Request, res: Response, next: NextFuncti
     res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'covers', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -56,7 +56,7 @@ export const getAvatarFile = async (req: Request, res: Response, next: NextFunct
     res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'avatars', user.avatar));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);
@@ -93,7 +93,7 @@ export const updateFiles = async (req: Request, res: Response, next: NextFunctio
     return res.send({ message: 'ok' });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
-      return next(new BadRequestError('переданы некорректные данные в метод'));
+      return next(new BadRequestError('bad request'));
     }
 
     next(error);

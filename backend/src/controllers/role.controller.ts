@@ -3,14 +3,18 @@ import { NextFunction, Request, Response } from 'express';
 
 import { BadRequestError, ForbiddenError, NotFoundError } from '../errors';
 
-import Tag from '../models/tag.model';
+import Role from '../models/role.model';
 
-type User = { id: number; };
-
-export const createTag = async (req: Request, res: Response, next: NextFunction) => {
+export const createRole = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { user: { id: userId } } = (req as Request & { user: User });
     const { name } = req.body;
-    const { id } = await Tag.create({ name });
+
+    if (userId !== 1) {
+      return next(new ForbiddenError('access denied'));
+    }
+
+    const { id } = await Role.create({ name });
 
     return res.status(201).send({ id, name });
   } catch (error: unknown) {
@@ -22,11 +26,11 @@ export const createTag = async (req: Request, res: Response, next: NextFunction)
   }
 };
 
-export const getTags = async (req: Request, res: Response, next: NextFunction) => {
+export const getRoles = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const tags = await Tag.findAll({ attributes: { exclude: ['createdAt', 'updatedAt'] } });
+    const roles = await Role.findAll({ attributes: { exclude: ['createdAt', 'updatedAt'] } });
 
-    return res.status(201).send(tags);
+    return res.status(201).send(roles);
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('bad request'));
@@ -36,7 +40,7 @@ export const getTags = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
-export const deleteTag = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteRole = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const { user: { id: userId } } = (req as Request & { user: User });
@@ -49,24 +53,24 @@ export const deleteTag = async (req: Request, res: Response, next: NextFunction)
       return next(new BadRequestError('bad request'));
     }
 
-    const tag = await Tag.findOne({ where: { id } });
+    const role = await Role.findOne({ where: { id } });
 
-    if (!tag) {
-      return new NotFoundError('tag was not find');
+    if (!role) {
+      return new NotFoundError('role was not find');
     }
 
-    await Tag.destroy({ where: { id } });
+    await Role.destroy({ where: { id } });
 
-    return res.status(200).send({ message: 'card was deleted', id });
+    return res.status(200).send({ message: 'role was deleted', id });
   } catch (err) {
     next(err);
   }
 };
 
-export const updateTag = async (req: Request, res: Response, next: NextFunction) => {
+export const updateRole = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { name } = req.body;
-  const { user: { id: userId } } = (req as Request & { user: User });
+  const { id: userId } = (req as Request & { user: User }).user;
 
   if (userId !== 1) {
     return next(new ForbiddenError('access denied'));
@@ -77,15 +81,15 @@ export const updateTag = async (req: Request, res: Response, next: NextFunction)
   }
 
   try {
-    const tag = await Tag.findOne({ where: { id } });
+    const role = await Role.findOne({ where: { id } });
 
-    if (!tag) {
+    if (!role) {
       return new NotFoundError('card was not found');
     }
 
-    await tag.update({ name });
+    await role.update({ name });
 
-    return res.status(200).send({ id: tag.id, name: tag.name });
+    return res.status(200).send({ id: role.id, name: role.name });
   } catch (err) {
     next(err);
   }

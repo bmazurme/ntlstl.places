@@ -29,8 +29,16 @@ export const UrlsApi = {
     INDEX: '/tags',
     ID: '/tags/:id',
   },
+  ROLES: {
+    INDEX: '/roles',
+    ID: '/roles/:id',
+  },
   CARD_TAGS: {
     INDEX: '/card-tags',
     ID: '/card-tags/:id',
+  },
+  USER_ROLES: {
+    INDEX: '/user-roles',
+    ID: '/user-roles/:id',
   },
 };
