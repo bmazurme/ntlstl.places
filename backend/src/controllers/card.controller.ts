@@ -19,7 +19,7 @@ import CardTag from '../models/card-tag.model';
 export const createCard = async (req: any, res: Response, next: NextFunction) => {
   try {
     const { name, tagName } = req.body;
-    const tag = await Tag.findOne({ where: { name: tagName } });
+    const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
     let tagId = null;
 
     if (!tag) {
@@ -31,12 +31,12 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
 
     const tempPath = req.files[0].path;
     const fileName = req.files[0].originalname;
-    const uniqName = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
-    const targetPath = path.join('uploads', uniqName);
+    const link = `${uuidv4()}_${fileName.replace(fileName.split('.')[fileName.split('.').length - 1], 'webp')}`.toLowerCase();
+    const targetPath = path.join('uploads', link);
     const folderCovers = path.join(__dirname, '..', '..', 'uploads', 'covers');
     const folderSlides = path.join(__dirname, '..', '..', 'uploads', 'slides');
-    const cover = path.join(folderCovers, uniqName);
-    const slide = path.join(folderSlides, uniqName);
+    const cover = path.join(folderCovers, link);
+    const slide = path.join(folderSlides, link);
 
     await sharp(tempPath)
       .toFormat('webp')
@@ -56,15 +56,13 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
       }
     });
 
+    const { user: { id: userId } } = (req as & { user: User });
     const user = await User.findOne({
-      where: { id: (req as & { user: User }).user.id },
+      where: { id: userId },
     });
 
     const card = await Card.create({
-      ...req.files[0],
-      name,
-      link: uniqName,
-      user_id: (req as & { user: User }).user.id,
+      ...req.files[0], name, link, user_id: userId,
     });
 
     if (tagId) {
@@ -72,7 +70,7 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
     }
 
     return res.send({
-      id: card.id, name: card.name, link: card.link, userid: user?.id, username: user?.name,
+      id: card.id, name: card.name, link: card.link, userid: userId, username: user?.name,
     });
   } catch (error: unknown) {
     if ((error as Error).name === 'ValidationError') {
@@ -132,7 +130,17 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
 export const updateCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const card = await Card.findOne({ where: { id: req.params.id } });
-    const { name } = req.body;
+    const { name, tagName } = req.body;
+
+    const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
+    let tagId = null;
+
+    if (!tag) {
+      const { id } = await Tag.create({ name: tagName });
+      tagId = id;
+    } else {
+      tagId = tag.id;
+    }
 
     if (!card) {
       return new NotFoundError('card was not found');
@@ -143,6 +151,13 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
     }
 
     await card.update({ name });
+
+    const { id: cardId } = card;
+    const cardTag = await CardTag.findOne({ where: { cardId, tagId } });
+
+    if (!cardTag) {
+      await CardTag.create({ cardId, tagId });
+    }
 
     return res.status(200).send(card);
   } catch (err) {
@@ -318,7 +333,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
     const like = await Like.destroy({
       where: {
         card_id: Number(id),
-        user_id: Number((req as Request & { user: User }).user.id),
+        user_id: Number(userId),
       },
     });
 
@@ -358,9 +373,9 @@ export const getCardCount = async (req: Request, res: Response, next: NextFuncti
   }
 
   try {
-    const cards = await Card.findAll({ where: { user_id: userId } });
+    const count = await Card.count({ where: { user_id: userId } });
 
-    return res.status(201).send({ count: cards.length });
+    return res.status(201).send({ count });
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('bad request'));
