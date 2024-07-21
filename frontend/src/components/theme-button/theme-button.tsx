@@ -7,18 +7,14 @@ import ThemeContext from '../../context/theme-context';
 import style from './theme-button.module.css';
 
 export default function ThemeButton() {
-  const { isDark, setIsDark } = useContext(ThemeContext);
-  const onToggle = () => {
-    setIsDark(isDark === 'light' ? 'dark' : 'light');
-    localStorage.setItem('ms-theme', isDark === 'light' ? 'dark' : 'light');
-  };
+  const { isDark, toggleIsDark } = useContext(ThemeContext);
 
   return (
     <button
       className={style.button}
       type="button"
       aria-label="Switch theme"
-      onClick={onToggle}
+      onClick={toggleIsDark}
     >
       {isDark === 'light' ? <BiMoon /> : <BiSun />}
     </button>
