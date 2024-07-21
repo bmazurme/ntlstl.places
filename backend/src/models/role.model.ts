@@ -11,6 +11,7 @@ import { NonAttribute } from '@sequelize/core';
 import { Optional } from 'sequelize';
 
 import User from './user.model';
+import Card from './card.model';
 import UserRole from './user-role.model';
 
 interface RoleAttributes {

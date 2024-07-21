@@ -6,6 +6,8 @@ import Card from './models/card.model';
 import Like from './models/like.model';
 import Tag from './models/tag.model';
 import CardTag from './models/card-tag.model';
+import Role from './models/role.model';
+import UserRole from './models/user-role.model';
 
 dotEnvConfig({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -19,7 +21,7 @@ const sequelizeOptions: SequelizeOptions = {
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
-sequelize.addModels([User, Card, Like, Tag, CardTag]);
+sequelize.addModels([User, Card, Like, Tag, CardTag, Role, UserRole]);
 
 const dbConnect = async () => {
   try {
