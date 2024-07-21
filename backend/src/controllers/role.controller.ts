@@ -5,6 +5,8 @@ import { BadRequestError, ForbiddenError, NotFoundError } from '../errors';
 
 import Role from '../models/role.model';
 
+type User = { id: number; };
+
 export const createRole = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { user: { id: userId } } = (req as Request & { user: User });
