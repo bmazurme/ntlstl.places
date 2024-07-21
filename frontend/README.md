@@ -19,48 +19,6 @@
 [![Auto tests frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/frontend.js.yml)
 [![Deploy frontend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.frontend.yml)
 
-### To do frontend
-- [X] prod/dev configs .env
-- [X] fix package.json, scripts
-- [X] fix dockerfile
-- [X] docker-compose -> shared
-- [X] fix update libs
-- [X] fix icon, static
-- [X] fix style-lint config
-- [ ] fix links (color)
-- [ ] fix footer for mobile mode
-- [ ] fix main-page (custom cards, ads-card)
-- [X] fix upload form avatar (crop, rotate, scale) - lib AvatarEditor
-- [ ] fix upload form image for card (crop, rotate, scale) - lib AvatarEditor
-- [ ] fix atatar component (add preloader)
-- [X] fix oauth page (wigth, color-scheme)
-- [ ] fix profile style
-- [ ] fix slide style, effect, edit mode, edit template / grid
-- [X] fix slide-image preloader
-- [X] fix edit-profile form
-- [X] fix routing (to slide, to auth)
-- [ ] fix routing slide (open card page by id & open slide by click) 
-- [ ] fix mobile, tab modes
-- [ ] fix paginator, carousel
-- [ ] fix preloader, api (is-loading)
-- [ ] fix users-page - style, likes, comments
-- [X] fix bundle
-- [ ] fix refactoring - fix structure
-- [ ] fix readme - add manual
-- [ ] feat upload progress files/images widget
-- [X] feat card page
-- [ ] feat theme-array [custom theme]
-- [ ] feat tags-page / block (lib)
-- [ ] feat pwa api
-- [ ] feat role
-- [ ] feat ui-kit-page
-- [ ] feat metrik-page
-- [ ] feat page about (info)
-- [ ] feat location tag widget
-- [ ] feat share-link widget
-- [ ] feat notication page, page-list, block, widget, websocket
-- [ ] feat metrik
-
 ### Installation
 ```bash
 # clone the repository on your computer

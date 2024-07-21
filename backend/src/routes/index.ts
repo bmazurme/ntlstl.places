@@ -8,6 +8,8 @@ import cardRoute from './card.route';
 import fileRoute from './files.route';
 import tagRoute from './tags.route';
 import cardTagRoute from './card-tags.route';
+import roleRoute from './roles.route';
+import userRoleRoute from './user-roles.route';
 
 import authMiddleware from '../middlewares/auth-middleware';
 import userMiddleware from '../middlewares/user-middleware';
@@ -20,6 +22,8 @@ router.use(userMiddleware, cardsRoute);
 router.use(fileRoute);
 router.use(authMiddleware, cardRoute); // move to component
 router.use(authMiddleware, userRoute); // move to component
+router.use(authMiddleware, roleRoute);
+router.use(authMiddleware, userRoleRoute);
 router.use(authMiddleware, tagRoute); // move to component
 router.use(authMiddleware, cardTagRoute); // move to component
 
