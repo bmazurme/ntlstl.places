@@ -16,32 +16,6 @@
 [![Auto tests backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/backend.js.yml)
 [![Deploy backend](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml/badge.svg)](https://github.com/bmazurme/ntlstl.mesto/actions/workflows/deploy.backend.yml)
 
-- [X] prod/dev configs .env
-- [X] fix package.json, scripts
-- [X] fix dockerfile
-- [X] fix remove field email from response users & userId
-- [X] fix docker-compose -> shared
-- [X] fix update libs
-- [ ] fix logs (live-time, root)
-- [ ] fix winston telegram config, manual
-- [ ] fix endpoint cards
-- [ ] fix admins endpoints
-- [ ] fix avatar endpoint (sharp)
-- [ ] fix oauth (any services)
-- [ ] fix CORS, CSP configs
-- [ ] fix refactoring - fix structure
-- [ ] fix readme - add manual
-- [ ] feat role
-- [ ] feat tag (location, model, controller, route)
-- [ ] feat note (model, controller, route)
-- [ ] feat comment (model, controller, slides, notes)
-- [ ] feat notification model, controller, route, websocket
-- [ ] express -> nest
-- [ ] sequelize -> type-orm
-- [ ] oauth -> passport
-- [ ] separate file-storage api
-- [ ] size images for upload
-
 ### Installation
 ```bash
 # clone the repository on your computer
