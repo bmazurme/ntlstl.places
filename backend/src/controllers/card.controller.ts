@@ -20,7 +20,7 @@ export const createCard = async (req: any, res: Response, next: NextFunction) =>
   try {
     const { name, tagName } = req.body;
     const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
-    let tagId = null;
+    let tagId = null; // see 147
 
     if (!tag) {
       const { id } = await Tag.create({ name: tagName });
@@ -133,6 +133,8 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
     const { name, tagName } = req.body;
 
     const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
+
+    // from ...
     let tagId = null;
 
     if (!tag) {
@@ -141,6 +143,9 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
     } else {
       tagId = tag.id;
     }
+    // to ...
+    // 136 - 143 -> ...
+    // consttagId = !tag ? (await Tag.create({ name: tagName })).id : tag.id;
 
     if (!card) {
       return new NotFoundError('card was not found');
@@ -288,7 +293,7 @@ export const likeCard = async (req: Request, res: Response, next: NextFunction) 
   if (Number.isNaN(+cardId)) {
     return next(new BadRequestError('bad request'));
   }
-
+  // ??? ref
   try {
     const { card_id } = await Like.create(
       {
@@ -328,7 +333,7 @@ export const dislikeCard = async (req: Request, res: Response, next: NextFunctio
   if (Number.isNaN(+id)) {
     return next(new BadRequestError('bad request'));
   }
-
+  // ??? ref
   try {
     const like = await Like.destroy({
       where: {
