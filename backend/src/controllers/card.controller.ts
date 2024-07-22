@@ -130,17 +130,18 @@ export const deleteCard = async (req: Request, res: Response, next: NextFunction
 export const updateCard = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const card = await Card.findOne({ where: { id: req.params.id } });
-    const { name, tagName } = req.body;
+    const { name } = req.body;
+    // const { name, tagName } = req.body;
 
-    const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
-    let tagId = null;
+    // const tag = await Tag.findOne({ where: { name: tagName } }); // ref -> multy (get tags from string)
+    // let tagId = null;
 
-    if (!tag) {
-      const { id } = await Tag.create({ name: tagName });
-      tagId = id;
-    } else {
-      tagId = tag.id;
-    }
+    // if (!tag) {
+    //   const { id } = await Tag.create({ name: tagName });
+    //   tagId = id;
+    // } else {
+    //   tagId = tag.id;
+    // }
 
     if (!card) {
       return new NotFoundError('card was not found');
@@ -152,12 +153,12 @@ export const updateCard = async (req: Request, res: Response, next: NextFunction
 
     await card.update({ name });
 
-    const { id: cardId } = card;
-    const cardTag = await CardTag.findOne({ where: { cardId, tagId } });
+    // const { id: cardId } = card;
+    // const cardTag = await CardTag.findOne({ where: { cardId, tagId } });
 
-    if (!cardTag) {
-      await CardTag.create({ cardId, tagId });
-    }
+    // if (!cardTag) {
+    //   await CardTag.create({ cardId, tagId });
+    // }
 
     return res.status(200).send(card);
   } catch (err) {
