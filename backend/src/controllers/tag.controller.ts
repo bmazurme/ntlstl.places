@@ -57,7 +57,7 @@ export const deleteTag = async (req: Request, res: Response, next: NextFunction)
 
     await Tag.destroy({ where: { id } });
 
-    return res.status(200).send({ message: 'card was deleted', id });
+    return res.status(200).send({ message: 'tag was deleted', id });
   } catch (err) {
     next(err);
   }
@@ -80,7 +80,7 @@ export const updateTag = async (req: Request, res: Response, next: NextFunction)
     const tag = await Tag.findOne({ where: { id } });
 
     if (!tag) {
-      return new NotFoundError('card was not found');
+      return new NotFoundError('tag was not found');
     }
 
     await tag.update({ name });
