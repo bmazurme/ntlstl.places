@@ -43,3 +43,6 @@ type AvatarProps = {
   info: User | null;
   currentUser: User | null;
 };
+
+type GetCardsByTagPropsType = { tagName: string; pageId: number; };
+type GetCardsByUserPropsType = { userId: number; pageId: number; };
