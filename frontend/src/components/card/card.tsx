@@ -9,7 +9,9 @@ import { Urls } from '../../utils/constants';
 
 import style from './card.module.css';
 
-export default function Card({ card, index }: { card: Card; index: number; }) {
+type CardType = { card: Card; index: number; };
+
+export default function Card({ card, index }: CardType) {
   const user = useUser();
 
   return (
