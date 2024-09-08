@@ -13,14 +13,14 @@ const cardsApiEndpoints = cardsApi
         }),
         providesTags: ['Cards'],
       }),
-      getCardsByTag: builder.mutation<Card[], { tagName: string; pageId: number; }>({
+      getCardsByTag: builder.mutation<Card[], GetCardsByTagPropsType>({
         query: ({ tagName, pageId }) => ({
           url: `/cards/tag/${tagName}/page/${pageId}`,
           method: 'GET',
         }),
         invalidatesTags: ['Cards'],
       }),
-      getCardsByUser: builder.mutation<Card[], { userId: number; pageId: number; }>({
+      getCardsByUser: builder.mutation<Card[], GetCardsByUserPropsType>({
         query: ({ userId, pageId }) => ({
           url: `/cards/user/${userId}/page/${pageId}`,
           method: 'GET',
