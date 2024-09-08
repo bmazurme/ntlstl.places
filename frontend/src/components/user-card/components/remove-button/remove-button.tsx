@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import classNames from 'classnames';
 
-import Modal from '../../../modal';
+import Modal from '../../../../ui/modal';
 import WithConfirm from '../../../with-confirm';
 import { BiSolidTrashAlt } from '../../../../utils/icons/bi';
 
