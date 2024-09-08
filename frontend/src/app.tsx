@@ -3,10 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import ThemeContext from './context/theme-context';
 import useDarkTheme from './hooks/use-dark-theme';
 import { useAppLocation } from './hooks/use-app-location';
 
+import { ThemeProvider } from './providers';
 import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
 import { Urls } from './utils/constants';
 
@@ -28,7 +28,7 @@ export default function App() {
   const { providerValue } = useDarkTheme();
 
   return (
-    <ThemeContext.Provider value={providerValue}>
+    <ThemeProvider>
       <ErrorBoundaryWrapper>
         <Suspense>
           <Routes location={background || location}>
@@ -54,6 +54,6 @@ export default function App() {
         )}
         <ToastContainer theme={providerValue.isDark} />
       </ErrorBoundaryWrapper>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }

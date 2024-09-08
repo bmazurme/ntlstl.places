@@ -9,9 +9,9 @@ export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   title?: string;
 }
 export type IconType = (props: IconBaseProps) => JSX.Element;
+type IconButtonType = { component: IconType; onClick: () => void; };
 
-export default function EditAvatar({ component: Component, onClick }
-  : { component: IconType; onClick: () => void; }) {
+export default function IconButton({ component: Component, onClick }: IconButtonType) {
   return (
     <button
       className={style.icon}

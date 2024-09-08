@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   useRef,
   useState,
@@ -11,8 +10,9 @@ import { BiCloudUpload } from '../../utils/icons/bi';
 
 import style from './upload-button.module.css';
 
-export default function UploadButton({ setEditor }
-  : { setEditor: (file: File | string | null) => void; }) {
+type UploadButtonPropsType = { setEditor: (file: File | string | null) => void; }
+
+export default function UploadButton({ setEditor }: UploadButtonPropsType) {
   const elementInputFile = useRef<HTMLInputElement>(null);
   const [name, setName] = useState('');
   const onInputChange = useCallback(async (evt: ChangeEvent<HTMLInputElement>) => {

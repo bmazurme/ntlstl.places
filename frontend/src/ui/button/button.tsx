@@ -1,7 +1,7 @@
 import React from 'react';
-import classNames from 'classnames';
-
 import type { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
+
+import classNames from 'classnames';
 
 import style from './button.module.css';
 

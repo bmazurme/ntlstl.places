@@ -6,7 +6,9 @@ import { BASE_API_URL, Urls } from '../../utils/constants';
 
 import style from './user.module.css';
 
-export default function User({ user }: { user: User; }) {
+type UserPropsType = { user: User; }
+
+export default function User({ user }: UserPropsType) {
   return (
     <li className={style.item} key={uuidv4()}>
       <Link to={`${Urls.USER.INDEX}/${user.id}`} className={style.link}>

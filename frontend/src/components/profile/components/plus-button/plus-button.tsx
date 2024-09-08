@@ -2,7 +2,7 @@
 import React from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
-import Modal from '../../../modal';
+import Modal from '../../../../ui/modal';
 import AddCard from '../add-card';
 import MoreButton from '../../../more-button';
 import { BiPlus } from '../../../../utils/icons/bi';

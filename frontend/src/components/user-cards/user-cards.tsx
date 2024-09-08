@@ -7,8 +7,9 @@ import CardLoader from '../card-loader';
 
 import style from '../cards/cards.module.css';
 
-export default function UserCards({ fetchItems, hasMoreItems, cards }
-  : { fetchItems: () => void; hasMoreItems: boolean; cards: Card[]; }) {
+type UserCardsPropsType = { fetchItems: () => void; hasMoreItems: boolean; cards: Card[]; };
+
+export default function UserCards({ fetchItems, hasMoreItems, cards }: UserCardsPropsType) {
   return (
     <InfiniteScroll
       loadMore={fetchItems}

@@ -17,8 +17,9 @@ import style from '../card/card.module.css';
 import inputstyle from './card.module.css';
 
 type FormPayload = { name: string; };
+type CardPropsType = { card: Card; index: number; };
 
-export default function Card({ card, index }: { card: Card; index: number; }) {
+export default function Card({ card, index }: CardPropsType) {
   const user = useUser();
   const errorHandler = useErrorHandler();
   const [updateCard] = useUpdateCardMutation();
