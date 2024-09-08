@@ -6,9 +6,16 @@ import { BiChevronDown } from '../../utils/icons/bi';
 
 import style from './more-button.module.css';
 
+type MoreButtonPropsType = {
+  handler: () => void;
+  disabled?: boolean;
+  extraClass?: CSSImportRule;
+  children?: IconType;
+};
+
 export default function MoreButton({
   handler, disabled, extraClass, children: Component,
-} : { handler: () => void; disabled?: boolean; extraClass?: CSSImportRule; children?: IconType; }) {
+}: MoreButtonPropsType) {
   return (
     <button
       type="button"
