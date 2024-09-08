@@ -5,8 +5,9 @@ import Title from '../title';
 
 import style from './board.module.css';
 
-export default function Board({ children, title }
-  : PropsWithChildren & { title?: string; }) {
+type BoardType = PropsWithChildren & { title?: string; };
+
+export default function Board({ children, title }: BoardType) {
   return (
     <div className={style.container}>
       {title && <Title text={title} />}
