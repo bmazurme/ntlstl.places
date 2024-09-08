@@ -1,14 +1,16 @@
 import React from 'react';
 
-export default function WithConfirm({
-  card, title, buttonText, onSubmit, isLoading,
-} : {
+type WithConfirmType = {
   card: Card;
   title: string;
   buttonText: string;
   isLoading: boolean;
   onSubmit: (c: Card) => void;
-}) {
+};
+
+export default function WithConfirm({
+  card, title, buttonText, onSubmit, isLoading,
+}: WithConfirmType) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(card);
