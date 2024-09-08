@@ -16,8 +16,9 @@ export const getFile = async (req: Request, res: Response, next: NextFunction) =
     if (!card) {
       return next(new NotFoundError('File not found'));
     }
-
-    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'slides', card.link));
+    res
+      // .setHeader('Cache-Control', 'public, max-age=86400')
+      .sendFile(path.join(__dirname, '..', '..', 'uploads', 'slides', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('bad request'));
@@ -35,7 +36,9 @@ export const getCoverFile = async (req: Request, res: Response, next: NextFuncti
       return next(new NotFoundError('File not found'));
     }
 
-    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'covers', card.link));
+    res
+      .setHeader('Cache-Control', 'public, max-age=86400')
+      .sendFile(path.join(__dirname, '..', '..', 'uploads', 'covers', card.link));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('bad request'));
@@ -53,7 +56,7 @@ export const getAvatarFile = async (req: Request, res: Response, next: NextFunct
       return next(new NotFoundError('File not found'));
     }
 
-    res.sendFile(path.join(__dirname, '..', '..', 'uploads', 'avatars', user.avatar));
+    res.set('Cache-Control', 'public, max-age=31557600').sendFile(path.join(__dirname, '..', '..', 'uploads', 'avatars', user.avatar));
   } catch (error: unknown) {
     if ((error as Error).name === 'CastError') {
       return next(new BadRequestError('bad request'));
