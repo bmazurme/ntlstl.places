@@ -63,7 +63,7 @@ jobs:
           echo TELEGRAM_LEVEL=${{ secrets.TELEGRAM_LEVEL }} >> .env
           cd ..
 
-          docker-compose build
+          docker compose build
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-frontend:latest
           docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY-backend:latest
         
