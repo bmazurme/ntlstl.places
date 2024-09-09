@@ -23,6 +23,7 @@ export default function Slide() {
 
   const getCard = async () => {
     if (params.id) {
+      console.log(params.id);
       const result = await getCardById(params.id);
       const { error } = result as { error: FetchBaseQueryError | SerializedError; };
 
@@ -41,20 +42,26 @@ export default function Slide() {
 
   return (
     <AnimatePresence>
-      <div className={style.slide}>
-        <motion.img
-          initial={{
-            // opacity: 0,
-            // scale: 0.175,
-          }}
-          animate={MODAL_CONFIG.ANIMATE}
-          exit={MODAL_CONFIG.EXIT}
-          src={`${BASE_API_URL}/files/${card?.link}` ?? ''}
-          alt={card?.name ?? ''}
-          className={style.image}
-          height="100%"
-          width="100%"
-        />
+      <motion.div
+        animate={MODAL_CONFIG.ANIMATE}
+        exit={MODAL_CONFIG.EXIT}
+        className={style.slide}
+        initial={{
+          // opacity: 0,
+          // scale: 0.175,
+        }}
+      >
+        {card?.link ? (
+          <img
+            src={`${BASE_API_URL}/files/${card?.link}` ?? ''}
+            alt={card?.name ?? ''}
+            className={style.image}
+            height="100%"
+            width="100%"
+          />
+        )
+          : (<div className={style.image} />)}
+
         <div className={style.footer}>
           <div className={style.info}>
             <p className={classNames(style.name, { [style.loading]: isLoading })}>{card?.name ?? ''}</p>
@@ -64,7 +71,7 @@ export default function Slide() {
           </div>
           <IconButton component={BiLogoTelegram} onClick={onShare} />
         </div>
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 }

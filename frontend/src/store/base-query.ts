@@ -34,7 +34,7 @@ const baseQueryWithReauth: BaseQueryFn<
   } else if (result.error && result.error.status === 401) {
     // console.log('result', 401);
   } else if (result.error && result.error.status === 404) {
-    // console.log('result', 404);
+    toast('404', options);
   } else if (result.error && result.error.status === 500) {
     toast('500 Internal Server Error', options);
   }

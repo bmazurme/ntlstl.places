@@ -14,12 +14,12 @@ import useUser from '../../hooks/use-user';
 import { Urls } from '../../utils/constants';
 
 import style from '../card/card.module.css';
-import inputstyle from './card.module.css';
+import inputstyle from './user-card.module.css';
 
 type FormPayload = { name: string; };
 type CardPropsType = { card: Card; index: number; };
 
-export default function Card({ card, index }: CardPropsType) {
+export default function UserCard({ card, index }: CardPropsType) {
   const user = useUser();
   const errorHandler = useErrorHandler();
   const [updateCard] = useUpdateCardMutation();
