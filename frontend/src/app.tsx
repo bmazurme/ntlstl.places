@@ -1,11 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-import useDarkTheme from './hooks/use-dark-theme';
 import { useAppLocation } from './hooks/use-app-location';
-
 import { ThemeProvider } from './providers';
 import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
 import { Urls } from './utils/constants';
@@ -25,7 +21,6 @@ const NotFoundPage = lazy(() => import('./pages/404'));
 export default function App() {
   const location = useAppLocation();
   const background = location.state?.pathname;
-  const { providerValue } = useDarkTheme();
 
   return (
     <ThemeProvider>
@@ -42,17 +37,13 @@ export default function App() {
             <Route path={Urls.USERS.CURRENT} element={(<UserPage />)} />
             <Route path={Urls[404]} element={(<NotFoundPage />)} />
           </Routes>
+          {background && (
+          <Routes>
+            <Route path={Urls.USERS.CURRENT_EDIT} element={(<UserEditModalPage />)} />
+            <Route path={Urls.CARDS.CURRENT} element={(<CardModalPage />)} />
+          </Routes>
+          )}
         </Suspense>
-        {background
-        && (
-          <Suspense>
-            <Routes>
-              <Route path={Urls.USERS.CURRENT_EDIT} element={(<UserEditModalPage />)} />
-              <Route path={Urls.CARDS.CURRENT} element={(<CardModalPage />)} />
-            </Routes>
-          </Suspense>
-        )}
-        <ToastContainer theme={providerValue.isDark} />
       </ErrorBoundaryWrapper>
     </ThemeProvider>
   );
