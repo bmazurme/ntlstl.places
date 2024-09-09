@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ThemeContext from '../../context/theme-context';
@@ -10,6 +11,7 @@ export default function ThemeProvider({ children }: PropsWithChildren) {
   return (
     <ThemeContext.Provider value={providerValue}>
       { children }
+      <ToastContainer theme={providerValue.isDark} />
     </ThemeContext.Provider>
   );
 }
