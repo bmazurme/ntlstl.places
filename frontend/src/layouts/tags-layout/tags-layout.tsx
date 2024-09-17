@@ -2,7 +2,7 @@ import React from 'react';
 
 import Board from '../../components/board';
 import Tags from '../../components/tags';
-import Preloader from '../../components/preloader';
+import { Preloader } from '../../ui';
 
 import { useGetTagsQuery } from '../../store';
 
