@@ -10,13 +10,13 @@ export interface IconBaseProps extends React.SVGAttributes<SVGElement> {
   title?: string;
 }
 export type IconType = (props: IconBaseProps) => JSX.Element;
-export type TypeLink = {
+export type LinkType = {
   url: string;
   label: string;
   icon: IconType;
 };
 
-export default function FooterMenu({ links }: { links: TypeLink[]; }) {
+export default function FooterMenu({ links }: { links: LinkType[]; }) {
   return (
     <ul className={style.items}>
       {links.map(({ url, label, icon: Component }) => (
