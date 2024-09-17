@@ -2,7 +2,7 @@ import React from 'react';
 
 import Board from '../../components/board';
 import Users from '../../components/users';
-import Preloader from '../../components/preloader';
+import { Preloader } from '../../ui';
 
 import { useGetUsersQuery } from '../../store';
 
