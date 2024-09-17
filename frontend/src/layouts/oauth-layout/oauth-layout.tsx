@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
-import Preloader from '../../components/preloader';
+import { Preloader } from '../../ui';
 import Board from '../../components/board';
 
 import { useSignInWitOauthYaMutation } from '../../store/api';
