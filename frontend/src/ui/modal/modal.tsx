@@ -10,10 +10,10 @@ import { MODAL_CONFIG } from '../../utils';
 
 import style from './modal.module.css';
 
-export default function Popup({ children, onClose }
-: { children: ReactNode; onClose: () => void }) {
-  const reactModals = document.getElementById('modals');
+type PopupType = { children: ReactNode; onClose: () => void }
 
+export default function Popup({ children, onClose }: PopupType) {
+  const reactModals = document.getElementById('modals');
   const handleEscape = (e: KeyboardEvent) => {
     if (e.type === 'keydown' && e.code === 'Escape') {
       onClose();
