@@ -4,9 +4,10 @@ import InputField from './input-field';
 import Popup from './modal';
 import UploadButton from './upload-button';
 import Preloader from './preloader';
+import Title from './title';
 
 export {
   Button, IconButton, InputField, Popup, UploadButton,
-  Preloader,
+  Preloader, Title,
 };
 export type { InputProps } from './input-field';

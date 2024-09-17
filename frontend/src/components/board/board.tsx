@@ -1,7 +1,7 @@
 import React from 'react';
 import type { PropsWithChildren } from 'react';
 
-import Title from '../title';
+import { Title } from '../../ui';
 
 import style from './board.module.css';
 
